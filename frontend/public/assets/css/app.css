@@ -55,7 +55,7 @@ body::before {
 .site-header {
     position: sticky;
     top: 0;
-    background: linear-gradient(135deg, var(--deep-green) 0%, rgba(1, 51, 40, 0.95) 100%);
+    background: linear-gradient(135deg, var(--deep-green) 0%, rgba(0, 31, 26, 0.95) 100%);
     backdrop-filter: saturate(1.2) blur(12px);
     border-bottom: 1px solid var(--border-copper);
     z-index: 100;
