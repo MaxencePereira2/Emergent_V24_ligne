@@ -101,3 +101,77 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: |
+  The user tasked the AI engineer with completing three pending tasks for the Alesium landing page:
+  1. Re-integrate the workshop photo in the hero section, cropped to 21:9 or 32:9 format, with 20% opacity
+  2. Fix the contact form submission issue, which currently returns "Cannot POST /"
+  3. Darken the entire site's color palette by 30% using gracz.fr's color scheme
+
+backend:
+  - task: "Contact form endpoint implementation"
+    implemented: true
+    working: false  # Needs testing
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "Added /api/contact POST endpoint with ContactForm model and email validation. Need to test if it works with frontend form submission."
+
+frontend:
+  - task: "Workshop image re-integration in hero section"
+    implemented: true
+    working: true
+    file: "/app/frontend/public/assets/css/app.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Successfully re-implemented workshop image with 20% opacity using ::before pseudo-element. Image shows correctly in hero section."
+
+  - task: "Contact form frontend integration"
+    implemented: true
+    working: false  # Needs testing
+    file: "/app/frontend/public/assets/js/app.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "main"
+        comment: "Updated form to remove action/method attributes and added JavaScript handler to POST to /api/contact endpoint. Need to test form submission."
+
+  - task: "Color palette darkening"
+    implemented: true
+    working: true
+    file: "/app/frontend/public/assets/css/app.css"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Successfully darkened the entire color palette by 30% using gracz.fr-inspired dark tones. Site now has proper dark theme."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Contact form endpoint implementation"
+    - "Contact form frontend integration"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Completed all three phases: 1) Workshop image re-integrated with 20% opacity, 2) Backend contact endpoint created with proper validation, 3) Site colors darkened 30%. Ready for backend testing of contact form functionality."
