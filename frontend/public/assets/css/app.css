@@ -3,25 +3,25 @@
     --surface: #FFFFFF;
     --text: #1E2329;
     --muted: #6B7280;
-    --primary: #013328;
+    --primary: #001F1A;
     --primary-ink: #FFFFFF;
     --accent: #CC8B65;
     --border: #D6DBE2;
     
-    /* Nouvelle palette inspirée de l'image */
-    --deep-green: #013328;
+    /* Nouvelle palette avec vert plus contrasté (+30%) */
+    --deep-green: #001F1A;
     --warm-beige: #E3DCD2;
     --copper: #CC8B65;
     --dark-charcoal: #100C0D;
     
     /* Couleurs de sections harmonieuses */
-    --section-green-light: rgba(1, 51, 40, 0.05);
+    --section-green-light: rgba(0, 31, 26, 0.05);
     --section-beige-light: rgba(227, 220, 210, 0.3);
     --section-copper-light: rgba(204, 139, 101, 0.1);
     --section-warm-light: #FEFCFA;
     
     /* Couleurs de bordure harmonieuses */
-    --border-green: rgba(1, 51, 40, 0.15);
+    --border-green: rgba(0, 31, 26, 0.15);
     --border-beige: rgba(227, 220, 210, 0.5);
     --border-copper: rgba(204, 139, 101, 0.3);
 }
