@@ -456,7 +456,7 @@ body::before {
 }
 
 #faq h2 {
-    color: #FFFFFF !important; /* Blanc sur fond sombre */
+    color: var(--text) !important; /* Texte sombre sur fond clair */
 }
 
 /* Textes tarifs en couleur sombre pour lisibilité sur fond clair */
