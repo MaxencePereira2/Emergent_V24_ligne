@@ -230,7 +230,49 @@ body::before {
 .section {
     max-width: 1200px;
     margin: 80px auto;
-    padding: 0 20px;
+    padding: 40px 20px;
+    background: var(--surface);
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Couleurs spécifiques pour chaque section */
+#presentation {
+    background: linear-gradient(135deg, var(--soft-blue) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-blue);
+}
+
+#positionnement {
+    background: linear-gradient(135deg, var(--soft-green) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-green);
+}
+
+#tarifs {
+    background: linear-gradient(135deg, var(--soft-purple) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-purple);
+}
+
+#projets {
+    background: linear-gradient(135deg, var(--soft-orange) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-orange);
+}
+
+#contact {
+    background: linear-gradient(135deg, var(--soft-pink) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-orange);
+}
+
+.section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+    z-index: 1;
 }
 
 .section h2 {
