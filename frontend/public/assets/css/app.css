@@ -260,30 +260,30 @@ body::before {
     overflow: hidden;
 }
 
-/* Couleurs spécifiques pour chaque section */
+/* Couleurs spécifiques pour chaque section avec nouvelle palette */
 #presentation {
-    background: linear-gradient(135deg, var(--soft-blue) 0%, var(--surface) 100%);
-    border: 1px solid var(--border-blue);
+    background: linear-gradient(135deg, var(--section-beige-light) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-beige);
+}
+
+#projets {
+    background: linear-gradient(135deg, var(--section-copper-light) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-copper);
 }
 
 #positionnement {
-    background: linear-gradient(135deg, var(--soft-green) 0%, var(--surface) 100%);
+    background: linear-gradient(135deg, var(--section-green-light) 0%, var(--surface) 100%);
     border: 1px solid var(--border-green);
 }
 
 #tarifs {
-    background: linear-gradient(135deg, var(--soft-purple) 0%, var(--surface) 100%);
-    border: 1px solid var(--border-purple);
-}
-
-#projets {
-    background: linear-gradient(135deg, var(--soft-orange) 0%, var(--surface) 100%);
-    border: 1px solid var(--border-orange);
+    background: linear-gradient(135deg, var(--section-warm-light) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-beige);
 }
 
 #contact {
-    background: linear-gradient(135deg, var(--soft-pink) 0%, var(--surface) 100%);
-    border: 1px solid var(--border-orange);
+    background: linear-gradient(135deg, var(--section-green-light) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-green);
 }
 
 .section::before {
