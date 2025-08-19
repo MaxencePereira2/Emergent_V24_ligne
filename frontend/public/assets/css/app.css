@@ -244,10 +244,11 @@ body::before {
 }
 
 .btn:hover {
-    background: var(--copper);
-    border-color: var(--copper);
+    background: #002D23;
+    border-color: #002D23;
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(204, 139, 101, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 31, 26, 0.6);
+    color: var(--warm-beige);
 }
 
 .section {
