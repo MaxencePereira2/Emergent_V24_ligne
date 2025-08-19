@@ -270,7 +270,9 @@ body::before {
 
 #projets {
     background: linear-gradient(135deg, var(--section-copper-light) 0%, var(--surface) 100%);
-    border: 1px solid var(--border-copper);
+    border: none;
+    box-shadow: none;
+    padding: 40px 0;
 }
 
 #positionnement {
