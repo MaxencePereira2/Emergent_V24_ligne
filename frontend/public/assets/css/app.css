@@ -791,7 +791,7 @@ body::before {
     font-size: 1.1rem;
     margin: 1rem 1.5rem;
     font-weight: 600;
-    color: var(--text);
+    color: #2d3748; /* Texte sombre pour les titres des projets */
     line-height: 1.4;
 }
 
