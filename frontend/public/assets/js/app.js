@@ -387,6 +387,24 @@
         });
     });
 
+    // CV Interactive functionality
+    const cvQuestions = document.querySelectorAll('.cv-question');
+    cvQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const isOpen = question.getAttribute('aria-expanded') === 'true';
+            const answer = question.nextElementSibling;
+            
+            // Toggle current CV item
+            if (isOpen) {
+                question.setAttribute('aria-expanded', 'false');
+                answer.classList.remove('open');
+            } else {
+                question.setAttribute('aria-expanded', 'true');
+                answer.classList.add('open');
+            }
+        });
+    });
+
     // Parallaxe entre sections (-30% à 0%)
     function initSectionParallax() {
         const sections = document.querySelectorAll('.section');
