@@ -423,7 +423,7 @@ body::before {
 .price {
     font-weight: 600;
     font-size: 1.1rem;
-    color: var(--accent);
+    color: var(--copper);
     margin: 0;
 }
 
