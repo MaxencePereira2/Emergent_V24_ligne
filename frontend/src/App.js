@@ -1,24 +1,66 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [htmlContent, setHtmlContent] = useState('');
+
   useEffect(() => {
-    // Redirect to the static Alesium site
-    window.location.replace('/index.html');
+    // Load the Alesium static site content
+    fetch('/index.html')
+      .then(response => response.text())
+      .then(html => {
+        // Parse the HTML and extract the body content
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Get the body content
+        const bodyContent = doc.body.innerHTML;
+        setHtmlContent(bodyContent);
+        
+        // Load CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/assets/css/app.css';
+        document.head.appendChild(link);
+        
+        // Load fonts
+        const fontLink = document.createElement('link');
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap';
+        fontLink.rel = 'stylesheet';
+        document.head.appendChild(fontLink);
+        
+        // Set page title
+        document.title = 'Alesium — Du concept à la production fiable et rentable';
+        
+        // Load and execute the JavaScript after a short delay
+        setTimeout(() => {
+          const script = document.createElement('script');
+          script.src = '/assets/js/app.js';
+          document.head.appendChild(script);
+        }, 500);
+      })
+      .catch(error => {
+        console.error('Error loading Alesium site:', error);
+        setHtmlContent('<div style="padding: 40px; text-align: center; font-family: Inter, sans-serif;">Erreur de chargement du site Alesium</div>');
+      });
   }, []);
 
-  return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-      fontFamily: 'Inter, system-ui, sans-serif',
-      background: '#F6F7F8',
-      color: '#1E2329'
-    }}>
-      <p>Redirection vers le site Alesium...</p>
-    </div>
-  );
+  if (!htmlContent) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontFamily: 'Inter, system-ui, sans-serif',
+        background: '#F6F7F8',
+        color: '#1E2329'
+      }}>
+        <p>Chargement du site Alesium...</p>
+      </div>
+    );
+  }
+
+  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 }
 
 export default App;
