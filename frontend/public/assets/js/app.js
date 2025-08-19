@@ -300,74 +300,74 @@
         }
     });
 
-    // FAQ functionality - style Gracz
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const isOpen = question.getAttribute('aria-expanded') === 'true';
-            const answer = question.nextElementSibling;
+    // Parallaxe entre sections (-30% à 0%)
+    function initSectionParallax() {
+        const sections = document.querySelectorAll('.section');
+        
+        // Initialiser toutes les sections en mode "enter"
+        sections.forEach(section => {
+            section.classList.add('section-enter');
+        });
+        
+        function updateSectionParallax() {
+            const scrollY = window.pageYOffset;
+            const windowHeight = window.innerHeight;
             
-            // Close all other FAQ items
-            faqQuestions.forEach(otherQuestion => {
-                if (otherQuestion !== question) {
-                    otherQuestion.setAttribute('aria-expanded', 'false');
-                    const otherAnswer = otherQuestion.nextElementSibling;
-                    otherAnswer.classList.remove('open');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionCenter = sectionTop + sectionHeight / 2;
+                
+                // Calculer la distance par rapport au centre de l'écran
+                const screenCenter = scrollY + windowHeight / 2;
+                const distanceFromCenter = Math.abs(screenCenter - sectionCenter);
+                
+                // Si la section est proche du centre de l'écran
+                if (distanceFromCenter < windowHeight * 0.8) {
+                    // Calculer le pourcentage de visibilité (0 = loin, 1 = au centre)
+                    const visibility = Math.max(0, 1 - (distanceFromCenter / (windowHeight * 0.8)));
+                    
+                    // Appliquer la transformation de -30% à 0%
+                    const translateY = (1 - visibility) * 30;
+                    const opacity = 0.3 + (visibility * 0.7);
+                    
+                    section.style.transform = `translateY(${translateY}%)`;
+                    section.style.opacity = opacity;
+                    
+                    if (visibility > 0.7) {
+                        section.classList.remove('section-enter');
+                        section.classList.add('section-visible');
+                    }
+                } else {
+                    // Section trop loin, la garder en mode "enter"
+                    section.classList.remove('section-visible');
+                    section.classList.add('section-enter');
                 }
             });
-            
-            // Toggle current FAQ item
-            if (isOpen) {
-                question.setAttribute('aria-expanded', 'false');
-                answer.classList.remove('open');
-            } else {
-                question.setAttribute('aria-expanded', 'true');
-                answer.classList.add('open');
+        }
+        
+        // Écouter le scroll avec throttling
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateSectionParallax();
+                    ticking = false;
+                });
+                ticking = true;
             }
-        });
+        }
+        
+        window.addEventListener('scroll', onScroll);
+        
+        // Appel initial
+        updateSectionParallax();
+    }
+    
+    // Initialiser la parallaxe des sections
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initSectionParallax, 100);
     });
-
-    // Parallaxe 10% sur le mouvement vertical
-    let ticking = false;
-    
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.parallax-layer');
-        
-        parallaxElements.forEach(element => {
-            const speed = scrolled * 0.1; // 10% de parallaxe
-            element.style.transform = `translateY(${speed}px)`;
-        });
-        
-        ticking = false;
-    }
-    
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    }
-    
-    window.addEventListener('scroll', requestTick);
-    
-    // Ajouter les couches de parallaxe au DOM
-    function addParallaxLayers() {
-        const parallaxContainer = document.createElement('div');
-        parallaxContainer.className = 'parallax-container';
-        
-        for (let i = 0; i < 3; i++) {
-            const layer = document.createElement('div');
-            layer.className = 'parallax-layer';
-            layer.style.zIndex = -2 - i;
-            parallaxContainer.appendChild(layer);
-        }
-        
-        document.body.appendChild(parallaxContainer);
-    }
-    
-    // Initialiser la parallaxe au chargement
-    document.addEventListener('DOMContentLoaded', addParallaxLayers);
 
     // Add loading animation for images
     document.addEventListener('DOMContentLoaded', () => {
