@@ -435,17 +435,31 @@ body::before {
     background: var(--surface);
     margin: 3rem 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    user-select: none;
 }
 
 .carousel .track {
     display: flex;
     gap: 24px;
     padding: 24px;
-    animation: slide 30s infinite linear;
     width: fit-content;
+    cursor: grab;
+    transition: transform 0.3s ease;
 }
 
-.carousel .track:hover {
+.carousel .track:active {
+    cursor: grabbing;
+}
+
+.carousel .track.dragging {
+    transition: none;
+}
+
+.carousel .track.auto-scroll {
+    animation: slide 30s infinite linear;
+}
+
+.carousel .track.auto-scroll:hover {
     animation-play-state: paused;
 }
 
