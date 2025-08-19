@@ -304,15 +304,20 @@ body::before {
 .portrait {
     margin: 0;
     position: relative;
+    z-index: 2;
 }
 
 .portrait img {
     width: 100%;
     height: auto;
-    display: block;
+    display: block !important;
     border-radius: 20px;
     border: 2px solid var(--border);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-width: 100%;
+    object-fit: cover;
 }
 
 .portrait:hover img {
