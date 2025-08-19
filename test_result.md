@@ -169,7 +169,6 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Contact form endpoint implementation"
     - "Contact form frontend integration"
   stuck_tasks: []
   test_all: false
