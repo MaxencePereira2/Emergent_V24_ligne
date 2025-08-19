@@ -18,6 +18,66 @@
         location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
 
+    // Contact form handler
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.querySelector('.form-status');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone') || null,
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+            
+            // Show loading state
+            const submitBtn = contactForm.querySelector('.contact-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Get backend URL from React environment or fallback
+                const backendUrl = process.env.REACT_APP_BACKEND_URL || 
+                                 window.location.origin.replace(':3000', ':8001');
+                
+                const response = await fetch(`${backendUrl}/api/contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    // Success
+                    formStatus.style.display = 'block';
+                    formStatus.style.color = '#2d6e3e';
+                    formStatus.textContent = 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Erreur lors de l\'envoi du message');
+                }
+            } catch (error) {
+                // Error
+                formStatus.style.display = 'block';
+                formStatus.style.color = '#d32f2f';
+                formStatus.textContent = 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.';
+                console.error('Contact form error:', error);
+            } finally {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
     // Projects and carousel functionality
     const DATA_URL = 'content/projets.json';
     const carouselHost = document.querySelector('#projets .track');
