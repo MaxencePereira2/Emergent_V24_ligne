@@ -64,6 +64,7 @@
         let currentTranslate = 0;
         let prevTranslate = 0;
         let animationID = 0;
+        let startTime = 0;
         
         // Fonction pour activer/désactiver l'auto-scroll
         function toggleAutoScroll(enable) {
@@ -74,9 +75,6 @@
             }
         }
         
-        // Désactiver l'auto-scroll initialement
-        toggleAutoScroll(false);
-        
         // Démarrer l'auto-scroll après 2 secondes
         setTimeout(() => {
             if (!isDragging) {
@@ -86,33 +84,33 @@
         
         // Gestion des événements tactiles et souris
         carouselHost.addEventListener('mousedown', startDrag);
-        carouselHost.addEventListener('touchstart', startDrag, { passive: false });
+        carouselHost.addEventListener('touchstart', startDrag, { passive: true });
         
-        carouselHost.addEventListener('mouseup', endDrag);
-        carouselHost.addEventListener('touchend', endDrag);
-        carouselHost.addEventListener('mouseleave', endDrag);
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
         
-        carouselHost.addEventListener('mousemove', drag);
-        carouselHost.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag, { passive: true });
         
         function startDrag(e) {
+            if (e.target.closest('.card a')) return; // Ne pas interférer avec les liens
+            
             isDragging = true;
+            startTime = Date.now();
             toggleAutoScroll(false);
             carouselHost.classList.add('dragging');
             
             startX = getPositionX(e);
             prevTranslate = currentTranslate;
             
-            carouselHost.style.cursor = 'grabbing';
             animationID = requestAnimationFrame(animation);
         }
         
         function drag(e) {
             if (!isDragging) return;
             
-            e.preventDefault();
             const currentPosition = getPositionX(e);
-            currentTranslate = prevTranslate + currentPosition - startX;
+            currentTranslate = prevTranslate + (currentPosition - startX) * 0.8; // Facteur de réduction pour un scroll plus fluide
         }
         
         function endDrag() {
@@ -120,9 +118,17 @@
             
             isDragging = false;
             carouselHost.classList.remove('dragging');
-            carouselHost.style.cursor = 'grab';
             
             cancelAnimationFrame(animationID);
+            
+            // Inertie de scroll
+            const duration = Date.now() - startTime;
+            const distance = currentTranslate - prevTranslate;
+            const velocity = distance / duration;
+            
+            if (Math.abs(velocity) > 0.1) {
+                currentTranslate += velocity * 200; // Inertie
+            }
             
             // Remettre l'auto-scroll après 3 secondes d'inactivité
             setTimeout(() => {
