@@ -405,9 +405,9 @@
         });
     });
 
-    // Parallaxe entre sections (-30% à 0%)
+    // Parallaxe entre sections (-10% à 0%) - EXCLUANT la section "qui je suis"
     function initSectionParallax() {
-        const sections = document.querySelectorAll('.section');
+        const sections = document.querySelectorAll('.section:not(#presentation)'); // Exclure la section "qui je suis"
         
         // Initialiser toutes les sections en mode "enter"
         sections.forEach(section => {
