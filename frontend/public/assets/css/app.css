@@ -228,7 +228,7 @@ body::before {
     line-height: 1.1;
     color: var(--warm-beige);
     letter-spacing: 0.02em;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     
     /* Style Petralithe avec espacement des lettres */
     word-spacing: 0.1em;
