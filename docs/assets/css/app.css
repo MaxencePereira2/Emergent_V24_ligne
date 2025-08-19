@@ -365,8 +365,8 @@ body::before {
 }
 
 #projets {
-    background: rgba(255, 255, 255, 0.7); /* Fond éclairci de 70% */
-    border: 1px solid rgba(160, 150, 126, 0.3);
+    background: rgba(255, 255, 255, 0.93); /* Fond très clair avec dégradé 7% max */
+    border: 1px solid var(--border-beige);
     border-radius: 8px;
 }
 
