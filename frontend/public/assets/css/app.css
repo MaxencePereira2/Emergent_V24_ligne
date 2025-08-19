@@ -681,6 +681,10 @@ body::before {
     padding: 40px 24px;
     width: fit-content;
     cursor: grab;
+    user-select: none; /* Empêche la sélection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     transition: transform 0.3s ease;
     position: relative;
     z-index: 2;
