@@ -392,6 +392,17 @@ body::before {
     border-radius: 12px;
 }
 
+/* Z-index spécifiques pour éviter les chevauchements */
+#projets {
+    z-index: 5; /* Section projets au-dessus */
+    position: relative;
+}
+
+#positionnement {
+    z-index: 3; /* Section positionnement en dessous */
+    position: relative;
+}
+
 /* Titres spécifiques des sections "projets" et "qui je suis" en texte sombre */
 #presentation h2,
 #projets h2 {
