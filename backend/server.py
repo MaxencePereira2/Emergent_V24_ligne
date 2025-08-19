@@ -68,6 +68,28 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
+@api_router.post("/contact", response_model=ContactForm)
+async def create_contact_form(input: ContactFormCreate):
+    contact_dict = input.dict()
+    contact_obj = ContactForm(**contact_dict)
+    
+    try:
+        # Store in database
+        _ = await db.contact_forms.insert_one(contact_obj.dict())
+        
+        # Log the contact form submission
+        logger.info(f"New contact form submission from {contact_obj.email}")
+        
+        return contact_obj
+    except Exception as e:
+        logger.error(f"Error saving contact form: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error processing contact form")
+
+@api_router.get("/contact", response_model=List[ContactForm])
+async def get_contact_forms():
+    contact_forms = await db.contact_forms.find().to_list(1000)
+    return [ContactForm(**contact_form) for contact_form in contact_forms]
+
 # Include the router in the main app
 app.include_router(api_router)
 
