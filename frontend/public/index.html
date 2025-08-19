@@ -1,151 +1,352 @@
 <!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
-        <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-        <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="theme-color" content="#2E3A44"/>
+    <title>Alesium — Du concept à la production fiable et rentable</title>
+    <meta name="description" content="Conseil & industrialisation pour PME et artisans industriels. Étude, prototypage, mise en production. Solutions prêtes à fabriquer."/>
+    <meta name="robots" content="index,follow"/>
+    <meta name="author" content="Alesium"/>
+    <meta name="keywords" content="industrialisation, prototypage, PME, artisans, production, conseil, étude technique, machines spéciales"/>
+    <meta property="og:title" content="Alesium — Du concept à la production fiable et rentable"/>
+    <meta property="og:description" content="Conseil & industrialisation pour PME et artisans industriels."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://www.alesium.fr"/>
+    <meta property="og:locale" content="fr_FR"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="assets/css/app.css" rel="stylesheet">
+</head>
+<body>
+    <noscript>Activez JavaScript pour utiliser ce site.</noscript>
+    <header class="site-header">
+        <nav class="nav">
+            <a href="#accueil" class="logo">Alesium</a>
+            <div class="spacer"></div>
+            <a href="#positionnement">Positionnement</a>
+            <a href="#tarifs">Tarifs</a>
+            <a href="#projets">Projets</a>
+            <a href="#contact" class="cta">Parlons de votre projet</a>
+        </nav>
+    </header>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-        <title>Emergent | Fullstack App</title>
-    </head>
-    <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root"></div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-        <a
-            id="emergent-badge"
-            target="_blank"
-            href="https://app.emergent.sh/?utm_source=emergent-badge"
-            style="
-                display: flex !important;
-                align-items: center !important;
-                position: fixed !important;
-                bottom: 20px;
-                right: 20px;
-                text-decoration: none;
-                padding: 6px 10px;
-                font-family: -apple-system, BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell,
-                    &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;,
-                    sans-serif !important;
-                font-size: 12px !important;
-                z-index: 9999 !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-                border-radius: 8px !important;
-                background-color: #ffffff !important;
-                border: 1px solid rgba(255, 255, 255, 0.25) !important;
-            "
-        >
-            <div
-                style="display: flex; flex-direction: row; align-items: center"
-            >
-                <img
-                    style="width: 20px; height: 20px; margin-right: 8px"
-                    src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4"
-                />
-                <p
-                    style="
-                        color: #000000;
-                        font-family: -apple-system, BlinkMacSystemFont,
-                            &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu,
-                            Cantarell, &quot;Open Sans&quot;,
-                            &quot;Helvetica Neue&quot;, sans-serif !important;
-                        font-size: 12px !important;
-                        align-items: center;
-                        margin-bottom: 0;
-                    "
-                >
-                    Made with Emergent
-                </p>
+    <main id="accueil">
+        <section class="hero">
+            <div class="hero-inner">
+                <h1>Du concept à la production fiable et rentable</h1>
+                <p>Étude → prototype → mise en place. Solutions prêtes à fabriquer, testées, adaptées à votre capacité réelle de production.</p>
+                <a class="btn" href="#contact">Démarrer un échange (15 min)</a>
             </div>
-        </a>
-        <script>
-            !(function (t, e) {
-                var o, n, p, r;
-                e.__SV ||
-                    ((window.posthog = e),
-                    (e._i = []),
-                    (e.init = function (i, s, a) {
-                        function g(t, e) {
-                            var o = e.split(".");
-                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
-                                (t[e] = function () {
-                                    t.push(
-                                        [e].concat(
-                                            Array.prototype.slice.call(
-                                                arguments,
-                                                0,
-                                            ),
-                                        ),
-                                    );
-                                });
-                        }
-                        ((p = t.createElement("script")).type =
-                            "text/javascript"),
-                            (p.crossOrigin = "anonymous"),
-                            (p.async = !0),
-                            (p.src =
-                                s.api_host.replace(
-                                    ".i.posthog.com",
-                                    "-assets.i.posthog.com",
-                                ) + "/static/array.js"),
-                            (r =
-                                t.getElementsByTagName(
-                                    "script",
-                                )[0]).parentNode.insertBefore(p, r);
-                        var u = e;
-                        for (
-                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
-                                u.people = u.people || [],
-                                u.toString = function (t) {
-                                    var e = "posthog";
-                                    return (
-                                        "posthog" !== a && (e += "." + a),
-                                        t || (e += " (stub)"),
-                                        e
-                                    );
-                                },
-                                u.people.toString = function () {
-                                    return u.toString(1) + ".people (stub)";
-                                },
-                                o =
-                                    "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
-                                        " ",
-                                    ),
-                                n = 0;
-                            n < o.length;
-                            n++
-                        )
-                            g(u, o[n]);
-                        e._i.push([i, s, a]);
-                    }),
-                    (e.__SV = 1));
-            })(document, window.posthog || []);
-            posthog.init("phc_yJW1VjHGGwmCbbrtczfqqNxgBDbhlhOWcdzcIJEOTFE", {
-                api_host: "https://us.i.posthog.com",
-                person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
-            });
-        </script>
-    </body>
+        </section>
+
+        <section id="presentation" class="section">
+            <div class="grid-2">
+                <div>
+                    <h2>Qui je suis</h2>
+                    <p>Ingénieur-concepteur & faiseur. Atelier rentable monté from scratch, expérience multi-matériaux et multi-procédés, opérationnel immédiatement.</p>
+                    <ul class="bullets">
+                        <li>Conception robuste, pensée atelier</li>
+                        <li>Itérations courtes, prototypage rapide</li>
+                        <li>Transfert efficace vers votre production</li>
+                    </ul>
+                </div>
+                <figure class="portrait">
+                    <img src="assets/profil/profil.jpeg" alt="Profil Alesium" onerror="this.style.display='none'">
+                </figure>
+            </div>
+        </section>
+
+        <section id="positionnement" class="section">
+            <h2>Positionnement</h2>
+            <p>J'aide les PME et artisans industriels à passer du concept à la production fiable et rentable, grâce à une expertise complète de la conception à la fabrication.</p>
+            <ul class="bullets">
+                <li>Ingénieur + faiseur : alignement étude/atelier</li>
+                <li>Multi-matériaux et procédés</li>
+                <li>Opérationnel immédiatement</li>
+            </ul>
+        </section>
+
+        <section id="tarifs" class="section">
+            <h2>Offres & tarifs</h2>
+            <div class="cards">
+                <article class="card">
+                    <h3>Audit / Diagnostic rapide</h3>
+                    <p>Évaluation terrain et recommandations.</p>
+                    <p class="price">650 € HT (forfait)</p>
+                </article>
+                <article class="card">
+                    <h3>Étude + proto numérique</h3>
+                    <p>Conception, RDM, dossier prêt à fabriquer.</p>
+                    <p class="price">700 € HT / jour</p>
+                </article>
+                <article class="card">
+                    <h3>Prototype physique / machine spéciale</h3>
+                    <p>Réalisation atelier, tests, itérations.</p>
+                    <p class="price">750 € HT / jour + matière</p>
+                </article>
+                <article class="card">
+                    <h3>Industrialisation express</h3>
+                    <p>Livrable + process + transfert vers production.</p>
+                    <p class="price">5 000 – 8 000 € HT</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="projets" class="section">
+            <h2>Projets</h2>
+            <div class="carousel">
+                <div class="track" aria-live="polite"></div>
+                <button class="nav prev" aria-label="Précédent">←</button>
+                <button class="nav next" aria-label="Suivant">→</button>
+            </div>
+            <p class="muted">Cliquez sur un projet pour voir le détail.</p>
+        </section>
+
+        <section id="projet-detail" class="section hidden" aria-hidden="true"></section>
+
+        <section id="contact" class="section">
+            <h2>Contact</h2>
+            <div class="contact-inline-email">
+                📧 Écrivez-nous : <a href="mailto:contact@alesium.fr">contact@alesium.fr</a>
+            </div>
+            <form class="recall-form" autocomplete="on">
+                <input type="tel" name="tel" inputmode="tel" placeholder="Être rappelé : votre numéro" required>
+                <button type="submit">Être rappelé</button>
+            </form>
+            <div class="tally-wrap">
+                <iframe src="https://tally.so/r/mY6ZWN?hideTitle=1&transparentBackground=1&alignLeft=1" 
+                        title="Formulaire de contact Alesium" frameborder="0"></iframe>
+                <p class="muted small">Si le formulaire n'apparaît pas, <a href="https://tally.so/r/mY6ZWN" target="_blank" rel="noopener">ouvrez-le ici</a>.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p class="small">© <span id="year"></span> Alesium — Tous droits réservés.</p>
+        <nav class="legal-links">
+            <a href="#/mentions-legales">Mentions légales</a> · <a href="#/rgpd">RGPD</a>
+        </nav>
+    </footer>
+
+    <section id="mentions-legales" class="section hidden">
+        <div class="legal-content">
+            <h2>Mentions légales</h2>
+            <p><strong>Éditeur du site</strong><br>
+            Alesium – Maxence Pereira Métallerie (Raison sociale : Maxence Pereira Métallerie)<br>
+            SIREN : 951 628 932<br>
+            Siège social : <em>à compléter</em><br>
+            Contact : <a href='mailto:contact@alesium.fr'>contact@alesium.fr</a></p>
+            <p><strong>Directeur de la publication</strong><br>Maxence Pereira</p>
+            <p><strong>Hébergement</strong><br>
+            GitHub Pages – GitHub, Inc., 88 Colin P. Kelly Jr St, San Francisco, CA 94107, USA<br>
+            <a href='https://pages.github.com/' target='_blank' rel='noopener'>pages.github.com</a></p>
+            <p><strong>Propriété intellectuelle</strong><br>
+            L'ensemble des contenus (textes, visuels, logos, mises en page) est protégé. Toute reproduction est soumise à autorisation écrite préalable.</p>
+            <p><strong>Responsabilité</strong><br>
+            Les informations publiées sont fournies à titre indicatif et peuvent évoluer. L'éditeur ne saurait être tenu responsable d'un mauvais usage des informations et livrables.</p>
+        </div>
+    </section>
+
+    <section id="rgpd" class="section hidden">
+        <div class="legal-content">
+            <h2>Politique de protection des données (RGPD)</h2>
+            <p><strong>Responsable de traitement</strong><br>
+            Alesium – Maxence Pereira Métallerie (SIREN 951 628 932)<br>
+            Contact : <a href='mailto:contact@alesium.fr'>contact@alesium.fr</a></p>
+            <p><strong>Données traitées</strong><br>
+            Données de contact (nom, email, téléphone, société), contenus de messages, données d'usage strictement nécessaires au bon fonctionnement du site.</p>
+            <p><strong>Finalités & bases légales</strong><br>
+            Réponse aux demandes (consentement), prospection B2B mesurée (intérêt légitime), amélioration du site (intérêt légitime).</p>
+            <p><strong>Durées de conservation</strong><br>
+            Contacts : 24 mois après le dernier échange utile. Données techniques : selon obligations légales/applicables.</p>
+            <p><strong>Destinataires</strong><br>
+            Éditeur et prestataires techniques strictement nécessaires. Formulaire : service Tally (tally.so). Veuillez consulter leur politique de confidentialité.</p>
+            <p><strong>Vos droits</strong><br>
+            Accès, rectification, effacement, limitation, opposition, portabilité. Exercice par email à <a href='mailto:contact@alesium.fr'>contact@alesium.fr</a>. Réclamation possible auprès de la CNIL.</p>
+            <p><strong>Cookies</strong><br>
+            Pas de cookies publicitaires. Les intégrations tierces peuvent déposer des traceurs techniques. Votre navigateur permet de les contrôler.</p>
+        </div>
+    </section>
+
+    <script src="assets/js/app.js"></script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Alesium",
+        "url": "https://www.alesium.fr",
+        "email": "contact@alesium.fr",
+        "description": "Conseil & industrialisation : étude, prototypage, mise en production pour PME et artisans industriels.",
+        "areaServed": "FR",
+        "knowsAbout": ["industrialisation", "machines spéciales", "prototypage", "mécano-soudure", "usinage", "CNC", "RDM"],
+        "makesOffer": {
+            "@type": "OfferCatalog",
+            "name": "Services d'industrialisation",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Audit / Diagnostic rapide",
+                        "description": "Évaluation terrain et recommandations prioritaires."
+                    },
+                    "priceSpecification": {
+                        "@type": "UnitPriceSpecification",
+                        "priceCurrency": "EUR",
+                        "price": "650",
+                        "unitCode": "DAY"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Étude + prototype numérique",
+                        "description": "Conception, RDM, dossier prêt à fabriquer."
+                    },
+                    "priceSpecification": {
+                        "@type": "UnitPriceSpecification",
+                        "priceCurrency": "EUR",
+                        "price": "700",
+                        "unitCode": "DAY"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Prototype physique / machine spéciale",
+                        "description": "Réalisation atelier, tests, itérations."
+                    },
+                    "priceSpecification": {
+                        "@type": "UnitPriceSpecification",
+                        "priceCurrency": "EUR",
+                        "price": "750",
+                        "unitCode": "DAY"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Industrialisation express (2–3 semaines)",
+                        "description": "Livrable + process + transfert vers la production."
+                    },
+                    "priceSpecification": {
+                        "@type": "PriceSpecification",
+                        "priceCurrency": "EUR",
+                        "minPrice": "5000",
+                        "maxPrice": "8000"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+
+    <script type="application/json" id="llm-site-manifest">
+    {
+        "brand": {
+            "name": "Alesium",
+            "domain": "https://www.alesium.fr",
+            "contact_email": "contact@alesium.fr",
+            "positioning": "J'aide les PME et artisans industriels à passer du concept à la production fiable et rentable, grâce à une expertise complète de la conception à la fabrication.",
+            "differentiators": [
+                "Ingénieur + faiseur : alignement étude/atelier",
+                "Atelier rentable monté from scratch",
+                "Multi-matériaux & multi-procédés, opérationnel immédiatement"
+            ],
+            "key_sentence": "Je ne suis pas un bureau d'études classique : je vous livre des solutions prêtes à fabriquer, testées, et adaptées à votre capacité réelle de production."
+        },
+        "audience": [
+            "PME industrielles (5–50 personnes)",
+            "Start-ups hardware post-POC",
+            "Artisans visant la petite série"
+        ],
+        "offers_pricing": {
+            "offers": [
+                {
+                    "name": "Audit / Diagnostic rapide",
+                    "deliverable": "priorisation d'actions",
+                    "pricing": "650 € HT forfait (1 jour sur site)"
+                },
+                {
+                    "name": "Étude + proto numérique",
+                    "deliverable": "dossier prêt à fabriquer",
+                    "pricing": "700 € HT / jour"
+                },
+                {
+                    "name": "Prototype physique / machine spéciale",
+                    "deliverable": "prototype testé",
+                    "pricing": "750 € HT / jour + matière"
+                },
+                {
+                    "name": "Industrialisation express (2–3 semaines)",
+                    "deliverable": "livrable + process + transfert",
+                    "pricing": "5 000 – 8 000 € HT"
+                }
+            ],
+            "pricing_notes": "Ne pas afficher uniquement du temps passé : associer chaque offre à un livrable tangible."
+        },
+        "routing": {
+            "mode": "hash",
+            "anchors": ["#accueil", "#presentation", "#positionnement", "#tarifs", "#projets", "#/projets/{slug}", "#contact", "#/mentions-legales", "#/rgpd"],
+            "spa_fallback": "404.html"
+        },
+        "content_map": {
+            "home": {
+                "hero": "Promesse claire + CTA (prise de contact)",
+                "sections": ["Qui je suis", "Positionnement", "Offres & Tarifs", "Projets (carrousel)", "Contact (bas de page)"]
+            },
+            "projects": {
+                "source": "docs/content/projets.json",
+                "fields": ["slug", "title", "preview", "images", "summary", "key_points", "results", "time_spent", "tech"],
+                "detail_route": "#/projets/{slug}"
+            },
+            "contact": {
+                "email": "contact@alesium.fr",
+                "recall_button": "mailto: contact@alesium.fr (sujet pré-rempli avec numéro)",
+                "form_iframe": "https://tally.so/r/mY6ZWN"
+            }
+        },
+        "vocabulary": {
+            "primary_keywords": ["industrialisation", "machines spéciales", "prototypage", "mécano-soudure", "usinage", "CNC", "RDM", "transfert en production"],
+            "synonyms": {
+                "industrialisation": ["mise en production", "transfert industriel"],
+                "prototype": ["proto", "maquette fonctionnelle"],
+                "machines spéciales": ["machine sur mesure", "équipement dédié", "machine custom"]
+            },
+            "avoid": ["superlatifs creux", "jargon marketing non technique"]
+        },
+        "ux_constraints": {
+            "tone": "sobre, sérieux, ingénieur→ingénieur",
+            "readability": "phrases courtes, concret, chiffres seulement si vérifiables",
+            "accessibility": "contrastes élevés, tailles de police suffisantes, mobile-first",
+            "animations": "légères, non bloquantes, pas d'auto-lecture sonore"
+        },
+        "faq": [
+            {
+                "q": "En quoi Alesium diffère d'un bureau d'études classique ?",
+                "a": "Étude → proto → mise en place. Alignement constant avec les contraintes atelier ; livrables prêts à fabriquer."
+            },
+            {
+                "q": "Pouvez-vous intervenir rapidement ?",
+                "a": "Oui. Opérationnel immédiatement (pas de phase d'apprentissage facturée)."
+            },
+            {
+                "q": "Sur quels matériaux/procédés ?",
+                "a": "Multi-matériaux et procédés (mécano-soudure, usinage, CNC, assemblage, etc.)."
+            }
+        ],
+        "llm_usage_notes": [
+            "Toujours proposer un échange court (15 min) en CTA.",
+            "Résumer les projets en 3 blocs : Contexte → Solution → Résultats.",
+            "Ne pas inventer de données chiffrées ; si manquantes, rester qualitatif."
+        ]
+    }
+    </script>
+</body>
 </html>
