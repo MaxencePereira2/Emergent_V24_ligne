@@ -1,0 +1,264 @@
+(function() {
+    // Set year in footer
+    const YEAR = document.getElementById('year');
+    if (YEAR) YEAR.textContent = new Date().getFullYear();
+
+    const EMAIL = 'contact@alesium.fr';
+
+    // Recall form handler
+    document.querySelector('.recall-form')?.addEventListener('submit', e => {
+        e.preventDefault();
+        const num = e.target.tel.value.trim();
+        if (!num) {
+            alert('Merci d\'indiquer votre numéro.');
+            return;
+        }
+        const subject = `Rappeler ce numéro ASAP: "${num}"`;
+        const body = `Numéro à rappeler : ${num}\n\n(Envoyé depuis alesium.fr)`;
+        location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+
+    // Projects and carousel functionality
+    const DATA_URL = 'content/projets.json';
+    const carouselHost = document.querySelector('#projets .track');
+    const prevBtn = document.querySelector('#projets .prev');
+    const nextBtn = document.querySelector('#projets .next');
+    const detail = document.getElementById('projet-detail');
+
+    function slugify(text) {
+        return text
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/[-\s]+/g, '-')
+            .replace(/^-|-$/g, '');
+    }
+
+    function cardHTML(p) {
+        return `
+            <article class="card">
+                <a href="#/projets/${p.slug}">
+                    <img src="${p.preview}" alt="${p.title}" onerror="this.style.display='none'"/>
+                    <h3>${p.title}</h3>
+                </a>
+            </article>
+        `;
+    }
+
+    function renderCarousel(items) {
+        if (!carouselHost) return;
+        carouselHost.innerHTML = items.map(cardHTML).join('');
+        
+        // Add smooth scroll for carousel navigation
+        prevBtn?.addEventListener('click', () => {
+            carouselHost.scrollBy({left: -350, behavior: 'smooth'});
+        });
+        
+        nextBtn?.addEventListener('click', () => {
+            carouselHost.scrollBy({left: 350, behavior: 'smooth'});
+        });
+
+        // Add touch/swipe support for mobile
+        let startX = 0;
+        let scrollLeft = 0;
+        let isDown = false;
+
+        carouselHost.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - carouselHost.offsetLeft;
+            scrollLeft = carouselHost.scrollLeft;
+        });
+
+        carouselHost.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        carouselHost.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        carouselHost.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carouselHost.offsetLeft;
+            const walk = (x - startX) * 2;
+            carouselHost.scrollLeft = scrollLeft - walk;
+        });
+    }
+
+    function renderDetail(p) {
+        if (!detail) return;
+        detail.classList.remove('hidden');
+        detail.setAttribute('aria-hidden', 'false');
+        
+        const imageGallery = p.images && p.images.length > 0 
+            ? `<div class="gallery">${p.images.map(src => `<img src="${src}" alt="${p.title}" onerror="this.style.display='none'">`).join('')}</div>`
+            : '';
+
+        const keyPoints = p.key_points && p.key_points.length > 0
+            ? `<h3>Points clés</h3><ul class="bullets">${p.key_points.map(point => `<li>${point}</li>`).join('')}</ul>`
+            : '';
+
+        detail.innerHTML = `
+            <h2>${p.title}</h2>
+            <p class="muted">${p.summary || ''}</p>
+            ${imageGallery}
+            <div class="cols">
+                <div>
+                    ${keyPoints}
+                    ${p.tech ? `<h3>Technologies</h3><p>${p.tech}</p>` : ''}
+                </div>
+                <div>
+                    <h3>Résultats</h3>
+                    <p>${p.results || 'Données non disponibles'}</p>
+                    <h3>Temps passé</h3>
+                    <p>${p.time_spent || 'Données non disponibles'}</p>
+                </div>
+            </div>
+            <p><a class="btn" href="#projets">← Revenir aux projets</a></p>
+        `;
+        
+        // Smooth scroll to detail section
+        setTimeout(() => {
+            window.scrollTo({
+                top: detail.offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }, 100);
+    }
+
+    function hideDetail() {
+        if (!detail) return;
+        detail.classList.add('hidden');
+        detail.setAttribute('aria-hidden', 'true');
+        detail.innerHTML = '';
+    }
+
+    function route(items) {
+        const hash = location.hash || '';
+        const projectMatch = hash.match(/^#\/projets\/(.+)$/);
+        
+        if (projectMatch) {
+            const slug = projectMatch[1];
+            const project = items.find(x => x.slug === slug);
+            if (project) {
+                renderDetail(project);
+            } else {
+                hideDetail();
+            }
+        } else {
+            hideDetail();
+        }
+    }
+
+    // Load projects data
+    fetch(DATA_URL)
+        .then(r => r.json())
+        .then(items => {
+            renderCarousel(items);
+            route(items);
+            
+            // Handle hash changes for SPA routing
+            window.addEventListener('hashchange', () => route(items));
+        })
+        .catch(e => {
+            console.warn('projets.json introuvable', e);
+            // Fallback: create mock data from available assets
+            createMockProjects();
+        });
+
+    // Legal sections handling
+    const ml = document.getElementById('mentions-legales');
+    const rg = document.getElementById('rgpd');
+
+    function showSection(sectionId) {
+        [ml, rg].forEach(s => {
+            if (!s) return;
+            s.classList.add('hidden');
+            s.setAttribute('aria-hidden', 'true');
+        });
+
+        const sec = document.querySelector(sectionId);
+        if (sec) {
+            sec.classList.remove('hidden');
+            sec.setAttribute('aria-hidden', 'false');
+            setTimeout(() => {
+                window.scrollTo({
+                    top: sec.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    }
+
+    // Handle legal page routing
+    window.addEventListener('hashchange', () => {
+        if (location.hash === '#/mentions-legales') showSection('#mentions-legales');
+        if (location.hash === '#/rgpd') showSection('#rgpd');
+    });
+
+    // Initial legal page check
+    if (location.hash === '#/mentions-legales') showSection('#mentions-legales');
+    if (location.hash === '#/rgpd') showSection('#rgpd');
+
+    // Smooth scrolling for anchor links
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="#"]:not([href="#/"])');
+        if (!link) return;
+        
+        const href = link.getAttribute('href');
+        if (href.startsWith('#/')) return; // Skip SPA routes
+        
+        const target = document.querySelector(href);
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+
+    // Add loading animation for images
+    document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.addEventListener('load', () => {
+                img.style.opacity = '1';
+            });
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.3s ease';
+        });
+    });
+
+    // Create mock projects if JSON fails to load
+    function createMockProjects() {
+        const mockProjects = [
+            {
+                slug: "optimisation-escalier-acier",
+                title: "Optimisation du temps de fabrication d'escalier en acier",
+                preview: "assets/projets/optimisation-escalier-acier/preview.jpg",
+                images: ["assets/projets/optimisation-escalier-acier/image1.jpg", "assets/projets/optimisation-escalier-acier/image2.jpg"],
+                summary: "Réduction du temps de fabrication d'escaliers métalliques par optimisation des procédés.",
+                key_points: ["Analyse des goulots d'étranglement", "Nouvelle méthode d'assemblage", "Outillage spécialisé"],
+                results: "Temps de fabrication réduit de 40%",
+                time_spent: "3 semaines",
+                tech: "Soudure MIG/MAG, usinage CNC"
+            },
+            {
+                slug: "ligne-production",
+                title: "Fabrication d'une ligne de production",
+                preview: "assets/projets/ligne-production/preview.jpg",
+                images: ["assets/projets/ligne-production/image1.jpg"],
+                summary: "Conception et réalisation complète d'une ligne de production automatisée.",
+                key_points: ["Automatisation des tâches répétitives", "Contrôle qualité intégré", "Interface opérateur intuitive"],
+                results: "Productivité augmentée de 60%",
+                time_spent: "8 semaines",
+                tech: "Automatisme, pneumatique, vision industrielle"
+            }
+        ];
+        
+        renderCarousel(mockProjects);
+        route(mockProjects);
+        window.addEventListener('hashchange', () => route(mockProjects));
+    }
+})();
