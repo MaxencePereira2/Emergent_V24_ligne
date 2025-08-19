@@ -445,7 +445,7 @@ body::before {
 
 /* Titres sections avec fonds spécifiques - contraste 40% amélioré */
 #positionnement h2 {
-    color: #FFFFFF !important; /* Blanc sur fond sombre */
+    color: #000000 !important; /* Noir sur fond clair pour meilleur contraste */
 }
 
 #tarifs h2 {
