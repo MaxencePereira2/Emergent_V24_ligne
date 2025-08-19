@@ -417,6 +417,12 @@ body::before {
     position: relative;
 }
 
+#projet-detail {
+    z-index: 10; /* Détail projet au-dessus de tout */
+    position: relative;
+    margin-bottom: 100px; /* Espace pour éviter la collision avec positionnement */
+}
+
 #positionnement {
     z-index: 3; /* Section positionnement en dessous */
     position: relative;
