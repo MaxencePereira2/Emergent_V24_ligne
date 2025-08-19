@@ -665,6 +665,7 @@ body::before {
     transition: transform 0.3s ease;
     position: relative;
     z-index: 2;
+    overflow: visible;
 }
 
 .carousel .track:active {
@@ -673,6 +674,7 @@ body::before {
 
 .carousel .track.dragging {
     transition: none;
+    cursor: grabbing;
 }
 
 .carousel .track.auto-scroll {
