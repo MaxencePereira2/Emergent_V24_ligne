@@ -339,7 +339,7 @@ body::before {
 }
 
 .section.section-enter {
-    transform: translateY(30%);
+    transform: translateY(10%); /* Réduit de 30% à 10% */
     opacity: 0.3;
 }
 
