@@ -390,6 +390,16 @@ body::before {
     border-radius: 12px;
 }
 
+/* Tous les textes de la section tarifs en blanc */
+#tarifs, 
+#tarifs p, 
+#tarifs ul, 
+#tarifs li,
+#tarifs .card p,
+#tarifs .card span {
+    color: white !important;
+}
+
 #contact {
     background: 
         linear-gradient(135deg, var(--section-green-light) 0%, rgba(244,244,244,0.98) 100%);
