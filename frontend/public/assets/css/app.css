@@ -80,25 +80,30 @@ body::before {
     opacity: 0.6;
 }
 
+/* Navigation avec transparence et effet glass morphism */
 .nav {
     display: flex;
-    gap: 24px;
+    gap: 32px;
     align-items: center;
-    padding: 16px 20px;
-    max-width: 1200px;
+    padding: 20px 30px;
+    max-width: 1400px;
     margin: 0 auto;
+    backdrop-filter: blur(20px);
 }
 
 .nav .logo {
-    font-weight: 600;
-    font-size: 1.25rem;
+    font-weight: 400;
+    font-size: 1.8rem;
     color: var(--warm-beige);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: all 0.3s ease;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 .nav .logo:hover {
     color: var(--copper);
+    text-shadow: 0 0 10px rgba(204, 139, 101, 0.3);
 }
 
 .nav .spacer {
@@ -106,56 +111,45 @@ body::before {
 }
 
 .nav a {
-    color: var(--warm-beige);
+    color: rgba(227, 220, 210, 0.9);
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
+    font-weight: 300;
+    transition: all 0.3s ease;
     position: relative;
+    padding: 8px 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
 .nav a:hover:not(.cta):not(.logo) {
     color: var(--copper);
-}
-
-.nav a:hover:not(.cta):not(.logo)::after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--copper);
-    transform: scaleX(1);
+    background: rgba(204, 139, 101, 0.1);
+    border-radius: 4px;
 }
 
 .nav a:not(.cta):not(.logo)::after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--copper);
-    transform: scaleX(0);
-    transition: transform 0.2s ease;
+    display: none;
 }
 
 .nav .cta {
-    padding: 12px 20px;
-    border: 1px solid var(--copper);
-    background: var(--copper);
-    color: var(--primary-ink);
-    border-radius: 12px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    padding: 12px 24px;
+    border: 1px solid rgba(227, 220, 210, 0.6);
+    background: rgba(227, 220, 210, 0.1);
+    color: var(--warm-beige);
+    border-radius: 6px;
+    font-weight: 400;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    letter-spacing: 0.05em;
 }
 
 .nav .cta:hover {
     background: var(--warm-beige);
     border-color: var(--warm-beige);
     color: var(--deep-green);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(204, 139, 101, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(227, 220, 210, 0.3);
 }
 
 .hero {
