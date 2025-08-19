@@ -393,7 +393,11 @@ body::before {
     border-radius: 12px;
 }
 
-/* Z-index spécifiques pour éviter les chevauchements */
+/* Section "qui je suis" toujours visible sans parallaxe */
+#presentation {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
 #projets {
     z-index: 5; /* Section projets au-dessus */
     position: relative;
