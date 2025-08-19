@@ -435,6 +435,146 @@ body::before {
 #tarifs .card span {
     color: white !important;
 }
+/* Styles pour la section CV interactive */
+.cv-interactive {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.cv-interactive h3 {
+    color: #2d3748;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.cv-section {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(139, 90, 60, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cv-question {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2d3748;
+    transition: all 0.3s ease;
+}
+
+.cv-question:hover {
+    background: rgba(139, 90, 60, 0.1);
+}
+
+.cv-question span:first-child {
+    flex: 1;
+}
+
+.cv-icon {
+    background: rgba(139, 90, 60, 0.2);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #8b5a3c;
+    transition: transform 0.3s ease;
+}
+
+.cv-question[aria-expanded="true"] .cv-icon {
+    transform: rotate(45deg);
+}
+
+.cv-answer {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.98);
+}
+
+.cv-answer.open {
+    max-height: 1000px;
+    padding: 1.5rem;
+}
+
+.cv-answer h4 {
+    color: #8b5a3c;
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.cv-answer p {
+    color: #2d3748;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.cv-answer ul {
+    color: #2d3748;
+    margin-left: 1rem;
+}
+
+.cv-answer li {
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
+}
+
+.expertise-grid,
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.timeline {
+    margin: 1rem 0;
+}
+
+.timeline-item {
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid rgba(139, 90, 60, 0.3);
+}
+
+.timeline-item h4 {
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .expertise-grid,
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .cv-interactive {
+        padding: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .cv-question {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}
 
 #contact {
     background: 
