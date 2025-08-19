@@ -47,50 +47,115 @@
     function renderCarousel(items) {
         if (!carouselHost) return;
         
+        // Trier les projets dans l'ordre 1-2-3-4-5-6 basé sur le numéro au début du titre
+        const sortedItems = items.sort((a, b) => {
+            const numA = parseInt(a.title.match(/^(\d+)/)?.[1] || '999');
+            const numB = parseInt(b.title.match(/^(\d+)/)?.[1] || '999');
+            return numA - numB;
+        });
+        
         // Dupliquer les items pour un défilement infini
-        const duplicatedItems = [...items, ...items];
+        const duplicatedItems = [...sortedItems, ...sortedItems];
         carouselHost.innerHTML = duplicatedItems.map(cardHTML).join('');
         
-        // Supprimer les anciens event listeners de navigation
-        // Le carrousel est maintenant auto-défilant via CSS
-        
-        // Garder le support tactile pour mobile
+        // Variables pour le glissement manuel
+        let isDragging = false;
         let startX = 0;
-        let scrollLeft = 0;
-        let isDown = false;
-
-        carouselHost.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - carouselHost.offsetLeft;
-            scrollLeft = carouselHost.scrollLeft;
-            carouselHost.style.animationPlayState = 'paused';
-        });
-
-        carouselHost.addEventListener('mouseleave', () => {
-            isDown = false;
-            carouselHost.style.animationPlayState = 'running';
-        });
-
-        carouselHost.addEventListener('mouseup', () => {
-            isDown = false;
-            carouselHost.style.animationPlayState = 'running';
-        });
-
-        carouselHost.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID = 0;
+        
+        // Fonction pour activer/désactiver l'auto-scroll
+        function toggleAutoScroll(enable) {
+            if (enable) {
+                carouselHost.classList.add('auto-scroll');
+            } else {
+                carouselHost.classList.remove('auto-scroll');
+            }
+        }
+        
+        // Désactiver l'auto-scroll initialement
+        toggleAutoScroll(false);
+        
+        // Démarrer l'auto-scroll après 2 secondes
+        setTimeout(() => {
+            if (!isDragging) {
+                toggleAutoScroll(true);
+            }
+        }, 2000);
+        
+        // Gestion des événements tactiles et souris
+        carouselHost.addEventListener('mousedown', startDrag);
+        carouselHost.addEventListener('touchstart', startDrag, { passive: false });
+        
+        carouselHost.addEventListener('mouseup', endDrag);
+        carouselHost.addEventListener('touchend', endDrag);
+        carouselHost.addEventListener('mouseleave', endDrag);
+        
+        carouselHost.addEventListener('mousemove', drag);
+        carouselHost.addEventListener('touchmove', drag, { passive: false });
+        
+        function startDrag(e) {
+            isDragging = true;
+            toggleAutoScroll(false);
+            carouselHost.classList.add('dragging');
+            
+            startX = getPositionX(e);
+            prevTranslate = currentTranslate;
+            
+            carouselHost.style.cursor = 'grabbing';
+            animationID = requestAnimationFrame(animation);
+        }
+        
+        function drag(e) {
+            if (!isDragging) return;
+            
             e.preventDefault();
-            const x = e.pageX - carouselHost.offsetLeft;
-            const walk = (x - startX) * 2;
-            carouselHost.style.transform = `translateX(${-walk}px)`;
-        });
+            const currentPosition = getPositionX(e);
+            currentTranslate = prevTranslate + currentPosition - startX;
+        }
         
-        // Pause animation on hover
+        function endDrag() {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            carouselHost.classList.remove('dragging');
+            carouselHost.style.cursor = 'grab';
+            
+            cancelAnimationFrame(animationID);
+            
+            // Remettre l'auto-scroll après 3 secondes d'inactivité
+            setTimeout(() => {
+                if (!isDragging) {
+                    toggleAutoScroll(true);
+                    // Reset position for smooth auto-scroll
+                    currentTranslate = 0;
+                    prevTranslate = 0;
+                    carouselHost.style.transform = 'translateX(0)';
+                }
+            }, 3000);
+        }
+        
+        function getPositionX(e) {
+            return e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        }
+        
+        function animation() {
+            if (isDragging) {
+                carouselHost.style.transform = `translateX(${currentTranslate}px)`;
+                requestAnimationFrame(animation);
+            }
+        }
+        
+        // Pause auto-scroll au survol
         carouselHost.addEventListener('mouseenter', () => {
-            carouselHost.style.animationPlayState = 'paused';
+            if (!isDragging) {
+                carouselHost.style.animationPlayState = 'paused';
+            }
         });
         
         carouselHost.addEventListener('mouseleave', () => {
-            if (!isDown) {
+            if (!isDragging) {
                 carouselHost.style.animationPlayState = 'running';
             }
         });
