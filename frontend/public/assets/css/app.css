@@ -38,6 +38,30 @@ body {
     color: var(--text);
     background: var(--bg);
     scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Parallaxe 10% sur le scroll vertical */
+.parallax-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+    background: var(--bg);
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(166, 115, 85, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(209, 202, 192, 0.04) 0%, transparent 60%);
+    will-change: transform;
 }
 
 body::before {
@@ -45,10 +69,10 @@ body::before {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .9)), url('../fonds/watermark');
+    background: linear-gradient(180deg, rgba(244, 244, 244, .9), rgba(244, 244, 244, .9)), url('../fonds/watermark.jpg');
     background-size: 400px auto;
     background-repeat: repeat;
-    opacity: .1;
+    opacity: .08;
     z-index: -1;
 }
 
