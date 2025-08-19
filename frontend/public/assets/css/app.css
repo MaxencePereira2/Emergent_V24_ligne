@@ -315,6 +315,21 @@ body::before {
     border-radius: 0;
     position: relative;
     overflow: hidden;
+    
+    /* Parallaxe entre sections */
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.section.section-enter {
+    transform: translateY(30%);
+    opacity: 0.3;
+}
+
+.section.section-visible {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 /* Couleurs spécifiques pour chaque section - style Petralithe */
