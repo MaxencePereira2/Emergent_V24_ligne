@@ -27,8 +27,8 @@
     --border-copper: rgba(139, 90, 60, 0.2);
 }
 
-* {
-    box-sizing: border-box;
+html {
+    scroll-padding-top: 100px; /* Compensation pour le header fixe lors des ancres */
 }
 
 html,
