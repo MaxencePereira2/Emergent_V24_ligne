@@ -429,7 +429,24 @@ body::before {
 /* Titres spécifiques des sections "projets" et "qui je suis" en texte sombre */
 #presentation h2,
 #projets h2 {
-    color: #2d3748 !important; /* Texte sombre pour ces sections */
+    color: #000000 !important; /* Noir pur sur fond clair pour contraste optimal */
+}
+
+/* Titres sections avec fonds spécifiques - contraste 40% amélioré */
+#positionnement h2 {
+    color: #FFFFFF !important; /* Blanc sur fond sombre */
+}
+
+#tarifs h2 {
+    color: #000000 !important; /* Noir sur fond clair/blanc */
+}
+
+#contact h2 {
+    color: #000000 !important; /* Noir sur fond clair */
+}
+
+#faq h2 {
+    color: #FFFFFF !important; /* Blanc sur fond sombre */
 }
 #tarifs, 
 #tarifs p, 
