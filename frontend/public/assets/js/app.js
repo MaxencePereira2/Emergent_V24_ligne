@@ -414,8 +414,8 @@
                     // Calculer le pourcentage de visibilité (0 = loin, 1 = au centre)
                     const visibility = Math.max(0, 1 - (distanceFromCenter / (windowHeight * 0.8)));
                     
-                    // Appliquer la transformation de -30% à 0%
-                    const translateY = (1 - visibility) * 30;
+                    // Appliquer la transformation de -10% à 0%
+                    const translateY = (1 - visibility) * 10; // Réduit de 30 à 10
                     const opacity = 0.3 + (visibility * 0.7);
                     
                     section.style.transform = `translateY(${translateY}%)`;
