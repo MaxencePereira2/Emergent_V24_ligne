@@ -46,18 +46,15 @@
 
     function renderCarousel(items) {
         if (!carouselHost) return;
-        carouselHost.innerHTML = items.map(cardHTML).join('');
         
-        // Add smooth scroll for carousel navigation
-        prevBtn?.addEventListener('click', () => {
-            carouselHost.scrollBy({left: -350, behavior: 'smooth'});
-        });
+        // Dupliquer les items pour un défilement infini
+        const duplicatedItems = [...items, ...items];
+        carouselHost.innerHTML = duplicatedItems.map(cardHTML).join('');
         
-        nextBtn?.addEventListener('click', () => {
-            carouselHost.scrollBy({left: 350, behavior: 'smooth'});
-        });
-
-        // Add touch/swipe support for mobile
+        // Supprimer les anciens event listeners de navigation
+        // Le carrousel est maintenant auto-défilant via CSS
+        
+        // Garder le support tactile pour mobile
         let startX = 0;
         let scrollLeft = 0;
         let isDown = false;
@@ -66,14 +63,17 @@
             isDown = true;
             startX = e.pageX - carouselHost.offsetLeft;
             scrollLeft = carouselHost.scrollLeft;
+            carouselHost.style.animationPlayState = 'paused';
         });
 
         carouselHost.addEventListener('mouseleave', () => {
             isDown = false;
+            carouselHost.style.animationPlayState = 'running';
         });
 
         carouselHost.addEventListener('mouseup', () => {
             isDown = false;
+            carouselHost.style.animationPlayState = 'running';
         });
 
         carouselHost.addEventListener('mousemove', (e) => {
@@ -81,7 +81,18 @@
             e.preventDefault();
             const x = e.pageX - carouselHost.offsetLeft;
             const walk = (x - startX) * 2;
-            carouselHost.scrollLeft = scrollLeft - walk;
+            carouselHost.style.transform = `translateX(${-walk}px)`;
+        });
+        
+        // Pause animation on hover
+        carouselHost.addEventListener('mouseenter', () => {
+            carouselHost.style.animationPlayState = 'paused';
+        });
+        
+        carouselHost.addEventListener('mouseleave', () => {
+            if (!isDown) {
+                carouselHost.style.animationPlayState = 'running';
+            }
         });
     }
 
