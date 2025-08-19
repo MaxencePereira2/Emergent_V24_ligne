@@ -294,6 +294,75 @@
         }
     });
 
+    // FAQ functionality - style Gracz
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const isOpen = question.getAttribute('aria-expanded') === 'true';
+            const answer = question.nextElementSibling;
+            
+            // Close all other FAQ items
+            faqQuestions.forEach(otherQuestion => {
+                if (otherQuestion !== question) {
+                    otherQuestion.setAttribute('aria-expanded', 'false');
+                    const otherAnswer = otherQuestion.nextElementSibling;
+                    otherAnswer.classList.remove('open');
+                }
+            });
+            
+            // Toggle current FAQ item
+            if (isOpen) {
+                question.setAttribute('aria-expanded', 'false');
+                answer.classList.remove('open');
+            } else {
+                question.setAttribute('aria-expanded', 'true');
+                answer.classList.add('open');
+            }
+        });
+    });
+
+    // Parallaxe 10% sur le mouvement vertical
+    let ticking = false;
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.parallax-layer');
+        
+        parallaxElements.forEach(element => {
+            const speed = scrolled * 0.1; // 10% de parallaxe
+            element.style.transform = `translateY(${speed}px)`;
+        });
+        
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', requestTick);
+    
+    // Ajouter les couches de parallaxe au DOM
+    function addParallaxLayers() {
+        const parallaxContainer = document.createElement('div');
+        parallaxContainer.className = 'parallax-container';
+        
+        for (let i = 0; i < 3; i++) {
+            const layer = document.createElement('div');
+            layer.className = 'parallax-layer';
+            layer.style.zIndex = -2 - i;
+            parallaxContainer.appendChild(layer);
+        }
+        
+        document.body.appendChild(parallaxContainer);
+    }
+    
+    // Initialiser la parallaxe au chargement
+    document.addEventListener('DOMContentLoaded', addParallaxLayers);
+
     // Add loading animation for images
     document.addEventListener('DOMContentLoaded', () => {
         const images = document.querySelectorAll('img');
