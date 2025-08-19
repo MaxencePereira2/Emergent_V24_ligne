@@ -69,11 +69,16 @@ body::before {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(180deg, rgba(244, 244, 244, .9), rgba(244, 244, 244, .9)), url('../fonds/watermark.jpg');
-    background-size: 400px auto;
-    background-repeat: repeat;
-    opacity: .08;
+    background: url('../fonds/atelier.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: .2;
     z-index: -1;
+    
+    /* Crop au format 21:9 */
+    background-size: 100% auto;
+    background-position: center 30%;
 }
 
 .site-header {
