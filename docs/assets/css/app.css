@@ -332,7 +332,7 @@ body::before {
 
 .section {
     max-width: 1400px;
-    margin: 80px auto; /* Réduit de 120px à 80px (condensé de 30%) */
+    margin: 56px auto; /* Réduit de 80px à 56px (30% de rapprochement) */
     padding: 60px 40px; /* Réduit de 80px à 60px */
     background: var(--surface);
     border-radius: 0;
