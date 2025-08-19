@@ -243,10 +243,10 @@ body::before {
 }
 
 .btn:hover {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--copper);
+    border-color: var(--copper);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(63, 122, 107, 0.4);
+    box-shadow: 0 8px 25px rgba(204, 139, 101, 0.4);
 }
 
 .section {
