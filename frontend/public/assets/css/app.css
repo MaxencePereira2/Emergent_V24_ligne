@@ -200,19 +200,8 @@ body::before {
         radial-gradient(ellipse at 80% 70%, rgba(209, 202, 192, 0.04) 0%, transparent 50%),
         linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.02) 25%, transparent 50%);
     background-size: 800px 600px, 600px 400px, 200px 200px;
-    z-index: 1;
-    animation: heroParallax 20s ease-in-out infinite;
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: linear-gradient(0deg, rgba(230, 231, 232, 0.08) 0%, transparent 100%);
     z-index: 2;
+    animation: heroParallax 20s ease-in-out infinite;
 }
 
 @keyframes heroParallax {
