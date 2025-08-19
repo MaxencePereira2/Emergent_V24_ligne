@@ -35,6 +35,34 @@ function App() {
         setTimeout(() => {
           const script = document.createElement('script');
           script.src = '/assets/js/app.js';
+          script.onload = () => {
+            // Forcer la ré-initialisation de la FAQ après le chargement du JS
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+              question.addEventListener('click', () => {
+                const isOpen = question.getAttribute('aria-expanded') === 'true';
+                const answer = question.nextElementSibling;
+                
+                // Close all other FAQ items
+                faqQuestions.forEach(otherQuestion => {
+                  if (otherQuestion !== question) {
+                    otherQuestion.setAttribute('aria-expanded', 'false');
+                    const otherAnswer = otherQuestion.nextElementSibling;
+                    otherAnswer.classList.remove('open');
+                  }
+                });
+                
+                // Toggle current FAQ item
+                if (isOpen) {
+                  question.setAttribute('aria-expanded', 'false');
+                  answer.classList.remove('open');
+                } else {
+                  question.setAttribute('aria-expanded', 'true');
+                  answer.classList.add('open');
+                }
+              });
+            });
+          };
           document.head.appendChild(script);
         }, 500);
       })
