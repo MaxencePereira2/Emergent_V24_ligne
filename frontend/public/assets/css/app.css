@@ -398,6 +398,17 @@ body::before {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
+
+/* Supprimer tout effet d'ombre 3D des titres de sections */
+.section h2,
+#presentation h2,
+#projets h2,
+#positionnement h2,
+#tarifs h2,
+#contact h2,
+#faq h2 {
+    text-shadow: none !important; /* Suppression complète des ombres 3D */
+}
 #projets {
     z-index: 5; /* Section projets au-dessus */
     position: relative;
