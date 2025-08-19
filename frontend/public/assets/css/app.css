@@ -404,6 +404,24 @@ body::before {
     position: relative;
 }
 
+/* Style pour les détails de projets - fond clair et texte sombre */
+#projet-detail {
+    background: rgba(255, 255, 255, 0.95) !important; /* Fond clair */
+    color: #2d3748 !important; /* Texte sombre */
+}
+
+#projet-detail h2,
+#projet-detail h3,
+#projet-detail p,
+#projet-detail ul,
+#projet-detail li {
+    color: #2d3748 !important; /* Tous les textes en sombre */
+}
+
+#projet-detail .muted {
+    color: #666 !important; /* Texte muté légèrement plus clair mais toujours lisible */
+}
+
 /* Titres spécifiques des sections "projets" et "qui je suis" en texte sombre */
 #presentation h2,
 #projets h2 {
