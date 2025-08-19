@@ -392,7 +392,11 @@ body::before {
     border-radius: 12px;
 }
 
-/* Tous les textes de la section tarifs en blanc */
+/* Titres spécifiques des sections "projets" et "qui je suis" en texte sombre */
+#presentation h2,
+#projets h2 {
+    color: #2d3748 !important; /* Texte sombre pour ces sections */
+}
 #tarifs, 
 #tarifs p, 
 #tarifs ul, 
