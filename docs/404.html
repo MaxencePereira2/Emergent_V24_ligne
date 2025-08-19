@@ -25,9 +25,11 @@
         <nav class="nav">
             <a href="#accueil" class="logo">Alesium</a>
             <div class="spacer"></div>
+            <a href="#presentation">Qui je suis</a>
+            <a href="#projets">Projets</a>
             <a href="#positionnement">Positionnement</a>
             <a href="#tarifs">Tarifs</a>
-            <a href="#projets">Projets</a>
+            <a href="#faq">FAQ</a>
             <a href="#contact" class="cta">Parlons de votre projet</a>
         </nav>
     </header>
@@ -57,6 +59,16 @@
                 </figure>
             </div>
         </section>
+
+        <section id="projets" class="section">
+            <h2>Projets</h2>
+            <div class="carousel">
+                <div class="track auto-scroll" aria-live="polite"></div>
+            </div>
+            <p class="muted">Cliquez sur un projet pour voir le détail. Glissez pour naviguer manuellement.</p>
+        </section>
+
+        <section id="projet-detail" class="section hidden" aria-hidden="true"></section>
 
         <section id="positionnement" class="section">
             <h2>Positionnement</h2>
@@ -94,32 +106,107 @@
             </div>
         </section>
 
-        <section id="projets" class="section">
-            <h2>Projets</h2>
-            <div class="carousel">
-                <div class="track" aria-live="polite"></div>
-                <button class="nav prev" aria-label="Précédent">←</button>
-                <button class="nav next" aria-label="Suivant">→</button>
+        <section id="faq" class="section">
+            <h2>Questions fréquentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Quel est le délai pour obtenir un devis ?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Les délais de rédaction des devis sont de 48h après réception des données techniques (dimensions, spécifications, contraintes) ou 24h après rendez-vous sur site. Les rendez-vous durent en moyenne une demi-journée pour bien comprendre vos besoins.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Quels sont les délais de réalisation ?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Les délais de conception et mise en production sont généralement de 4 à 8 semaines selon la complexité du projet. Pour les machines spéciales, prévoir 8 à 12 semaines. Nous vous communiquons un planning précis dès validation du devis.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Sur quels types de matériaux intervenez-vous ?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nous maîtrisons tous les matériaux industriels : aciers (construction, inox, haute résistance), aluminiums, fontes, plastiques techniques, composites. Notre expertise multi-matériaux nous permet d'optimiser chaque solution selon vos contraintes.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Proposez-vous un accompagnement après livraison ?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Oui, nous assurons la formation de vos équipes, le transfert de savoir-faire et un suivi post-livraison. Notre objectif : vous rendre autonome rapidement sur votre nouvelle solution de production.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Quelle est votre zone d'intervention ?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nous intervenons principalement en France, avec possibilité d'intervention à l'international pour les projets d'envergure. Les audits et diagnostics se font toujours sur site, quel que soit votre localisation.</p>
+                    </div>
+                </div>
             </div>
-            <p class="muted">Cliquez sur un projet pour voir le détail.</p>
         </section>
 
-        <section id="projet-detail" class="section hidden" aria-hidden="true"></section>
-
         <section id="contact" class="section">
-            <h2>Contact</h2>
-            <div class="contact-inline-email">
-                📧 Écrivez-nous : <a href="mailto:contact@alesium.fr">contact@alesium.fr</a>
+            <h2>Un projet en tête ?</h2>
+            <p class="contact-intro">Que ce soit pour discuter de votre projet, obtenir des conseils personnalisés, ou clarifier vos questions sur nos créations sur mesure, je suis là pour vous écouter et vous guider.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-label">Email</span>
+                    <a href="mailto:contact@alesium.fr" class="contact-value">contact@alesium.fr</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Téléphone</span>
+                    <a href="tel:+33674244314" class="contact-value">06 74 24 43 14</a>
+                </div>
             </div>
-            <form class="recall-form" autocomplete="on">
-                <input type="tel" name="tel" inputmode="tel" placeholder="Être rappelé : votre numéro" required>
-                <button type="submit">Être rappelé</button>
+
+            <form class="contact-form" action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Nom *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Téléphone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Sujet *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Sélectionnez un sujet</option>
+                        <option value="audit">Audit / Diagnostic rapide</option>
+                        <option value="etude">Étude + prototype numérique</option>
+                        <option value="prototype">Prototype physique / machine spéciale</option>
+                        <option value="industrialisation">Industrialisation express</option>
+                        <option value="autre">Autre demande</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Décrivez votre projet, vos besoins ou vos questions..." required></textarea>
+                </div>
+                
+                <button type="submit" class="contact-submit">Envoyer le message</button>
             </form>
-            <div class="tally-wrap">
-                <iframe src="https://tally.so/r/mY6ZWN?hideTitle=1&transparentBackground=1&alignLeft=1" 
-                        title="Formulaire de contact Alesium" frameborder="0"></iframe>
-                <p class="muted small">Si le formulaire n'apparaît pas, <a href="https://tally.so/r/mY6ZWN" target="_blank" rel="noopener">ouvrez-le ici</a>.</p>
-            </div>
         </section>
     </main>
 

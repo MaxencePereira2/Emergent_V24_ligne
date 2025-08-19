@@ -18,6 +18,66 @@
         location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
 
+    // Contact form handler
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.querySelector('.form-status');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone') || null,
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+            
+            // Show loading state
+            const submitBtn = contactForm.querySelector('.contact-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Get backend URL from React environment or fallback
+                const backendUrl = process.env.REACT_APP_BACKEND_URL || 
+                                 window.location.origin.replace(':3000', ':8001');
+                
+                const response = await fetch(`${backendUrl}/api/contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    // Success
+                    formStatus.style.display = 'block';
+                    formStatus.style.color = '#2d6e3e';
+                    formStatus.textContent = 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Erreur lors de l\'envoi du message');
+                }
+            } catch (error) {
+                // Error
+                formStatus.style.display = 'block';
+                formStatus.style.color = '#d32f2f';
+                formStatus.textContent = 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.';
+                console.error('Contact form error:', error);
+            } finally {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
     // Projects and carousel functionality
     const DATA_URL = 'content/projets.json';
     const carouselHost = document.querySelector('#projets .track');
@@ -46,42 +106,124 @@
 
     function renderCarousel(items) {
         if (!carouselHost) return;
-        carouselHost.innerHTML = items.map(cardHTML).join('');
         
-        // Add smooth scroll for carousel navigation
-        prevBtn?.addEventListener('click', () => {
-            carouselHost.scrollBy({left: -350, behavior: 'smooth'});
+        // Trier les projets dans l'ordre 1-2-3-4-5-6 basé sur le numéro au début du titre
+        const sortedItems = items.sort((a, b) => {
+            const numA = parseInt(a.title.match(/^(\d+)/)?.[1] || '999');
+            const numB = parseInt(b.title.match(/^(\d+)/)?.[1] || '999');
+            return numA - numB;
         });
         
-        nextBtn?.addEventListener('click', () => {
-            carouselHost.scrollBy({left: 350, behavior: 'smooth'});
-        });
-
-        // Add touch/swipe support for mobile
+        // Dupliquer les items pour un défilement infini
+        const duplicatedItems = [...sortedItems, ...sortedItems];
+        carouselHost.innerHTML = duplicatedItems.map(cardHTML).join('');
+        
+        // Variables pour le glissement manuel
+        let isDragging = false;
         let startX = 0;
-        let scrollLeft = 0;
-        let isDown = false;
-
-        carouselHost.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - carouselHost.offsetLeft;
-            scrollLeft = carouselHost.scrollLeft;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID = 0;
+        let startTime = 0;
+        
+        // Fonction pour activer/désactiver l'auto-scroll
+        function toggleAutoScroll(enable) {
+            if (enable) {
+                carouselHost.classList.add('auto-scroll');
+            } else {
+                carouselHost.classList.remove('auto-scroll');
+            }
+        }
+        
+        // Démarrer l'auto-scroll après 2 secondes
+        setTimeout(() => {
+            if (!isDragging) {
+                toggleAutoScroll(true);
+            }
+        }, 2000);
+        
+        // Gestion des événements tactiles et souris
+        carouselHost.addEventListener('mousedown', startDrag);
+        carouselHost.addEventListener('touchstart', startDrag, { passive: true });
+        
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+        
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag, { passive: true });
+        
+        function startDrag(e) {
+            if (e.target.closest('.card a')) return; // Ne pas interférer avec les liens
+            
+            isDragging = true;
+            startTime = Date.now();
+            toggleAutoScroll(false);
+            carouselHost.classList.add('dragging');
+            
+            startX = getPositionX(e);
+            prevTranslate = currentTranslate;
+            
+            animationID = requestAnimationFrame(animation);
+        }
+        
+        function drag(e) {
+            if (!isDragging) return;
+            
+            const currentPosition = getPositionX(e);
+            currentTranslate = prevTranslate + (currentPosition - startX) * 0.8; // Facteur de réduction pour un scroll plus fluide
+        }
+        
+        function endDrag() {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            carouselHost.classList.remove('dragging');
+            
+            cancelAnimationFrame(animationID);
+            
+            // Inertie de scroll
+            const duration = Date.now() - startTime;
+            const distance = currentTranslate - prevTranslate;
+            const velocity = distance / duration;
+            
+            if (Math.abs(velocity) > 0.1) {
+                currentTranslate += velocity * 200; // Inertie
+            }
+            
+            // Remettre l'auto-scroll après 3 secondes d'inactivité
+            setTimeout(() => {
+                if (!isDragging) {
+                    toggleAutoScroll(true);
+                    // Reset position for smooth auto-scroll
+                    currentTranslate = 0;
+                    prevTranslate = 0;
+                    carouselHost.style.transform = 'translateX(0)';
+                }
+            }, 3000);
+        }
+        
+        function getPositionX(e) {
+            return e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        }
+        
+        function animation() {
+            if (isDragging) {
+                carouselHost.style.transform = `translateX(${currentTranslate}px)`;
+                requestAnimationFrame(animation);
+            }
+        }
+        
+        // Pause auto-scroll au survol
+        carouselHost.addEventListener('mouseenter', () => {
+            if (!isDragging) {
+                carouselHost.style.animationPlayState = 'paused';
+            }
         });
-
+        
         carouselHost.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        carouselHost.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        carouselHost.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - carouselHost.offsetLeft;
-            const walk = (x - startX) * 2;
-            carouselHost.scrollLeft = scrollLeft - walk;
+            if (!isDragging) {
+                carouselHost.style.animationPlayState = 'running';
+            }
         });
     }
 
@@ -211,11 +353,128 @@
         const target = document.querySelector(href);
         if (target) {
             e.preventDefault();
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            const headerHeight = 80; // Hauteur du header fixe + marge
+            const targetPosition = target.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         }
+    });
+
+    // FAQ functionality - style Gracz
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const isOpen = question.getAttribute('aria-expanded') === 'true';
+            const answer = question.nextElementSibling;
+            
+            // Close all other FAQ items
+            faqQuestions.forEach(otherQuestion => {
+                if (otherQuestion !== question) {
+                    otherQuestion.setAttribute('aria-expanded', 'false');
+                    const otherAnswer = otherQuestion.nextElementSibling;
+                    otherAnswer.classList.remove('open');
+                }
+            });
+            
+            // Toggle current FAQ item
+            if (isOpen) {
+                question.setAttribute('aria-expanded', 'false');
+                answer.classList.remove('open');
+            } else {
+                question.setAttribute('aria-expanded', 'true');
+                answer.classList.add('open');
+            }
+        });
+    });
+
+    // CV Interactive functionality
+    const cvQuestions = document.querySelectorAll('.cv-question');
+    cvQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const isOpen = question.getAttribute('aria-expanded') === 'true';
+            const answer = question.nextElementSibling;
+            
+            // Toggle current CV item
+            if (isOpen) {
+                question.setAttribute('aria-expanded', 'false');
+                answer.classList.remove('open');
+            } else {
+                question.setAttribute('aria-expanded', 'true');
+                answer.classList.add('open');
+            }
+        });
+    });
+
+    // Parallaxe entre sections (-10% à 0%) - EXCLUANT la section "qui je suis"
+    function initSectionParallax() {
+        const sections = document.querySelectorAll('.section:not(#presentation)'); // Exclure la section "qui je suis"
+        
+        // Initialiser toutes les sections en mode "enter"
+        sections.forEach(section => {
+            section.classList.add('section-enter');
+        });
+        
+        function updateSectionParallax() {
+            const scrollY = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionCenter = sectionTop + sectionHeight / 2;
+                
+                // Calculer la distance par rapport au centre de l'écran
+                const screenCenter = scrollY + windowHeight / 2;
+                const distanceFromCenter = Math.abs(screenCenter - sectionCenter);
+                
+                // Si la section est proche du centre de l'écran
+                if (distanceFromCenter < windowHeight * 0.8) {
+                    // Calculer le pourcentage de visibilité (0 = loin, 1 = au centre)
+                    const visibility = Math.max(0, 1 - (distanceFromCenter / (windowHeight * 0.8)));
+                    
+                    // Appliquer la transformation de -10% à 0%
+                    const translateY = (1 - visibility) * 10; // Réduit de 30 à 10
+                    const opacity = 0.3 + (visibility * 0.7);
+                    
+                    section.style.transform = `translateY(${translateY}%)`;
+                    section.style.opacity = opacity;
+                    
+                    if (visibility > 0.7) {
+                        section.classList.remove('section-enter');
+                        section.classList.add('section-visible');
+                    }
+                } else {
+                    // Section trop loin, la garder en mode "enter"
+                    section.classList.remove('section-visible');
+                    section.classList.add('section-enter');
+                }
+            });
+        }
+        
+        // Écouter le scroll avec throttling
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateSectionParallax();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', onScroll);
+        
+        // Appel initial
+        updateSectionParallax();
+    }
+    
+    // Initialiser la parallaxe des sections
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initSectionParallax, 100);
     });
 
     // Add loading animation for images
