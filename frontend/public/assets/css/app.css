@@ -1,29 +1,29 @@
 :root {
-    --bg: #F6F7F8;
-    --surface: #FFFFFF;
-    --text: #1E2329;
-    --muted: #6B7280;
-    --primary: #001F1A;
+    --bg: #E6E7E8;
+    --surface: #F4F4F4;
+    --text: #0F0F10;
+    --muted: #4A4B50;
+    --primary: #000D0A;
     --primary-ink: #FFFFFF;
-    --accent: #CC8B65;
-    --border: #D6DBE2;
+    --accent: #A67355;
+    --border: #B8BCC2;
     
-    /* Nouvelle palette avec vert plus contrasté (+30%) */
-    --deep-green: #001F1A;
-    --warm-beige: #E3DCD2;
-    --copper: #CC8B65;
-    --dark-charcoal: #100C0D;
+    /* Nouvelle palette assombrie de 20% */
+    --deep-green: #000D0A;
+    --warm-beige: #D1CAC0;
+    --copper: #A67355;
+    --dark-charcoal: #080506;
     
-    /* Couleurs de sections harmonieuses */
-    --section-green-light: rgba(0, 31, 26, 0.05);
-    --section-beige-light: rgba(227, 220, 210, 0.3);
-    --section-copper-light: rgba(204, 139, 101, 0.1);
-    --section-warm-light: #FEFCFA;
+    /* Couleurs de sections harmonieuses assombries */
+    --section-green-light: rgba(0, 13, 10, 0.08);
+    --section-beige-light: rgba(209, 202, 192, 0.4);
+    --section-copper-light: rgba(166, 115, 85, 0.15);
+    --section-warm-light: #F8F6F4;
     
-    /* Couleurs de bordure harmonieuses */
-    --border-green: rgba(0, 31, 26, 0.15);
-    --border-beige: rgba(227, 220, 210, 0.5);
-    --border-copper: rgba(204, 139, 101, 0.3);
+    /* Couleurs de bordure harmonieuses assombries */
+    --border-green: rgba(0, 13, 10, 0.2);
+    --border-beige: rgba(209, 202, 192, 0.6);
+    --border-copper: rgba(166, 115, 85, 0.4);
 }
 
 * {
