@@ -164,8 +164,11 @@ body::before {
 }
 
 .hero {
-    padding: 120px 20px 80px;
-    background: linear-gradient(135deg, var(--deep-green) 0%, #001A15 50%, var(--deep-green) 100%);
+    padding: 80px 20px 60px;
+    background: linear-gradient(rgba(0, 13, 10, 0.7), rgba(0, 26, 21, 0.8)), url('../fonds/atelier.jpg');
+    background-size: cover;
+    background-position: center 40%;
+    background-attachment: fixed;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -175,7 +178,7 @@ body::before {
     justify-content: center;
 }
 
-/* Éléments de parallaxe assombris */
+/* Éléments de parallaxe par-dessus la photo */
 .hero::before {
     content: "";
     position: absolute;
@@ -184,12 +187,11 @@ body::before {
     width: 120%;
     height: 140%;
     background: 
-        radial-gradient(ellipse at 20% 30%, rgba(166, 115, 85, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(209, 202, 192, 0.04) 0%, transparent 50%),
-        linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.02) 25%, transparent 50%);
-    background-size: 800px 600px, 600px 400px, 200px 200px;
+        radial-gradient(ellipse at 20% 30%, rgba(166, 115, 85, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(209, 202, 192, 0.02) 0%, transparent 50%);
+    background-size: 800px 600px, 600px 400px;
     z-index: 2;
-    animation: heroParallax 20s ease-in-out infinite;
+    animation: heroParallax 25s ease-in-out infinite;
 }
 
 @keyframes heroParallax {
