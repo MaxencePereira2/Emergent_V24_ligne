@@ -1,30 +1,30 @@
 :root {
-    /* Base colors - darkened 30% inspired by gracz.fr puis éclaircies de 10% */
-    --bg: #1A1E22;
-    --surface: #2D3238;
-    --text: #E5E7EA;
-    --muted: #9CA3AF;
+    /* Base colors - VERSION CLAIRE pour publication */
+    --bg: #F8F9FA;
+    --surface: #FFFFFF;
+    --text: #2D3748;
+    --muted: #6B7280;
     --primary: #0A1410;
     --primary-ink: #FFFFFF;
     --accent: #8B5A3C;
-    --border: #3D4A58;
+    --border: #E2E8F0;
     
-    /* Main palette - gracz.fr inspired dark tones éclaircie */
+    /* Main palette - VERSION CLAIRE */
     --deep-green: #0A1410;
     --warm-beige: #A0967E;
     --copper: #8B5A3C;
-    --dark-charcoal: #181518;
+    --dark-charcoal: #2D3748;
     
-    /* Section backgrounds - éclaircie de 10% */
-    --section-green-light: rgba(10, 20, 16, 0.2);
-    --section-beige-light: rgba(160, 150, 126, 0.12);
-    --section-copper-light: rgba(139, 90, 60, 0.09);
-    --section-warm-light: #2D3238;
+    /* Section backgrounds - TRÈS CLAIRES avec dégradés 7% max */
+    --section-green-light: rgba(10, 20, 16, 0.05);
+    --section-beige-light: rgba(160, 150, 126, 0.07);
+    --section-copper-light: rgba(139, 90, 60, 0.05);
+    --section-warm-light: #FFFFFF;
     
-    /* Border colors - éclaircie */
-    --border-green: rgba(10, 20, 16, 0.4);
-    --border-beige: rgba(160, 150, 126, 0.22);
-    --border-copper: rgba(139, 90, 60, 0.22);
+    /* Border colors - TRÈS CLAIRES */
+    --border-green: rgba(10, 20, 16, 0.15);
+    --border-beige: rgba(160, 150, 126, 0.15);
+    --border-copper: rgba(139, 90, 60, 0.15);
 }
 
 html {
