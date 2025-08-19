@@ -1,0 +1,24 @@
+R&D impression 3D métal par conduction de chaleur : FDM métal
+preuve de concept pour levé de fonds
+
+Ce que j'ai fais:
+
+- Recherches d'antériorité - lecture de papiers
+- CAO / simulations logicielle
+- Calculs thermiques
+- mise en production par frittage laser sélectif en inconel
+- test / essais / erreurs / boucle
+- propriété intellectuelle - dépôt de brevet
+- Preuve de concept sur fusion d'acier par conduction et extrusion dans une buse de 0.4mm de diamètre
+
+
+Résultat:
+
+- P.O.C. validé
+- levée de fonds tour 1 validé
+
+
+Temps passé:
+
+N/A
+

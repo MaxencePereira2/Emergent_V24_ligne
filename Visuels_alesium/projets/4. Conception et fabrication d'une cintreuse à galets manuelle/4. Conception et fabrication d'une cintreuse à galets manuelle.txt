@@ -1,0 +1,23 @@
+Conception et fabrication d'un outillage de cintrage à froid pour l'acier (jusqu'à carré 16x16)
+
+Ce que j'ai fais:
+
+- CAO de l'ensemble -> cost to design
+- Mise en production (laser + tournage)
+- Essais
+- Livraison
+
+
+Résultat:
+
+- Cahier des charges respécté
+- coût maitrisé
+
+
+Temps passé:
+
+CAO: 0,5 jours
+Production: 0,5 jours
+
+Total: 1 jour + matière
+

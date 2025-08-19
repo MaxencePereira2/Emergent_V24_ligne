@@ -1,0 +1,32 @@
+Accompagnement d'une startup pour sa première ligne de production: presse statique de 40T + chariot interface spécifique + outillage spécifique.
+Machine "low-tech" -> pas d'autre énergie que l'énergie humaine, maintenance extrêmement simple, machine robuste.
+
+Ce que j'ai fais:
+
+- Rédigé le cahier des charge technique et fonctionnel aux côtés du client
+- proposé différentes solutions techniques chiffrées
+- CAO + essais numérique statique et dynamique
+- mise en production - découpe laser, usinage, ajustage, pliage
+- Soudure TIG + MAG
+- montage à blanc et essai en atelier
+- livraison
+- formation
+
+
+Résultat:
+
+Ligne de production en fonctionnement depuis fin 2024
+pressage des produits jusqu'à 40T sans défaut
+Cahier des charges et délais respectés
+Permet la création des premiers produits de la startup
+
+
+Temps passé:
+
+Cahier des charges, solutions techniques: 10 jours
+CAO + essais numériques: 21 jours
+Production: 17 jours
+Livraison / formation: 4 jours
+
+Total: 52 jours + matière
+

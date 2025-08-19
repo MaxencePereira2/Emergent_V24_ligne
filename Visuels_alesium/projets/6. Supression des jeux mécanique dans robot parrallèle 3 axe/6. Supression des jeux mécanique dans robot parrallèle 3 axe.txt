@@ -1,0 +1,28 @@
+R&D et dépôt de brevet : suppression de l'intégralité des jeux de rotulage dans les robots parallèles 3 axes.
+Utilisation d'un principe de mécanique simple: différence de point de potentiel au contact double billes + tube maintenu en position par une tension mécanique élastique.
+
+Ce que j'ai fais:
+
+- Recherches d'antériorité - lecture de papiers
+- CAO / simulations logicielle
+- test / essais / erreurs / boucle
+- propriété intellectuelle - dépôt de brevet
+
+
+Résultat:
+
+- 0 jeu mesuré réel
+- augmentation de l'accélération possible sans vibration (x5)
+- augmentation de la précision
+
+Utilité:
+
+- Impression 3D
+- Pick and place
+- ligne de production
+
+
+Temps passé:
+
+N/A
+

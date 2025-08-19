@@ -1,0 +1,30 @@
+Accompagnement d'une startup (october bike) pour son premier cadre de VTT de descente 100% made in France.
+Cadre en acier CroMo (25CD4S)
+
+Ce que j'ai fais:
+
+- Itérations CAO -> recherche des ratios de compression amortisseur, optimisation de la fin de course, recherche de maintien milieu de course
+- Cost to design: choix des modes de cinématique en fonction des coûts de production
+- Rédaction des gammes de production, choix des solutions et procédés techniques.
+- Recherches de solutions low cost pour outillage "one shot"
+- Caractérisations mécaniques en CAO -> essais statiques et dynamiques, prévention des ZAT et optimisation des cordons de soudure
+- Mise en production: Gabarit, grugeage, chambrage, soudure TIG, usinage tour et fraiseuse conventionnel + CNC, reprise en usinage après soudure
+- Itérations rapides terrain / CAO / fabriation
+
+
+Résultat:
+
+- Cadre prêt à être commercialisé (2026)
+- Fabrication 100% française
+- Maitrise des procédés complets
+- Maitrise des coûts de production: concurrence le tarif des cadres taiwanais
+
+
+Temps passé:
+
+CAO: 24 jours
+Production: 31 jours
+Améliorations : 11 jours
+
+Total: 66 jours + matière
+

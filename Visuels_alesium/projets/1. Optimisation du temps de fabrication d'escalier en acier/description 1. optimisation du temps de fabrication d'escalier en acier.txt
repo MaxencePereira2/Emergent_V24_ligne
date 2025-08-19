@@ -1,0 +1,22 @@
+j'ai accompagné un métallier qui réalise des escaliers en acier sur mesure de manière relativement artisanale.
+
+Ce que j'ai fais:
+
+- Standardisé le dessin des limons
+- Optimiser les chutes de découpe laser
+- Optimiser la conception pour le pliage CNC (prises de références)
+- Conçu un marbre de 2m * 4m pour la mise en position de toutes les pièces de l'escalier d'un coup
+- Revu les process de prise de côte et de production (soudure TIG + MIG)
+- Mise en place de procédures de soudure
+
+Résultat:
+
+Optimisation du temps de production de 120% -> passage de 20h de fabrication à 8h
+Reduction du coût de production total de 61%
+Diminution de la masse de l'escalier de 32% -> pose simplifiée
+Optimisation de l'espace atelier par la standardisation des pièces
+Reduction des erreurs (procédure)
+
+Temps passé:
+
+12 jours répartis sur 3 mois: audit, CAO, discussions, accompagnement aux premières fabrications. 
