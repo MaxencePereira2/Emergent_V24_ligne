@@ -65,14 +65,15 @@ body::before {
 }
 
 .site-header {
-    position: sticky;
+    position: fixed; /* Header fixe lors du scroll */
     top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100; /* Au-dessus de tout */
     background: linear-gradient(135deg, var(--deep-green) 0%, rgba(0, 31, 26, 0.95) 100%);
     backdrop-filter: saturate(1.2) blur(12px);
     border-bottom: 1px solid var(--border-copper);
-    z-index: 100;
     transition: all 0.3s ease;
-    position: relative;
     overflow: hidden;
 }
 
