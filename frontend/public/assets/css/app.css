@@ -3,24 +3,27 @@
     --surface: #FFFFFF;
     --text: #1E2329;
     --muted: #6B7280;
-    --primary: #2E3A44;
+    --primary: #013328;
     --primary-ink: #FFFFFF;
-    --accent: #3F7A6B;
+    --accent: #CC8B65;
     --border: #D6DBE2;
     
-    /* Nouvelles couleurs 2025 */
-    --soft-blue: #EDF4FF;
-    --soft-green: #F0F9F4;
-    --soft-purple: #F3F0FF;
-    --soft-orange: #FFF7ED;
-    --soft-pink: #FDF2F8;
-    --soft-yellow: #FFFBEB;
+    /* Nouvelle palette inspirée de l'image */
+    --deep-green: #013328;
+    --warm-beige: #E3DCD2;
+    --copper: #CC8B65;
+    --dark-charcoal: #100C0D;
     
-    /* Couleurs de bordure douces */
-    --border-blue: #C3DDFD;
-    --border-green: #A7F3D0;
-    --border-purple: #C4B5FD;
-    --border-orange: #FED7AA;
+    /* Couleurs de sections harmonieuses */
+    --section-green-light: rgba(1, 51, 40, 0.05);
+    --section-beige-light: rgba(227, 220, 210, 0.3);
+    --section-copper-light: rgba(204, 139, 101, 0.1);
+    --section-warm-light: #FEFCFA;
+    
+    /* Couleurs de bordure harmonieuses */
+    --border-green: rgba(1, 51, 40, 0.15);
+    --border-beige: rgba(227, 220, 210, 0.5);
+    --border-copper: rgba(204, 139, 101, 0.3);
 }
 
 * {
