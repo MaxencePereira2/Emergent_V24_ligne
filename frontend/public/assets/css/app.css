@@ -216,8 +216,8 @@ body::before {
     display: inline-block;
     padding: 16px 32px;
     border-radius: 12px;
-    border: 1px solid var(--primary);
-    background: var(--primary);
+    border: 2px solid var(--deep-green);
+    background: var(--deep-green);
     color: var(--primary-ink);
     text-decoration: none;
     font-weight: 600;
@@ -225,6 +225,7 @@ body::before {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 31, 26, 0.4);
 }
 
 .btn::before {
