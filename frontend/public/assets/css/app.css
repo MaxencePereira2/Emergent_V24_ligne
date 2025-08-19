@@ -165,7 +165,9 @@ body::before {
 
 .hero {
     padding: 80px 20px 60px;
-    background: linear-gradient(rgba(0, 13, 10, 0.7), rgba(0, 26, 21, 0.8)), url('../fonds/atelier.jpg');
+    background: 
+        linear-gradient(rgba(0, 13, 10, 0.8), rgba(0, 26, 21, 0.8)),
+        url('../fonds/atelier.jpg');
     background-size: cover;
     background-position: center 40%;
     background-attachment: fixed;
@@ -176,6 +178,9 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Aspect ratio crop effect */
+    aspect-ratio: 32 / 9;
+    max-height: 100vh;
 }
 
 /* Éléments de parallaxe par-dessus la photo */
