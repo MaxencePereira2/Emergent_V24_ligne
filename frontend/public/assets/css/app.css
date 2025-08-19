@@ -705,8 +705,7 @@ body::before {
     font-size: clamp(2.5rem, 4vw, 3.5rem);
     margin: 0 0 3rem;
     font-weight: 300;
-    color: var(--text); /* Déjà très contrasté avec le fond sombre */
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); /* Ombre plus prononcée pour le contraste */
+    color: #FFFFFF; /* Blanc pur pour contraste maximal sur fond sombre */
     position: relative;
     letter-spacing: 0.08em;
     text-transform: uppercase;
