@@ -416,6 +416,9 @@
             <p><a class="btn" href="#projets">← Revenir aux projets</a></p>
         `;
         
+        // Add gallery listeners after rendering
+        setTimeout(addGalleryListeners, 100);
+        
         // Smooth scroll to detail section
         setTimeout(() => {
             window.scrollTo({
