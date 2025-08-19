@@ -7,6 +7,20 @@
     --primary-ink: #FFFFFF;
     --accent: #3F7A6B;
     --border: #D6DBE2;
+    
+    /* Nouvelles couleurs 2025 */
+    --soft-blue: #EDF4FF;
+    --soft-green: #F0F9F4;
+    --soft-purple: #F3F0FF;
+    --soft-orange: #FFF7ED;
+    --soft-pink: #FDF2F8;
+    --soft-yellow: #FFFBEB;
+    
+    /* Couleurs de bordure douces */
+    --border-blue: #C3DDFD;
+    --border-green: #A7F3D0;
+    --border-purple: #C4B5FD;
+    --border-orange: #FED7AA;
 }
 
 * {
