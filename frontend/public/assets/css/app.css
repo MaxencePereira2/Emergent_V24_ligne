@@ -1093,8 +1093,8 @@ body::before {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--copper);
-    box-shadow: 0 0 0 3px rgba(166, 115, 85, 0.1);
+    border-color: rgba(139, 90, 60, 0.7); /* Contour doré plus prononcé au focus */
+    box-shadow: 0 0 0 3px rgba(139, 90, 60, 0.15); /* Ombre dorée au focus */
 }
 
 .form-group select {
