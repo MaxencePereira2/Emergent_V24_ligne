@@ -535,21 +535,39 @@ body::before {
 .carousel {
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: var(--surface);
-    margin: 3rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    user-select: none;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    margin: 4rem 0;
+    
+    /* Effet de profondeur Petralithe */
+    background: 
+        linear-gradient(180deg, transparent 0%, rgba(0, 31, 26, 0.02) 50%, transparent 100%);
+}
+
+.carousel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse at 25% 25%, rgba(204, 139, 101, 0.03) 0%, transparent 60%),
+        radial-gradient(ellipse at 75% 75%, rgba(227, 220, 210, 0.04) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
 }
 
 .carousel .track {
     display: flex;
-    gap: 24px;
-    padding: 24px;
+    gap: 32px;
+    padding: 40px 24px;
     width: fit-content;
     cursor: grab;
     transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .carousel .track:active {
@@ -561,7 +579,7 @@ body::before {
 }
 
 .carousel .track.auto-scroll {
-    animation: slide 30s infinite linear;
+    animation: slide 35s infinite linear;
 }
 
 .carousel .track.auto-scroll:hover {
@@ -578,19 +596,48 @@ body::before {
 }
 
 .carousel .card {
-    min-width: 300px;
+    min-width: 320px;
     flex-shrink: 0;
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    border: none;
+    border-radius: 8px;
     overflow: hidden;
-    background: #fff;
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.4s ease;
     cursor: pointer;
+    position: relative;
+    
+    /* Effet de relief inspiré de Petralithe */
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.carousel .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(204, 139, 101, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(227, 220, 210, 0.03) 0%, transparent 50%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel .card:hover::before {
+    opacity: 1;
 }
 
 .carousel .card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .carousel .card img {
