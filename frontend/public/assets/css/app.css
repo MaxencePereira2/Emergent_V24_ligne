@@ -31,6 +31,10 @@ html {
     scroll-padding-top: 100px; /* Compensation pour le header fixe lors des ancres */
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     margin: 0;
