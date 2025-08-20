@@ -302,6 +302,134 @@
         initPricingAccordion();
     }
 
+    // Legal modal functionality
+    function initLegalModal() {
+        const modal = document.getElementById('legal-modal');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = modal?.querySelector('.modal-close');
+        const overlay = modal?.querySelector('.modal-overlay');
+        const mentionsLink = document.getElementById('mentions-link');
+        const rgpdLink = document.getElementById('rgpd-link');
+
+        const mentionsContent = `
+            <h2>Mentions Légales</h2>
+            <h3>Identité</h3>
+            <p><strong>Nom/Dénomination sociale :</strong> Maxence Pereira Métallerie / Atelier Gracz</p>
+            <p><strong>Adresse :</strong> 17 Chemin des meuniers, 63320 Neschers</p>
+            <p><strong>Téléphone :</strong> 06 74 24 43 14</p>
+            <p><strong>Email :</strong> contact@alesium.fr</p>
+            
+            <h3>Directeur de publication</h3>
+            <p>Maxence Pereira</p>
+            
+            <h3>Hébergement</h3>
+            <p>Ce site est hébergé par GitHub Pages</p>
+            <p>GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis</p>
+            
+            <h3>Propriété intellectuelle</h3>
+            <p>Le contenu de ce site (textes, images, éléments graphiques, logo, icônes, sons, logiciels) est la propriété exclusive d'Alesium, à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs.</p>
+            
+            <h3>Responsabilité</h3>
+            <p>Les informations contenues sur ce site sont aussi précises que possible. Toutefois, des erreurs ou omissions peuvent survenir. Alesium ne pourra en aucun cas être tenu responsable de quelque dommage direct ou indirect que ce soit pouvant résulter de la consultation et/ou de l'utilisation de ce site.</p>
+        `;
+
+        const rgpdContent = `
+            <h2>Politique RGPD</h2>
+            <h3>Collecte des données personnelles</h3>
+            <p>Dans le cadre de nos services, nous sommes amenés à collecter et traiter des données personnelles vous concernant.</p>
+            
+            <h3>Types de données collectées</h3>
+            <ul>
+                <li>Données d'identification (nom, prénom)</li>
+                <li>Données de contact (email, téléphone)</li>
+                <li>Données relatives à votre projet (messages, besoins exprimés)</li>
+            </ul>
+            
+            <h3>Finalités du traitement</h3>
+            <p>Vos données sont collectées et traitées pour :</p>
+            <ul>
+                <li>Répondre à vos demandes de contact</li>
+                <li>Vous fournir nos services d'expertise industrielle</li>
+                <li>Vous tenir informé de nos actualités (avec votre consentement)</li>
+            </ul>
+            
+            <h3>Base légale</h3>
+            <p>Le traitement de vos données est fondé sur :</p>
+            <ul>
+                <li>Votre consentement libre, éclairé et spécifique</li>
+                <li>L'exécution d'un contrat ou de mesures précontractuelles</li>
+                <li>L'intérêt légitime d'Alesium</li>
+            </ul>
+            
+            <h3>Conservation des données</h3>
+            <p>Vos données sont conservées pendant la durée nécessaire aux finalités pour lesquelles elles sont traitées, conformément aux obligations légales applicables.</p>
+            
+            <h3>Vos droits</h3>
+            <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+            <ul>
+                <li>Droit d'accès à vos données personnelles</li>
+                <li>Droit de rectification</li>
+                <li>Droit à l'effacement</li>
+                <li>Droit à la limitation du traitement</li>
+                <li>Droit à la portabilité</li>
+                <li>Droit d'opposition</li>
+            </ul>
+            
+            <h3>Contact</h3>
+            <p>Pour exercer vos droits ou pour toute question relative au traitement de vos données personnelles, vous pouvez nous contacter à l'adresse : <strong>contact@alesium.fr</strong></p>
+        `;
+
+        function openModal(content) {
+            if (!modal || !modalBody) return;
+            modalBody.innerHTML = content;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            if (!modal) return;
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Event listeners
+        if (mentionsLink) {
+            mentionsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(mentionsContent);
+            });
+        }
+
+        if (rgpdLink) {
+            rgpdLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(rgpdContent);
+            });
+        }
+
+        if (modalClose) {
+            modalClose.addEventListener('click', closeModal);
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', closeModal);
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal?.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
+    // Initialize legal modal
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLegalModal);
+    } else {
+        initLegalModal();
+    }
+
     // Projects and carousel functionality
     const DATA_URL = 'content/projets.json';
     const carouselHost = document.querySelector('#projets .track');
