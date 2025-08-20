@@ -235,6 +235,73 @@
         });
     }
 
+    // Pricing cards accordion functionality
+    function initPricingAccordion() {
+        const pricingCards = document.querySelectorAll('.pricing-card');
+        
+        pricingCards.forEach(card => {
+            const toggle = card.querySelector('.card-toggle');
+            const detail = card.querySelector('.card-detail');
+            
+            if (!toggle || !detail) return;
+            
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+                
+                // Close all other cards
+                pricingCards.forEach(otherCard => {
+                    if (otherCard !== card) {
+                        const otherToggle = otherCard.querySelector('.card-toggle');
+                        const otherDetail = otherCard.querySelector('.card-detail');
+                        
+                        if (otherToggle && otherDetail) {
+                            otherToggle.setAttribute('aria-expanded', 'false');
+                            otherDetail.setAttribute('aria-hidden', 'true');
+                            otherDetail.classList.remove('open');
+                        }
+                    }
+                });
+                
+                // Toggle current card
+                if (isOpen) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                    detail.setAttribute('aria-hidden', 'true');
+                    detail.classList.remove('open');
+                } else {
+                    toggle.setAttribute('aria-expanded', 'true');
+                    detail.setAttribute('aria-hidden', 'false');
+                    detail.classList.add('open');
+                    
+                    // Smooth scroll to the opened card
+                    setTimeout(() => {
+                        card.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest'
+                        });
+                    }, 100);
+                }
+            });
+            
+            // Also handle clicks on the entire card (except detail area)
+            card.addEventListener('click', (e) => {
+                // Don't trigger if clicking inside the detail area
+                if (!detail.contains(e.target) && e.target !== toggle) {
+                    toggle.click();
+                }
+            });
+        });
+    }
+
+    // Initialize pricing accordion when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPricingAccordion);
+    } else {
+        initPricingAccordion();
+    }
+
     // Projects and carousel functionality
     const DATA_URL = 'content/projets.json';
     const carouselHost = document.querySelector('#projets .track');
