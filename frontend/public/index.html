@@ -211,30 +211,277 @@
 
         <section id="tarifs" class="section">
             <h2>Offres et Tarifs</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>Audit / Diagnostic rapide</h3>
-                    <p>Evaluation terrain et recommandations prioritaires.</p>
-                    <span class="price">650 € HT</span>
-                    <p class="small">forfait (1 jour sur site)</p>
+            <p class="section-intro">Solutions industrielles concrètes, de l'idée à la production. Expertise tech-indus premium pour PME et artisans.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card" data-offer="diagnostic">
+                    <div class="card-header">
+                        <h3>Diagnostic Flash</h3>
+                        <div class="card-subtitle">1 jour sur site</div>
+                        <div class="price-tag">1 150 € HT <span>/jour</span></div>
+                    </div>
+                    <div class="card-summary">
+                        Photo nette de l'existant et route vers prod fiable.
+                    </div>
+                    <button class="card-toggle" aria-expanded="false">
+                        <span>Voir le détail</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+                    
+                    <div class="card-detail" aria-hidden="true">
+                        <div class="detail-columns">
+                            <div class="detail-left">
+                                <h4>Ce que je fais réellement</h4>
+                                <ul>
+                                    <li>Analyse terrain approfondie</li>
+                                    <li>Identification contraintes/risques</li>
+                                    <li>Détection quick wins immédiats</li>
+                                    <li>Évaluation capacités existantes</li>
+                                </ul>
+                            </div>
+                            <div class="detail-right">
+                                <h4>Ce que vous recevez concrètement</h4>
+                                <ul>
+                                    <li>Rapport synthèse 10-15 pages</li>
+                                    <li>Plan d'action 30/60/90 jours</li>
+                                    <li>Estimation CAPEX/OPEX</li>
+                                    <li>Recommandations priorisées</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Etude + proto numerique</h3>
-                    <p>Dossier pret a fabriquer.</p>
-                    <span class="price">700 € HT</span>
-                    <p class="small">/ jour</p>
+
+                <div class="pricing-card" data-offer="etude">
+                    <div class="card-header">
+                        <h3>Étude & Proto numérique</h3>
+                        <div class="card-subtitle">Kit prêt à produire</div>
+                        <div class="price-tag">700 € HT <span>/jour</span></div>
+                        <div class="price-alt">Forfait 2 100–3 500 €</div>
+                    </div>
+                    <div class="card-summary">
+                        Passer de l'idée au kit prêt à produire.
+                    </div>
+                    <button class="card-toggle" aria-expanded="false">
+                        <span>Voir le détail</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+                    
+                    <div class="card-detail" aria-hidden="true">
+                        <div class="detail-columns">
+                            <div class="detail-left">
+                                <h4>Ce que je fais réellement</h4>
+                                <ul>
+                                    <li>CAO complète assemblage</li>
+                                    <li>Plans cotés technique</li>
+                                    <li>Fichiers découpe/usinage</li>
+                                    <li>Nomenclature détaillée</li>
+                                </ul>
+                            </div>
+                            <div class="detail-right">
+                                <h4>Ce que vous recevez concrètement</h4>
+                                <ul>
+                                    <li>Dossier prêt à fabriquer</li>
+                                    <li>Fichiers STEP, PDF, DXF</li>
+                                    <li>BOM (Bill of Materials)</li>
+                                    <li>Gamme de fabrication</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Prototype physique / machine speciale</h3>
-                    <p>Realisation atelier, tests, iterations.</p>
-                    <span class="price">750 € HT</span>
-                    <p class="small">/ jour + matiere</p>
+
+                <div class="pricing-card" data-offer="prototype">
+                    <div class="card-header">
+                        <h3>Prototype physique</h3>
+                        <div class="card-subtitle">POC → proto fonctionnel</div>
+                        <div class="price-tag">Sur devis</div>
+                        <div class="price-range">3 000–75 000 €</div>
+                    </div>
+                    <div class="card-summary">
+                        Valider conception, assemblages, temps de cycle.
+                    </div>
+                    <button class="card-toggle" aria-expanded="false">
+                        <span>Voir le détail</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+                    
+                    <div class="card-detail" aria-hidden="true">
+                        <div class="detail-columns">
+                            <div class="detail-left">
+                                <h4>Ce que je fais réellement</h4>
+                                <ul>
+                                    <li>Conception détaillée</li>
+                                    <li>Assemblage atelier</li>
+                                    <li>Essais fonctionnels</li>
+                                    <li>Documentation conformité</li>
+                                </ul>
+                            </div>
+                            <div class="detail-right">
+                                <h4>Ce que vous recevez concrètement</h4>
+                                <ul>
+                                    <li>Prototype fonctionnel testé</li>
+                                    <li>Rapport d'essais complet</li>
+                                    <li>Fiches de réglage</li>
+                                    <li>Plans de série validés</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Industrialisation express</h3>
-                    <p>Livrable + process + transfert vers la production.</p>
-                    <span class="price">5 000 – 8 000 € HT</span>
-                    <p class="small">(2–3 semaines)</p>
+
+                <div class="pricing-card" data-offer="machine">
+                    <div class="card-header">
+                        <h3>Machine spéciale</h3>
+                        <div class="card-subtitle">Industrialisation</div>
+                        <div class="price-tag">Sur devis</div>
+                        <div class="price-range">3 000–75 000 €</div>
+                    </div>
+                    <div class="card-summary">
+                        Outillage/équipement pour ligne de production.
+                    </div>
+                    <button class="card-toggle" aria-expanded="false">
+                        <span>Voir le détail</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+                    
+                    <div class="card-detail" aria-hidden="true">
+                        <div class="detail-columns">
+                            <div class="detail-left">
+                                <h4>Ce que je fais réellement</h4>
+                                <ul>
+                                    <li>Cahier des charges technique</li>
+                                    <li>Conception sur-mesure</li>
+                                    <li>Fabrication assemblage</li>
+                                    <li>Tests de performance</li>
+                                </ul>
+                            </div>
+                            <div class="detail-right">
+                                <h4>Ce que vous recevez concrètement</h4>
+                                <ul>
+                                    <li>Machine opérationnelle</li>
+                                    <li>Docs de maintenance</li>
+                                    <li>Formation opérateurs</li>
+                                    <li>Support post-installation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-card" data-offer="industrialisation">
+                    <div class="card-header">
+                        <h3>Conseil industrialisation</h3>
+                        <div class="card-subtitle">Montée en cadence</div>
+                        <div class="price-tag">5 000–12 000 € HT</div>
+                    </div>
+                    <div class="card-summary">
+                        Sécuriser une mise en production rapide & reproductible.
+                    </div>
+                    <button class="card-toggle" aria-expanded="false">
+                        <span>Voir le détail</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+                    
+                    <div class="card-detail" aria-hidden="true">
+                        <div class="detail-columns">
+                            <div class="detail-left">
+                                <h4>Ce que je fais réellement</h4>
+                                <ul>
+                                    <li>Gammes opératoires</li>
+                                    <li>Plan de contrôle qualité</li>
+                                    <li>AMDEC light</li>
+                                    <li>Optimisation flux</li>
+                                </ul>
+                            </div>
+                            <div class="detail-right">
+                                <h4>Ce que vous recevez concrètement</h4>
+                                <ul>
+                                    <li>Dossier d'industrialisation complet</li>
+                                    <li>Pack fournisseurs qualifiés</li>
+                                    <li>TRS cibles définies</li>
+                                    <li>Procédures production</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-card" data-offer="consulting">
+                    <div class="card-header">
+                        <h3>Consulting projet</h3>
+                        <div class="card-subtitle">POC / post-POC / industrialisation</div>
+                        <div class="price-tag">À partir de 600 € HT <span>/jour</span></div>
+                    </div>
+                    <div class="card-summary">
+                        Intervention en interne pour déployer un projet.
+                    </div>
+                    <button class="card-toggle" aria-expanded="false">
+                        <span>Voir le détail</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+                    
+                    <div class="card-detail" aria-hidden="true">
+                        <div class="detail-columns">
+                            <div class="detail-left">
+                                <h4>Ce que je fais réellement</h4>
+                                <ul>
+                                    <li>Immersion équipe projet</li>
+                                    <li>Support méthodes</li>
+                                    <li>Cadrage technique</li>
+                                    <li>Coordination intervenants</li>
+                                </ul>
+                            </div>
+                            <div class="detail-right">
+                                <h4>Ce que vous recevez concrètement</h4>
+                                <ul>
+                                    <li>Suivi opérationnel projet</li>
+                                    <li>Jalons documentés</li>
+                                    <li>Transfert savoir-faire</li>
+                                    <li>Montée en compétences équipe</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-card" data-offer="accompagnement">
+                    <div class="card-header">
+                        <h3>Accompagnement mensuel</h3>
+                        <div class="card-subtitle">Suivi continu</div>
+                        <div class="price-tag">950 € HT <span>/jour</span></div>
+                        <div class="price-alt">ou 1 250 € HT/mois</div>
+                    </div>
+                    <div class="card-summary">
+                        Garder le cap, écraser les dérives, accélérer montée en cadence.
+                    </div>
+                    <button class="card-toggle" aria-expanded="false">
+                        <span>Voir le détail</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+                    
+                    <div class="card-detail" aria-hidden="true">
+                        <div class="detail-columns">
+                            <div class="detail-left">
+                                <h4>Ce que je fais réellement</h4>
+                                <ul>
+                                    <li>1 journée par mois sur site</li>
+                                    <li>Points réguliers téléphone</li>
+                                    <li>Support asynchrone email</li>
+                                    <li>Veille technique continue</li>
+                                </ul>
+                            </div>
+                            <div class="detail-right">
+                                <h4>Ce que vous recevez concrètement</h4>
+                                <ul>
+                                    <li>Mises à jour documentation</li>
+                                    <li>Corrections rapides process</li>
+                                    <li>Suivi KPI industrialisation</li>
+                                    <li>Ajustements temps réel</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -358,9 +605,20 @@
     <footer class="site-footer">
         <p class="small">© 2025 Alesium — Tous droits reserves.</p>
         <nav class="legal-links">
-            <a href="#/mentions-legales">Mentions legales</a> · <a href="#/rgpd">RGPD</a>
+            <a href="#" id="mentions-link">Mentions legales</a> · <a href="#" id="rgpd-link">RGPD</a>
         </nav>
     </footer>
+
+    <!-- Modal pour mentions légales et RGPD -->
+    <div class="legal-modal" id="legal-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fermer">×</button>
+            <div class="modal-body" id="modal-body">
+                <!-- Contenu dynamique -->
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/app.js"></script>
 </body>
