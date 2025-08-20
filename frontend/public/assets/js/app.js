@@ -704,6 +704,7 @@
         
         const href = link.getAttribute('href');
         if (href.startsWith('#/')) return; // Skip SPA routes
+        if (href === '#' || href.length <= 1) return; // Skip invalid selectors
         
         const target = document.querySelector(href);
         if (target) {

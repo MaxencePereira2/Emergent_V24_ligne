@@ -397,6 +397,37 @@ body::before {
     margin-right: auto;
 }
 
+/* Sous-sections de tarifs */
+.pricing-subsection {
+    margin-bottom: 3rem;
+}
+
+.pricing-subsection:last-child {
+    margin-bottom: 0;
+}
+
+.subsection-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--copper);
+    text-align: center;
+    margin: 0 0 2rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+}
+
+.subsection-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--copper), var(--warm-beige));
+}
+
 /* Grille des cartes tarifs - style premium */
 .pricing-grid {
     display: grid;
@@ -448,7 +479,7 @@ body::before {
     border-bottom: 1px solid rgba(45, 55, 72, 0.05);
 }
 
-.pricing-card h3 {
+.pricing-card h4 {
     font-size: 1.4rem;
     font-weight: 600;
     color: var(--text);
@@ -557,8 +588,8 @@ body::before {
     gap: 2.5rem;
 }
 
-.detail-left h4,
-.detail-right h4 {
+.detail-left h5,
+.detail-right h5 {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text);
@@ -568,11 +599,11 @@ body::before {
     font-size: 0.9rem;
 }
 
-.detail-left h4 {
+.detail-left h5 {
     color: var(--copper);
 }
 
-.detail-right h4 {
+.detail-right h5 {
     color: var(--warm-beige);
 }
 
@@ -752,6 +783,11 @@ body::before {
     
     .price-tag {
         font-size: 1.5rem;
+    }
+    
+    .subsection-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
     }
 }
 
