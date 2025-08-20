@@ -605,9 +605,20 @@
     <footer class="site-footer">
         <p class="small">© 2025 Alesium — Tous droits reserves.</p>
         <nav class="legal-links">
-            <a href="#/mentions-legales">Mentions legales</a> · <a href="#/rgpd">RGPD</a>
+            <a href="#" id="mentions-link">Mentions legales</a> · <a href="#" id="rgpd-link">RGPD</a>
         </nav>
     </footer>
+
+    <!-- Modal pour mentions légales et RGPD -->
+    <div class="legal-modal" id="legal-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fermer">×</button>
+            <div class="modal-body" id="modal-body">
+                <!-- Contenu dynamique -->
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/app.js"></script>
 </body>
