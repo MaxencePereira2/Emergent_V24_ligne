@@ -711,6 +711,11 @@
             detail.classList.remove('hidden');
             detail.classList.remove('mobile-modal-active');
             detail.setAttribute('aria-hidden', 'false');
+            
+            // Scroll vers le détail en desktop seulement
+            setTimeout(() => {
+                detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
         }
         
         // Attacher l'event listener au bouton retour (desktop seulement)
