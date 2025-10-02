@@ -618,38 +618,31 @@
         detail.innerHTML = '';
     }
 
-    function route(items) {
+    function route() {
         const hash = location.hash || '';
         const projectMatch = hash.match(/^#\/projets\/(.+)$/);
         
         if (projectMatch) {
             const slug = projectMatch[1];
-            const project = items.find(x => x.slug === slug);
-            if (project) {
-                renderDetail(project);
-            } else {
-                hideDetail();
-            }
+            renderDetail(slug);
         } else {
             hideDetail();
         }
     }
 
-    // Load projects data
-    fetch(DATA_URL)
-        .then(r => r.json())
-        .then(items => {
-            renderCarousel(items);
-            route(items);
-            
-            // Handle hash changes for SPA routing
-            window.addEventListener('hashchange', () => route(items));
-        })
-        .catch(e => {
-            console.warn('projets.json introuvable', e);
-            // Fallback: create mock data from available assets
-            createMockProjects();
+    // Initialize project cards on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initProjectCards();
+            route();
         });
+    } else {
+        initProjectCards();
+        route();
+    }
+    
+    // Handle hash changes for SPA routing
+    window.addEventListener('hashchange', route);
 
     // Legal sections handling
     const ml = document.getElementById('mentions-legales');
