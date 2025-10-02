@@ -532,6 +532,10 @@ body::before {
     display: none;
 }
 
+#projet-detail:not(.hidden) {
+    display: block;
+}
+
 /* Modal mobile pour détails de projet */
 #projet-detail.mobile-modal-active {
     position: fixed !important;
