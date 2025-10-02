@@ -677,9 +677,9 @@
 
         detail.innerHTML = `
             ${isMobile ? `
-                <div class="mobile-modal-overlay" onclick="hideDetail()"></div>
+                <div class="mobile-modal-overlay"></div>
                 <div class="mobile-modal-wrapper">
-                    <button class="mobile-close" onclick="hideDetail()">×</button>
+                    <button class="mobile-close">×</button>
                     <div class="project-detail-content mobile-modal-content">
             ` : '<div class="project-detail-content">'}
                 ${!isMobile ? `<button class="btn-back"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour</button>` : ''}
@@ -734,6 +734,24 @@
                     hideDetail();
                 });
             }
+        } else {
+            // Mobile: attacher les listeners pour fermer la modal
+            const mobileOverlay = detail.querySelector('.mobile-modal-overlay');
+            const mobileClose = detail.querySelector('.mobile-close');
+            
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    hideDetail();
+                });
+            }
+            
+            if (mobileClose) {
+                mobileClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    hideDetail();
+                });
+            }
         }
         
         // Attacher les event listeners pour ouvrir la lightbox sur clic des miniatures
@@ -744,14 +762,6 @@
                 openLightbox(p.images, index, p.title);
             });
         });
-        
-        // Smooth scroll to detail section
-        setTimeout(() => {
-            window.scrollTo({
-                top: detail.offsetTop - 100,
-                behavior: 'smooth'
-            });
-        }, 100);
     }
     
     // Lightbox pour afficher les images en grand
