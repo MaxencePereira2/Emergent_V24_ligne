@@ -734,15 +734,7 @@
             }
         } else {
             // Mobile: attacher les listeners pour fermer la modal
-            const mobileOverlay = detail.querySelector('.mobile-modal-overlay');
             const mobileClose = detail.querySelector('.mobile-close');
-            
-            if (mobileOverlay) {
-                mobileOverlay.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hideDetail();
-                });
-            }
             
             if (mobileClose) {
                 mobileClose.addEventListener('click', (e) => {
@@ -750,6 +742,15 @@
                     hideDetail();
                 });
             }
+            
+            // Fermer en cliquant sur le fond (overlay) - on utilise le détail lui-même
+            detail.addEventListener('click', (e) => {
+                // Fermer seulement si on clique directement sur le detail container
+                if (e.target === detail) {
+                    e.preventDefault();
+                    hideDetail();
+                }
+            });
         }
         
         // Attacher les event listeners pour ouvrir la lightbox sur clic des miniatures
