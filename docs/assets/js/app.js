@@ -1,4 +1,7 @@
 (function() {
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+    
     // Set year in footer
     const YEAR = document.getElementById('year');
     if (YEAR) YEAR.textContent = new Date().getFullYear();
