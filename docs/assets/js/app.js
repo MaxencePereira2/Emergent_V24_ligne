@@ -722,6 +722,7 @@
                     </div>
                 </div>
             </div>
+            ${isMobile ? '</div>' : ''}
         `;
         
         // Attacher l'event listener au bouton retour
