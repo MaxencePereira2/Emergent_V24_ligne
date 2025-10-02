@@ -1806,9 +1806,23 @@ body::before {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: center;
+    display: inline-block;
+    width: 100%;
     
     /* Style Petralithe - espacement des lettres */
     word-spacing: 0.2em;
+}
+
+.section h2::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    background: url('../logos/logo-small.png') center/contain no-repeat;
+    opacity: 0.3;
 }
 
 .section h2::after {
