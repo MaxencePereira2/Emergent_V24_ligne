@@ -679,10 +679,8 @@
             : '';
 
         detail.innerHTML = `
-            ${isMobile ? `
-                <div class="mobile-modal-wrapper">
-                    <button class="mobile-close">×</button>
-                    <div class="project-detail-content mobile-modal-content">` : '<div class="project-detail-content">'}
+            ${isMobile ? `<button class="mobile-close">×</button>` : ''}
+            <div class="project-detail-content ${isMobile ? 'mobile-modal-content' : ''}">
                 ${!isMobile ? `<button class="btn-back"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour</button>` : ''}
                 
                 <div class="project-header">
@@ -723,7 +721,6 @@
                     </div>
                 </div>
             </div>
-            ${isMobile ? '</div><div class="mobile-modal-overlay"></div>' : ''}
         `;
         
         // Attacher l'event listener au bouton retour (desktop seulement)
