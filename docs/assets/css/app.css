@@ -1228,6 +1228,12 @@ body::before {
     padding: 2rem;
 }
 
+/* Justifier texte des réponses FAQ */
+.card-detail p,
+.card-detail li {
+    text-align: justify;
+}
+
 /* Colonnes détail */
 .detail-columns {
     display: grid;
