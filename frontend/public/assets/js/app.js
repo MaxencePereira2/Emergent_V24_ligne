@@ -465,6 +465,9 @@
     function renderDetail(projectSlug) {
         if (!detail) return;
         
+        // Détecter si on est sur mobile
+        const isMobile = window.innerWidth <= 768;
+        
         // Mapping des projets statiques avec contenus détaillés
         const projectsData = {
             "1-optimisation-du-temps-de-fabrication-descalier-en-acier": {
@@ -621,16 +624,45 @@
             return;
         }
         
-        // Masquer la grille des projets
+        // Sur mobile : afficher en modal overlay
+        // Sur desktop : remplacer la grille
         const projectsGrid = document.querySelector('.projects-grid');
-        if (projectsGrid) {
-            projectsGrid.style.display = 'none';
-        }
         
-        // Afficher le détail
-        detail.classList.remove('hidden');
-        detail.setAttribute('aria-hidden', 'false');
-        detail.style.display = 'block';
+        if (isMobile) {
+            // Mode mobile : modal overlay
+            detail.classList.remove('hidden');
+            detail.classList.add('mobile-modal-active');
+            detail.setAttribute('aria-hidden', 'false');
+            detail.style.display = 'block';
+            detail.style.position = 'fixed';
+            detail.style.top = '0';
+            detail.style.left = '0';
+            detail.style.width = '100%';
+            detail.style.height = '100%';
+            detail.style.zIndex = '10000';
+            detail.style.overflow = 'auto';
+            detail.style.background = 'white';
+            
+            // Bloquer le scroll du body
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Mode desktop : masquer la grille
+            if (projectsGrid) {
+                projectsGrid.style.display = 'none';
+            }
+            
+            detail.classList.remove('hidden');
+            detail.setAttribute('aria-hidden', 'false');
+            detail.style.display = 'block';
+            detail.style.position = '';
+            detail.style.top = '';
+            detail.style.left = '';
+            detail.style.width = '';
+            detail.style.height = '';
+            detail.style.zIndex = '';
+            detail.style.overflow = '';
+            detail.style.background = '';
+        }
         
         // Créer la galerie de miniatures cliquables
         const imageGallery = p.images && p.images.length > 0 
@@ -644,12 +676,10 @@
             : '';
 
         detail.innerHTML = `
-            <div class="project-detail-content">
-                <button class="btn-back">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Retour
+            ${isMobile ? '<div class="mobile-modal-overlay"></div>' : ''}
+            <div class="project-detail-content ${isMobile ? 'mobile-modal-content' : ''}">
+                <button class="btn-back ${isMobile ? 'mobile-close' : ''}">
+                    ${isMobile ? '×' : '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour'}
                 </button>
                 
                 <div class="project-header">
@@ -699,6 +729,16 @@
                 e.preventDefault();
                 hideDetail();
             });
+        }
+        
+        // Sur mobile : fermer en cliquant sur l'overlay
+        if (isMobile) {
+            const mobileOverlay = detail.querySelector('.mobile-modal-overlay');
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', () => {
+                    hideDetail();
+                });
+            }
         }
         
         // Attacher les event listeners pour ouvrir la lightbox sur clic des miniatures
@@ -815,16 +855,32 @@
     function hideDetail() {
         if (!detail) return;
         
+        const isMobile = window.innerWidth <= 768;
+        
         // Cacher le détail
         detail.classList.add('hidden');
+        detail.classList.remove('mobile-modal-active');
         detail.setAttribute('aria-hidden', 'true');
         detail.style.display = 'none';
+        detail.style.position = '';
+        detail.style.top = '';
+        detail.style.left = '';
+        detail.style.width = '';
+        detail.style.height = '';
+        detail.style.zIndex = '';
+        detail.style.overflow = '';
+        detail.style.background = '';
         detail.innerHTML = '';
         
-        // Réafficher la grille
-        const projectsGrid = document.querySelector('.projects-grid');
-        if (projectsGrid) {
-            projectsGrid.style.display = 'grid';
+        // Restaurer le scroll du body
+        document.body.style.overflow = '';
+        
+        // Réafficher la grille (sauf sur mobile où elle est déjà visible)
+        if (!isMobile) {
+            const projectsGrid = document.querySelector('.projects-grid');
+            if (projectsGrid) {
+                projectsGrid.style.display = 'grid';
+            }
         }
     }
 
