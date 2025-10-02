@@ -1,4 +1,7 @@
 (function() {
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+    
     // Set year in footer
     const YEAR = document.getElementById('year');
     if (YEAR) YEAR.textContent = new Date().getFullYear();
@@ -624,46 +627,6 @@
             return;
         }
         
-        // Sur mobile : afficher en modal overlay
-        // Sur desktop : remplacer la grille
-        const projectsGrid = document.querySelector('.projects-grid');
-        
-        if (isMobile) {
-            // Mode mobile : modal overlay
-            detail.classList.remove('hidden');
-            detail.classList.add('mobile-modal-active');
-            detail.setAttribute('aria-hidden', 'false');
-            detail.style.display = 'block';
-            detail.style.position = 'fixed';
-            detail.style.top = '0';
-            detail.style.left = '0';
-            detail.style.width = '100%';
-            detail.style.height = '100%';
-            detail.style.zIndex = '10000';
-            detail.style.overflow = 'auto';
-            detail.style.background = 'white';
-            
-            // Bloquer le scroll du body
-            document.body.style.overflow = 'hidden';
-        } else {
-            // Mode desktop : masquer la grille
-            if (projectsGrid) {
-                projectsGrid.style.display = 'none';
-            }
-            
-            detail.classList.remove('hidden');
-            detail.setAttribute('aria-hidden', 'false');
-            detail.style.display = 'block';
-            detail.style.position = '';
-            detail.style.top = '';
-            detail.style.left = '';
-            detail.style.width = '';
-            detail.style.height = '';
-            detail.style.zIndex = '';
-            detail.style.overflow = '';
-            detail.style.background = '';
-        }
-        
         // Créer la galerie de miniatures cliquables
         const imageGallery = p.images && p.images.length > 0 
             ? `<div class="horizontal-gallery">
@@ -675,12 +638,11 @@
             </div>`
             : '';
 
+        // Générer le HTML AVANT d'appliquer les classes
         detail.innerHTML = `
-            ${isMobile ? '<div class="mobile-modal-overlay"></div>' : ''}
+            ${isMobile ? `<button class="mobile-close">×</button>` : ''}
             <div class="project-detail-content ${isMobile ? 'mobile-modal-content' : ''}">
-                <button class="btn-back ${isMobile ? 'mobile-close' : ''}">
-                    ${isMobile ? '×' : '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour'}
-                </button>
+                ${!isMobile ? `<button class="btn-back"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour</button>` : ''}
                 
                 <div class="project-header">
                     <h2 class="project-title">${p.title}</h2>
@@ -722,23 +684,63 @@
             </div>
         `;
         
-        // Attacher l'event listener au bouton retour
-        const btnBack = detail.querySelector('.btn-back');
-        if (btnBack) {
-            btnBack.addEventListener('click', (e) => {
-                e.preventDefault();
-                hideDetail();
-            });
+        // Sur mobile : afficher en modal overlay
+        // Sur desktop : remplacer la grille
+        const projectsGrid = document.querySelector('.projects-grid');
+        
+        if (isMobile) {
+            // Mode mobile : modal overlay
+            detail.classList.remove('hidden');
+            detail.classList.add('mobile-modal-active');
+            detail.setAttribute('aria-hidden', 'false');
+            
+            // Bloquer le scroll du body
+            document.body.style.overflow = 'hidden';
+            
+            // Forcer le reflow pour que le navigateur applique les styles
+            detail.offsetHeight;
+            
+            // Scroll le container modal vers le top
+            detail.scrollTop = 0;
+        } else {
+            // Mode desktop : masquer la grille
+            if (projectsGrid) {
+                projectsGrid.style.display = 'none';
+            }
+            
+            detail.classList.remove('hidden');
+            detail.classList.remove('mobile-modal-active');
+            detail.setAttribute('aria-hidden', 'false');
         }
         
-        // Sur mobile : fermer en cliquant sur l'overlay
-        if (isMobile) {
-            const mobileOverlay = detail.querySelector('.mobile-modal-overlay');
-            if (mobileOverlay) {
-                mobileOverlay.addEventListener('click', () => {
+        // Attacher l'event listener au bouton retour (desktop seulement)
+        if (!isMobile) {
+            const btnBack = detail.querySelector('.btn-back');
+            if (btnBack) {
+                btnBack.addEventListener('click', (e) => {
+                    e.preventDefault();
                     hideDetail();
                 });
             }
+        } else {
+            // Mobile: attacher les listeners pour fermer la modal
+            const mobileClose = detail.querySelector('.mobile-close');
+            
+            if (mobileClose) {
+                mobileClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    hideDetail();
+                });
+            }
+            
+            // Fermer en cliquant sur le fond (overlay) - on utilise le détail lui-même
+            detail.addEventListener('click', (e) => {
+                // Fermer seulement si on clique directement sur le detail container
+                if (e.target === detail) {
+                    e.preventDefault();
+                    hideDetail();
+                }
+            });
         }
         
         // Attacher les event listeners pour ouvrir la lightbox sur clic des miniatures
@@ -749,14 +751,6 @@
                 openLightbox(p.images, index, p.title);
             });
         });
-        
-        // Smooth scroll to detail section
-        setTimeout(() => {
-            window.scrollTo({
-                top: detail.offsetTop - 100,
-                behavior: 'smooth'
-            });
-        }, 100);
     }
     
     // Lightbox pour afficher les images en grand
