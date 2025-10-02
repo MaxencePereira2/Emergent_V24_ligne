@@ -2443,9 +2443,9 @@ body::before {
         background: transparent !important;
     }
     
-    /* Header disparaît au scroll vers le bas */
+    /* Header disparaît complètement au scroll vers le bas */
     .nav.hidden-on-scroll {
-        transform: translateY(-100%);
+        display: none !important;
     }
     
     .nav .logo {
