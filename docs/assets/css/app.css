@@ -708,7 +708,8 @@ body::before {
 }
 
 /* Info boxes simplifiées */
-.project-info-simple {
+.project-info-simple,
+.project-info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
