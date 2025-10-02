@@ -2442,6 +2442,7 @@ body::before {
         gap: 16px;
         flex-wrap: wrap;
         transition: transform 0.3s ease-in-out;
+        background: transparent !important;
     }
     
     /* Header disparaît au scroll vers le bas */
