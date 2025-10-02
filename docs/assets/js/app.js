@@ -705,39 +705,23 @@
             </div>
         `;
         
-        // Sur mobile : afficher en modal overlay
-        // Sur desktop : remplacer la grille
+        // Affichage du détail (même comportement desktop et mobile)
         const projectsGrid = document.querySelector('.projects-grid');
         
-        if (isMobile) {
-            // Mode mobile : modal overlay
-            detail.classList.remove('hidden');
-            detail.classList.add('mobile-modal-active');
-            detail.setAttribute('aria-hidden', 'false');
-            
-            // Bloquer le scroll du body
-            document.body.style.overflow = 'hidden';
-            
-            // Forcer le reflow pour que le navigateur applique les styles
-            detail.offsetHeight;
-            
-            // Scroll le container modal vers le top
-            detail.scrollTop = 0;
-        } else {
-            // Mode desktop : masquer la grille
-            if (projectsGrid) {
-                projectsGrid.style.display = 'none';
-            }
-            
-            detail.classList.remove('hidden');
-            detail.classList.remove('mobile-modal-active');
-            detail.setAttribute('aria-hidden', 'false');
-            
-            // Scroll vers le détail en desktop seulement
-            setTimeout(() => {
-                detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+        // Masquer la grille
+        if (projectsGrid) {
+            projectsGrid.style.display = 'none';
         }
+        
+        // Afficher le détail
+        detail.classList.remove('hidden');
+        detail.classList.remove('mobile-modal-active');
+        detail.setAttribute('aria-hidden', 'false');
+        
+        // Scroll vers le détail
+        setTimeout(() => {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
         
         // Attacher l'event listener au bouton retour (desktop seulement)
         if (!isMobile) {
