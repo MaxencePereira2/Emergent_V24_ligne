@@ -634,13 +634,18 @@
 
     function hideDetail() {
         if (!detail) return;
+        
+        // Cacher le détail
         detail.classList.add('hidden');
-        detail.classList.remove('modal-active');
         detail.setAttribute('aria-hidden', 'true');
+        detail.style.display = 'none';
         detail.innerHTML = '';
         
-        // Restaurer le scroll du body
-        document.body.style.overflow = '';
+        // Réafficher la grille
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid) {
+            projectsGrid.style.display = 'grid';
+        }
     }
 
     function route() {
