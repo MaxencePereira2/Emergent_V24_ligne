@@ -1057,6 +1057,10 @@ body::before {
 /* Sous-sections de tarifs */
 .pricing-subsection {
     margin-bottom: 3rem;
+    padding: 2rem;
+    border: 1px solid rgba(204, 139, 101, 0.2);
+    border-radius: 16px;
+    background: rgba(248, 249, 250, 0.3);
 }
 
 .pricing-subsection:last-child {
