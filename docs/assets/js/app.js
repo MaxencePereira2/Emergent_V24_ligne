@@ -442,19 +442,21 @@
     }
 
     function initProjectCards() {
-        // Attacher les event listeners aux boutons "Voir le détail"
+        // Attacher les event listeners à toute la carte
         const projectCards = document.querySelectorAll('.project-card');
         
         projectCards.forEach(card => {
-            const button = card.querySelector('.project-btn');
             const projectSlug = card.getAttribute('data-project-slug');
             
-            if (button && projectSlug) {
-                button.addEventListener('click', (e) => {
+            if (projectSlug) {
+                // Rendre toute la carte cliquable
+                card.style.cursor = 'pointer';
+                
+                card.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    // Naviguer vers le détail du projet
-                    window.location.hash = `/projets/${projectSlug}`;
+                    // Ouvrir le détail en modal
+                    renderDetail(projectSlug);
                 });
             }
         });
