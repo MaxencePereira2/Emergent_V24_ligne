@@ -544,7 +544,7 @@ body::before {
     padding: 0 !important;
     margin: 0 !important;
     max-width: none !important;
-    background: rgba(0, 0, 0, 0.5) !important;
+    background: white !important;
     display: block !important;
 }
 
