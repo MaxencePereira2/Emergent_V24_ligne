@@ -655,18 +655,38 @@
                 <div class="project-header">
                     <h2 class="project-title">${p.title}</h2>
                     <p class="project-subtitle">${p.summary || ''}</p>
+                    ${p.client ? `<p class="project-client"><strong>Client :</strong> ${p.client}</p>` : ''}
+                    ${p.materials ? `<p class="project-materials"><strong>Matériaux :</strong> ${p.materials}</p>` : ''}
+                    ${p.ip ? `<p class="project-ip"><strong>PI :</strong> ${p.ip}</p>` : ''}
                 </div>
                 
                 ${imageGallery}
                 
-                <div class="project-info-simple">
+                ${p.key_points && p.key_points.length > 0 ? `
+                    <div class="project-section">
+                        <h3>Points clés</h3>
+                        <ul class="project-list">
+                            ${p.key_points.map(point => `<li>${point}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+                
+                ${p.technologies ? `
+                    <div class="project-section">
+                        <h3>Technologies</h3>
+                        <p>${p.technologies}</p>
+                    </div>
+                ` : ''}
+                
+                <div class="project-info-grid">
                     <div class="info-box">
                         <h3>Résultats</h3>
                         <p>${p.results || 'N/A'}</p>
                     </div>
                     <div class="info-box">
                         <h3>Durée</h3>
-                        <p>${p.time_spent || 'N/A'}</p>
+                        <p>${p.duration || 'N/A'}</p>
+                        ${p.phases ? `<div class="phases">${p.phases}</div>` : ''}
                     </div>
                 </div>
             </div>
