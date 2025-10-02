@@ -627,32 +627,6 @@
             return;
         }
         
-        // Sur mobile : afficher en modal overlay
-        // Sur desktop : remplacer la grille
-        const projectsGrid = document.querySelector('.projects-grid');
-        
-        if (isMobile) {
-            // Mode mobile : modal overlay
-            detail.classList.remove('hidden');
-            detail.classList.add('mobile-modal-active');
-            detail.setAttribute('aria-hidden', 'false');
-            
-            // Bloquer le scroll du body
-            document.body.style.overflow = 'hidden';
-            
-            // Scroll le container modal vers le top
-            detail.scrollTop = 0;
-        } else {
-            // Mode desktop : masquer la grille
-            if (projectsGrid) {
-                projectsGrid.style.display = 'none';
-            }
-            
-            detail.classList.remove('hidden');
-            detail.classList.remove('mobile-modal-active');
-            detail.setAttribute('aria-hidden', 'false');
-        }
-        
         // Créer la galerie de miniatures cliquables
         const imageGallery = p.images && p.images.length > 0 
             ? `<div class="horizontal-gallery">
@@ -664,6 +638,7 @@
             </div>`
             : '';
 
+        // Générer le HTML AVANT d'appliquer les classes
         detail.innerHTML = `
             ${isMobile ? `<button class="mobile-close">×</button>` : ''}
             <div class="project-detail-content ${isMobile ? 'mobile-modal-content' : ''}">
@@ -708,6 +683,32 @@
                 </div>
             </div>
         `;
+        
+        // Sur mobile : afficher en modal overlay
+        // Sur desktop : remplacer la grille
+        const projectsGrid = document.querySelector('.projects-grid');
+        
+        if (isMobile) {
+            // Mode mobile : modal overlay
+            detail.classList.remove('hidden');
+            detail.classList.add('mobile-modal-active');
+            detail.setAttribute('aria-hidden', 'false');
+            
+            // Bloquer le scroll du body
+            document.body.style.overflow = 'hidden';
+            
+            // Scroll le container modal vers le top
+            detail.scrollTop = 0;
+        } else {
+            // Mode desktop : masquer la grille
+            if (projectsGrid) {
+                projectsGrid.style.display = 'none';
+            }
+            
+            detail.classList.remove('hidden');
+            detail.classList.remove('mobile-modal-active');
+            detail.setAttribute('aria-hidden', 'false');
+        }
         
         // Attacher l'event listener au bouton retour (desktop seulement)
         if (!isMobile) {
