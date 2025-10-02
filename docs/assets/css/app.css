@@ -241,6 +241,15 @@ body::before {
     animation: fadeInUp 1.2s ease-out;
 }
 
+.hero-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero-logo img {
+    filter: brightness(1.5) contrast(1.2);
+}
+
 .hero h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin: 0 0 2rem;
