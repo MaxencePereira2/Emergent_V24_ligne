@@ -639,8 +639,12 @@
     function hideDetail() {
         if (!detail) return;
         detail.classList.add('hidden');
+        detail.classList.remove('modal-active');
         detail.setAttribute('aria-hidden', 'true');
         detail.innerHTML = '';
+        
+        // Restaurer le scroll du body
+        document.body.style.overflow = '';
     }
 
     function route() {
