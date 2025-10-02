@@ -2407,11 +2407,23 @@ body::before {
         flex-wrap: wrap;
     }
     
-    .nav .cta {
-        order: -1;
-        width: 100%;
+    .nav .logo {
+        flex: 1 1 100%;
         text-align: center;
         margin-bottom: 8px;
+    }
+    
+    .nav a:not(.logo):not(.cta) {
+        flex: 1 1 auto;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    
+    .nav .cta {
+        order: 999;
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
     }
     
     .hero {
@@ -2421,6 +2433,12 @@ body::before {
     .section {
         margin: 60px auto;
         padding: 0 16px;
+    }
+    
+    /* Désactiver la parallaxe en mobile pour éviter les chevauchements */
+    #faq {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
     }
     
     .section h2 {
