@@ -571,8 +571,13 @@
             return;
         }
         
+        // Afficher en modal overlay
         detail.classList.remove('hidden');
+        detail.classList.add('modal-active');
         detail.setAttribute('aria-hidden', 'false');
+        
+        // Bloquer le scroll du body
+        document.body.style.overflow = 'hidden';
         
         const imageGallery = p.images && p.images.length > 0 
             ? `<div class="gallery">${p.images.map(src => `<img src="${src}" alt="${p.title}" onerror="this.style.display='none'">`).join('')}</div>`
@@ -583,34 +588,52 @@
             : '';
 
         detail.innerHTML = `
-            <h2>${p.title}</h2>
-            <p class="muted">${p.summary || ''}</p>
-            ${imageGallery}
-            <div class="cols">
-                <div>
-                    ${keyPoints}
-                    ${p.tech ? `<h3>Technologies</h3><p>${p.tech}</p>` : ''}
-                </div>
-                <div>
-                    <h3>Résultats</h3>
-                    <p>${p.results || 'Données non disponibles'}</p>
-                    <h3>Temps passé</h3>
-                    <p>${p.time_spent || 'Données non disponibles'}</p>
+            <div class="project-modal-overlay"></div>
+            <div class="project-modal-content">
+                <button class="project-modal-close" aria-label="Fermer">×</button>
+                <div class="project-modal-body">
+                    <h2>${p.title}</h2>
+                    <p class="muted">${p.summary || ''}</p>
+                    ${imageGallery}
+                    <div class="cols">
+                        <div>
+                            ${keyPoints}
+                            ${p.tech ? `<h3>Technologies</h3><p>${p.tech}</p>` : ''}
+                        </div>
+                        <div>
+                            <h3>Résultats</h3>
+                            <p>${p.results || 'Données non disponibles'}</p>
+                            <h3>Temps passé</h3>
+                            <p>${p.time_spent || 'Données non disponibles'}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p><a class="btn" href="#projets">← Revenir aux projets</a></p>
         `;
+        
+        // Ajouter les event listeners pour fermer le modal
+        const closeBtn = detail.querySelector('.project-modal-close');
+        const overlay = detail.querySelector('.project-modal-overlay');
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', hideDetail);
+        }
+        
+        if (overlay) {
+            overlay.addEventListener('click', hideDetail);
+        }
+        
+        // Fermer avec la touche Escape
+        const escapeHandler = (e) => {
+            if (e.key === 'Escape') {
+                hideDetail();
+                document.removeEventListener('keydown', escapeHandler);
+            }
+        };
+        document.addEventListener('keydown', escapeHandler);
         
         // Add gallery listeners after rendering
         setTimeout(addGalleryListeners, 100);
-        
-        // Smooth scroll to detail section
-        setTimeout(() => {
-            window.scrollTo({
-                top: detail.offsetTop - 100,
-                behavior: 'smooth'
-            });
-        }, 100);
     }
 
     function hideDetail() {
