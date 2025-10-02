@@ -489,9 +489,6 @@
     function renderDetail(projectSlug) {
         if (!detail) return;
         
-        // Détecter si on est sur mobile
-        const isMobile = window.innerWidth <= 768;
-        
         // Mapping des projets statiques avec contenus détaillés
         const projectsData = {
             "1-optimisation-du-temps-de-fabrication-descalier-en-acier": {
