@@ -465,7 +465,7 @@
     function renderDetail(projectSlug) {
         if (!detail) return;
         
-        // Mapping des projets statiques avec TOUTES les images
+        // Mapping des projets statiques avec contenus détaillés
         const projectsData = {
             "1-optimisation-du-temps-de-fabrication-descalier-en-acier": {
                 title: "Optimisation du temps de fabrication d'escalier en acier",
