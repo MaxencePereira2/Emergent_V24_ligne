@@ -616,20 +616,16 @@ body::before {
 }
 
 /* Layout à 2 colonnes pour desktop */
+.project-detail-layout {
+    display: block; /* Par défaut: mobile - une colonne */
+}
+
 @media (min-width: 1024px) {
     .project-detail-layout {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 3rem;
         margin-top: 2rem;
-    }
-    
-    .project-left-column {
-        /* Colonne gauche : Header + Galerie */
-    }
-    
-    .project-right-column {
-        /* Colonne droite : Sections info */
     }
 }
 
