@@ -725,20 +725,12 @@
             ${isMobile ? '</div>' : ''}
         `;
         
-        // Attacher l'event listener au bouton retour
-        const btnBack = detail.querySelector('.btn-back');
-        if (btnBack) {
-            btnBack.addEventListener('click', (e) => {
-                e.preventDefault();
-                hideDetail();
-            });
-        }
-        
-        // Sur mobile : fermer en cliquant sur l'overlay
-        if (isMobile) {
-            const mobileOverlay = detail.querySelector('.mobile-modal-overlay');
-            if (mobileOverlay) {
-                mobileOverlay.addEventListener('click', () => {
+        // Attacher l'event listener au bouton retour (desktop seulement)
+        if (!isMobile) {
+            const btnBack = detail.querySelector('.btn-back');
+            if (btnBack) {
+                btnBack.addEventListener('click', (e) => {
+                    e.preventDefault();
                     hideDetail();
                 });
             }
