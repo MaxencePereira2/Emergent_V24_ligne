@@ -551,7 +551,7 @@ body::before {
     border-radius: 12px;
     max-width: 1000px;
     max-height: 85vh;
-    width: 90%;
+    width: 85%;
     margin: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     overflow: hidden;
@@ -563,13 +563,15 @@ body::before {
 @media (min-width: 1920px) {
     .project-modal-content {
         max-width: 1200px;
+        width: 70%;
     }
 }
 
 /* Responsive pour écrans 2K */
 @media (min-width: 2560px) {
     .project-modal-content {
-        max-width: 1400px;
+        max-width: 1600px;
+        width: 65%;
         max-height: 80vh;
     }
     
@@ -589,7 +591,8 @@ body::before {
 /* Responsive pour écrans 4K (32 pouces et plus) */
 @media (min-width: 3840px) {
     .project-modal-content {
-        max-width: 2000px;
+        max-width: 2400px;
+        width: 60%;
         max-height: 75vh;
     }
     
