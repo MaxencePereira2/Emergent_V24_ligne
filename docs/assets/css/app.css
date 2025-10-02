@@ -245,10 +245,15 @@ body::before {
 .hero-logo {
     text-align: center;
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
 }
 
 .hero-logo img {
     filter: brightness(1.5) contrast(1.2);
+    position: relative;
+    z-index: 10;
+    display: inline-block;
 }
 
 .hero h1 {
