@@ -697,6 +697,9 @@
             // Bloquer le scroll du body
             document.body.style.overflow = 'hidden';
             
+            // Forcer le reflow pour que le navigateur applique les styles
+            detail.offsetHeight;
+            
             // Scroll le container modal vers le top
             detail.scrollTop = 0;
         } else {
