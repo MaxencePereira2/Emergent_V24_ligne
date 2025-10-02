@@ -430,11 +430,7 @@
         initLegalModal();
     }
 
-    // Projects and carousel functionality
-    const DATA_URL = 'content/projets.json';
-    const carouselHost = document.querySelector('#projets .track');
-    const prevBtn = document.querySelector('#projets .prev');
-    const nextBtn = document.querySelector('#projets .next');
+    // Projects functionality
     const detail = document.getElementById('projet-detail');
 
     function slugify(text) {
@@ -445,136 +441,21 @@
             .replace(/^-|-$/g, '');
     }
 
-    function cardHTML(p) {
-        return `
-            <article class="card">
-                <a href="#/projets/${p.slug}">
-                    <img src="${p.preview}" alt="${p.title}" onerror="this.style.display='none'"/>
-                    <h3>${p.title}</h3>
-                </a>
-            </article>
-        `;
-    }
-
-    function renderCarousel(items) {
-        if (!carouselHost) return;
+    function initProjectCards() {
+        // Attacher les event listeners aux boutons "Voir le détail"
+        const projectCards = document.querySelectorAll('.project-card');
         
-        // Trier les projets dans l'ordre 1-2-3-4-5-6 basé sur le numéro au début du titre
-        const sortedItems = items.sort((a, b) => {
-            const numA = parseInt(a.title.match(/^(\d+)/)?.[1] || '999');
-            const numB = parseInt(b.title.match(/^(\d+)/)?.[1] || '999');
-            return numA - numB;
-        });
-        
-        // Dupliquer les items pour un défilement infini
-        const duplicatedItems = [...sortedItems, ...sortedItems];
-        carouselHost.innerHTML = duplicatedItems.map(cardHTML).join('');
-        
-        // Variables pour le glissement manuel
-        let isDragging = false;
-        let startX = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationID = 0;
-        let startTime = 0;
-        
-        // Fonction pour activer/désactiver l'auto-scroll
-        function toggleAutoScroll(enable) {
-            if (enable) {
-                carouselHost.classList.add('auto-scroll');
-            } else {
-                carouselHost.classList.remove('auto-scroll');
-            }
-        }
-        
-        // Démarrer l'auto-scroll après 2 secondes
-        setTimeout(() => {
-            if (!isDragging) {
-                toggleAutoScroll(true);
-            }
-        }, 2000);
-        
-        // Gestion des événements tactiles et souris
-        carouselHost.addEventListener('mousedown', startDrag);
-        carouselHost.addEventListener('touchstart', startDrag, { passive: true });
-        
-        document.addEventListener('mouseup', endDrag);
-        document.addEventListener('touchend', endDrag);
-        
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('touchmove', drag, { passive: true });
-        
-        function startDrag(e) {
-            if (e.target.closest('.card a')) return; // Ne pas interférer avec les liens
+        projectCards.forEach(card => {
+            const button = card.querySelector('.project-btn');
+            const projectSlug = card.getAttribute('data-project-slug');
             
-            isDragging = true;
-            startTime = Date.now();
-            toggleAutoScroll(false);
-            carouselHost.classList.add('dragging');
-            
-            startX = getPositionX(e);
-            prevTranslate = currentTranslate;
-            
-            animationID = requestAnimationFrame(animation);
-        }
-        
-        function drag(e) {
-            if (!isDragging) return;
-            
-            const currentPosition = getPositionX(e);
-            currentTranslate = prevTranslate + (currentPosition - startX) * 0.8; // Facteur de réduction pour un scroll plus fluide
-        }
-        
-        function endDrag() {
-            if (!isDragging) return;
-            
-            isDragging = false;
-            carouselHost.classList.remove('dragging');
-            
-            cancelAnimationFrame(animationID);
-            
-            // Inertie de scroll
-            const duration = Date.now() - startTime;
-            const distance = currentTranslate - prevTranslate;
-            const velocity = distance / duration;
-            
-            if (Math.abs(velocity) > 0.1) {
-                currentTranslate += velocity * 200; // Inertie
-            }
-            
-            // Remettre l'auto-scroll après 3 secondes d'inactivité
-            setTimeout(() => {
-                if (!isDragging) {
-                    toggleAutoScroll(true);
-                    // Reset position for smooth auto-scroll
-                    currentTranslate = 0;
-                    prevTranslate = 0;
-                    carouselHost.style.transform = 'translateX(0)';
-                }
-            }, 3000);
-        }
-        
-        function getPositionX(e) {
-            return e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-        }
-        
-        function animation() {
-            if (isDragging) {
-                carouselHost.style.transform = `translateX(${currentTranslate}px)`;
-                requestAnimationFrame(animation);
-            }
-        }
-        
-        // Pause auto-scroll au survol
-        carouselHost.addEventListener('mouseenter', () => {
-            if (!isDragging) {
-                carouselHost.style.animationPlayState = 'paused';
-            }
-        });
-        
-        carouselHost.addEventListener('mouseleave', () => {
-            if (!isDragging) {
-                carouselHost.style.animationPlayState = 'running';
+            if (button && projectSlug) {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // Naviguer vers le détail du projet
+                    window.location.hash = `/projets/${projectSlug}`;
+                });
             }
         });
     }
