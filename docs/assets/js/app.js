@@ -624,16 +624,45 @@
             return;
         }
         
-        // Masquer la grille des projets
+        // Sur mobile : afficher en modal overlay
+        // Sur desktop : remplacer la grille
         const projectsGrid = document.querySelector('.projects-grid');
-        if (projectsGrid) {
-            projectsGrid.style.display = 'none';
-        }
         
-        // Afficher le détail
-        detail.classList.remove('hidden');
-        detail.setAttribute('aria-hidden', 'false');
-        detail.style.display = 'block';
+        if (isMobile) {
+            // Mode mobile : modal overlay
+            detail.classList.remove('hidden');
+            detail.classList.add('mobile-modal-active');
+            detail.setAttribute('aria-hidden', 'false');
+            detail.style.display = 'block';
+            detail.style.position = 'fixed';
+            detail.style.top = '0';
+            detail.style.left = '0';
+            detail.style.width = '100%';
+            detail.style.height = '100%';
+            detail.style.zIndex = '10000';
+            detail.style.overflow = 'auto';
+            detail.style.background = 'white';
+            
+            // Bloquer le scroll du body
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Mode desktop : masquer la grille
+            if (projectsGrid) {
+                projectsGrid.style.display = 'none';
+            }
+            
+            detail.classList.remove('hidden');
+            detail.setAttribute('aria-hidden', 'false');
+            detail.style.display = 'block';
+            detail.style.position = '';
+            detail.style.top = '';
+            detail.style.left = '';
+            detail.style.width = '';
+            detail.style.height = '';
+            detail.style.zIndex = '';
+            detail.style.overflow = '';
+            detail.style.background = '';
+        }
         
         // Créer la galerie de miniatures cliquables
         const imageGallery = p.images && p.images.length > 0 
