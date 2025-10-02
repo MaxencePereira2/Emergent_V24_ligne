@@ -1,13 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function App() {
-  const [htmlContent, setHtmlContent] = useState('');
-
   useEffect(() => {
-    // Load the Alesium static site content
-    fetch('/index.html')
-      .then(response => response.text())
-      .then(html => {
+    // Le contenu HTML est déjà dans le DOM via index.html
+    // On charge juste le JavaScript pour l'interactivité
+    
+    const script = document.createElement('script');
+    script.src = '/assets/js/app.js';
+    script.async = true;
+    document.body.appendChild(script);
+    
+  }, []);
+
+  // Ne rien rendre, le contenu est déjà dans index.html
+  return null;
+}
+
+export default App;
         // Parse the HTML and extract the body content
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
