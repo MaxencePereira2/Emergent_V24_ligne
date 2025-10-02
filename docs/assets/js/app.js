@@ -571,13 +571,16 @@
             return;
         }
         
-        // Afficher en modal overlay
-        detail.classList.remove('hidden');
-        detail.classList.add('modal-active');
-        detail.setAttribute('aria-hidden', 'false');
+        // Masquer la grille des projets
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid) {
+            projectsGrid.style.display = 'none';
+        }
         
-        // Bloquer le scroll du body
-        document.body.style.overflow = 'hidden';
+        // Afficher le détail
+        detail.classList.remove('hidden');
+        detail.setAttribute('aria-hidden', 'false');
+        detail.style.display = 'block';
         
         const imageGallery = p.images && p.images.length > 0 
             ? `<div class="gallery">${p.images.map(src => `<img src="${src}" alt="${p.title}" onerror="this.style.display='none'">`).join('')}</div>`
@@ -588,52 +591,45 @@
             : '';
 
         detail.innerHTML = `
-            <div class="project-modal-overlay"></div>
-            <div class="project-modal-content">
-                <button class="project-modal-close" aria-label="Fermer">×</button>
-                <div class="project-modal-body">
-                    <h2>${p.title}</h2>
-                    <p class="muted">${p.summary || ''}</p>
-                    ${imageGallery}
-                    <div class="cols">
-                        <div>
-                            ${keyPoints}
-                            ${p.tech ? `<h3>Technologies</h3><p>${p.tech}</p>` : ''}
-                        </div>
-                        <div>
-                            <h3>Résultats</h3>
-                            <p>${p.results || 'Données non disponibles'}</p>
-                            <h3>Temps passé</h3>
-                            <p>${p.time_spent || 'Données non disponibles'}</p>
-                        </div>
+            <div class="project-detail-content">
+                <button class="btn-back" onclick="window.history.back()">← Retour aux projets</button>
+                <h2>${p.title}</h2>
+                <p class="muted">${p.summary || ''}</p>
+                ${imageGallery}
+                <div class="cols">
+                    <div>
+                        ${keyPoints}
+                        ${p.tech ? `<h3>Technologies</h3><p>${p.tech}</p>` : ''}
+                    </div>
+                    <div>
+                        <h3>Résultats</h3>
+                        <p>${p.results || 'Données non disponibles'}</p>
+                        <h3>Temps passé</h3>
+                        <p>${p.time_spent || 'Données non disponibles'}</p>
                     </div>
                 </div>
             </div>
         `;
         
-        // Ajouter les event listeners pour fermer le modal
-        const closeBtn = detail.querySelector('.project-modal-close');
-        const overlay = detail.querySelector('.project-modal-overlay');
-        
-        if (closeBtn) {
-            closeBtn.addEventListener('click', hideDetail);
-        }
-        
-        if (overlay) {
-            overlay.addEventListener('click', hideDetail);
-        }
-        
-        // Fermer avec la touche Escape
-        const escapeHandler = (e) => {
-            if (e.key === 'Escape') {
+        // Attacher l'event listener au bouton retour
+        const btnBack = detail.querySelector('.btn-back');
+        if (btnBack) {
+            btnBack.addEventListener('click', (e) => {
+                e.preventDefault();
                 hideDetail();
-                document.removeEventListener('keydown', escapeHandler);
-            }
-        };
-        document.addEventListener('keydown', escapeHandler);
+            });
+        }
         
         // Add gallery listeners after rendering
         setTimeout(addGalleryListeners, 100);
+        
+        // Smooth scroll to detail section
+        setTimeout(() => {
+            window.scrollTo({
+                top: detail.offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }, 100);
     }
 
     function hideDetail() {
