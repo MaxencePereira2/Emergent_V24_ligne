@@ -722,33 +722,12 @@
             detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
         
-        // Attacher l'event listener au bouton retour (desktop seulement)
-        if (!isMobile) {
-            const btnBack = detail.querySelector('.btn-back');
-            if (btnBack) {
-                btnBack.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hideDetail();
-                });
-            }
-        } else {
-            // Mobile: attacher les listeners pour fermer la modal
-            const mobileClose = detail.querySelector('.mobile-close');
-            
-            if (mobileClose) {
-                mobileClose.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hideDetail();
-                });
-            }
-            
-            // Fermer en cliquant sur le fond (overlay) - on utilise le détail lui-même
-            detail.addEventListener('click', (e) => {
-                // Fermer seulement si on clique directement sur le detail container
-                if (e.target === detail) {
-                    e.preventDefault();
-                    hideDetail();
-                }
+        // Attacher l'event listener au bouton retour
+        const btnBack = detail.querySelector('.btn-back');
+        if (btnBack) {
+            btnBack.addEventListener('click', (e) => {
+                e.preventDefault();
+                hideDetail();
             });
         }
         
