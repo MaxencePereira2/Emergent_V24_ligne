@@ -661,41 +661,47 @@
             <div class="project-detail-content">
                 <button class="btn-back"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Revenir à tous les projets</button>
                 
-                <div class="project-header">
-                    <h2 class="project-title">${p.title}</h2>
-                    <p class="project-subtitle">${p.summary || ''}</p>
-                    ${p.client ? `<p class="project-client"><strong>Client :</strong> ${p.client}</p>` : ''}
-                    ${p.materials ? `<p class="project-materials"><strong>Matériaux :</strong> ${p.materials}</p>` : ''}
-                    ${p.ip ? `<p class="project-ip"><strong>PI :</strong> ${p.ip}</p>` : ''}
-                </div>
-                
-                ${imageGallery}
-                
-                ${p.key_points && p.key_points.length > 0 ? `
-                    <div class="project-section">
-                        <h3>Points clés</h3>
-                        <ul class="project-list">
-                            ${p.key_points.map(point => `<li>${point}</li>`).join('')}
-                        </ul>
+                <div class="project-detail-layout">
+                    <div class="project-left-column">
+                        <div class="project-header">
+                            <h2 class="project-title">${p.title}</h2>
+                            <p class="project-subtitle">${p.summary || ''}</p>
+                            ${p.client ? `<p class="project-client"><strong>Client :</strong> ${p.client}</p>` : ''}
+                            ${p.materials ? `<p class="project-materials"><strong>Matériaux :</strong> ${p.materials}</p>` : ''}
+                            ${p.ip ? `<p class="project-ip"><strong>PI :</strong> ${p.ip}</p>` : ''}
+                        </div>
+                        
+                        ${imageGallery}
                     </div>
-                ` : ''}
-                
-                ${p.technologies ? `
-                    <div class="project-section">
-                        <h3>Technologies</h3>
-                        <p>${p.technologies}</p>
-                    </div>
-                ` : ''}
-                
-                <div class="project-info-grid">
-                    <div class="info-box">
-                        <h3>Résultats</h3>
-                        <p>${p.results || 'N/A'}</p>
-                    </div>
-                    <div class="info-box">
-                        <h3>Durée</h3>
-                        <p>${p.duration || 'N/A'}</p>
-                        ${p.phases ? `<div class="phases">${p.phases}</div>` : ''}
+                    
+                    <div class="project-right-column">
+                        ${p.key_points && p.key_points.length > 0 ? `
+                            <div class="project-section">
+                                <h3>Points clés</h3>
+                                <ul class="project-list">
+                                    ${p.key_points.map(point => `<li>${point}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        
+                        ${p.technologies ? `
+                            <div class="project-section">
+                                <h3>Technologies</h3>
+                                <p>${p.technologies}</p>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="project-info-grid">
+                            <div class="info-box">
+                                <h3>Résultats</h3>
+                                <p>${p.results || 'N/A'}</p>
+                            </div>
+                            <div class="info-box">
+                                <h3>Durée</h3>
+                                <p>${p.duration || 'N/A'}</p>
+                                ${p.phases ? `<div class="phases">${p.phases}</div>` : ''}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
