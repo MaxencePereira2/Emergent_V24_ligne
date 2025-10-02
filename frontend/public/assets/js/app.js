@@ -7,6 +7,27 @@
     if (YEAR) YEAR.textContent = new Date().getFullYear();
 
     const EMAIL = 'contact@alesium.fr';
+    
+    // Header mobile: cacher au scroll vers le bas, afficher au scroll vers le haut
+    let lastScrollTop = 0;
+    const nav = document.querySelector('.nav');
+    
+    window.addEventListener('scroll', () => {
+        // Seulement sur mobile
+        if (window.innerWidth <= 768) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scroll vers le bas
+                nav.classList.add('hidden-on-scroll');
+            } else {
+                // Scroll vers le haut
+                nav.classList.remove('hidden-on-scroll');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }
+    });
 
     // Recall form handler
     document.querySelector('.recall-form')?.addEventListener('submit', e => {

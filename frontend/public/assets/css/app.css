@@ -1228,6 +1228,12 @@ body::before {
     padding: 2rem;
 }
 
+/* Justifier texte des réponses FAQ */
+.card-detail p,
+.card-detail li {
+    text-align: justify;
+}
+
 /* Colonnes détail */
 .detail-columns {
     display: grid;
@@ -2409,6 +2415,12 @@ body::before {
         padding: 12px 16px;
         gap: 16px;
         flex-wrap: wrap;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    /* Header disparaît au scroll vers le bas */
+    .nav.hidden-on-scroll {
+        transform: translateY(-100%);
     }
     
     .nav .logo {
@@ -2443,6 +2455,21 @@ body::before {
     #faq {
         opacity: 1 !important;
         transform: translateY(0) !important;
+    }
+    
+    /* Justifier le texte des réponses FAQ */
+    .accordion-body {
+        text-align: justify;
+    }
+    
+    /* Opacité 100% pour les cartes et modals mobiles */
+    #projet-detail.mobile-modal-active {
+        background: rgba(0, 0, 0, 1) !important;
+    }
+    
+    #projet-detail.mobile-modal-active .project-detail-content {
+        background: white !important;
+        opacity: 1 !important;
     }
     
     .section h2 {
