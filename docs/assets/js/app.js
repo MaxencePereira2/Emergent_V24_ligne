@@ -639,6 +639,9 @@
             
             // Bloquer le scroll du body
             document.body.style.overflow = 'hidden';
+            
+            // Scroll le container modal vers le top
+            detail.scrollTop = 0;
         } else {
             // Mode desktop : masquer la grille
             if (projectsGrid) {
