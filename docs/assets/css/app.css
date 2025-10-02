@@ -1018,6 +1018,13 @@ body::before {
     margin: 0 auto;
 }
 
+/* Centrer une carte unique dans la grille */
+.pricing-grid .pricing-card:only-child {
+    max-width: 450px;
+    margin: 0 auto;
+    grid-column: 1 / -1;
+}
+
 /* Carte tarif - design haut de gamme gracz.fr */
 .pricing-card {
     background: rgba(255, 255, 255, 0.95);
