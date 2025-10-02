@@ -544,13 +544,13 @@ body::before {
     padding: 0 !important;
     margin: 0 !important;
     max-width: none !important;
-    background: rgba(0, 0, 0, 0.3) !important;
+    background: rgba(0, 0, 0, 0.5) !important;
     display: block !important;
 }
 
 #projet-detail.mobile-modal-active .project-detail-content {
     background: white !important;
-    min-height: 100vh !important;
+    min-height: 100% !important;
     padding: 4rem 1.5rem 2rem !important;
     margin: 0 !important;
 }
