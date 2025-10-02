@@ -465,7 +465,7 @@
     function renderDetail(projectSlug) {
         if (!detail) return;
         
-        // Mapping des projets statiques
+        // Mapping des projets statiques avec TOUTES les images
         const projectsData = {
             "1-optimisation-du-temps-de-fabrication-descalier-en-acier": {
                 title: "Optimisation du temps de fabrication d'escalier en acier",
@@ -582,30 +582,59 @@
         detail.setAttribute('aria-hidden', 'false');
         detail.style.display = 'block';
         
+        // Créer la galerie horizontale avec toutes les images
         const imageGallery = p.images && p.images.length > 0 
-            ? `<div class="gallery">${p.images.map(src => `<img src="${src}" alt="${p.title}" onerror="this.style.display='none'">`).join('')}</div>`
+            ? `<div class="horizontal-gallery">
+                ${p.images.map((src, index) => `
+                    <div class="gallery-item" data-index="${index}">
+                        <img src="${src}" alt="${p.title} - Image ${index + 1}" onerror="this.style.display='none'">
+                    </div>
+                `).join('')}
+            </div>`
             : '';
 
         const keyPoints = p.key_points && p.key_points.length > 0
-            ? `<h3>Points clés</h3><ul class="bullets">${p.key_points.map(point => `<li>${point}</li>`).join('')}</ul>`
+            ? `<div class="key-points-section">
+                <h3 class="section-title">Points clés</h3>
+                <ul class="key-points-list">${p.key_points.map(point => `<li><span class="point-icon">✓</span>${point}</li>`).join('')}</ul>
+            </div>`
             : '';
 
         detail.innerHTML = `
             <div class="project-detail-content">
-                <button class="btn-back" onclick="window.history.back()">← Retour aux projets</button>
-                <h2>${p.title}</h2>
-                <p class="muted">${p.summary || ''}</p>
+                <button class="btn-back">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Retour aux projets
+                </button>
+                
+                <div class="project-header">
+                    <h2 class="project-title">${p.title}</h2>
+                    <p class="project-subtitle">${p.summary || ''}</p>
+                </div>
+                
                 ${imageGallery}
-                <div class="cols">
-                    <div>
+                
+                <div class="project-info-grid">
+                    <div class="info-column">
                         ${keyPoints}
-                        ${p.tech ? `<h3>Technologies</h3><p>${p.tech}</p>` : ''}
+                        ${p.tech ? `
+                            <div class="tech-section">
+                                <h3 class="section-title">Technologies</h3>
+                                <p class="tech-content">${p.tech}</p>
+                            </div>
+                        ` : ''}
                     </div>
-                    <div>
-                        <h3>Résultats</h3>
-                        <p>${p.results || 'Données non disponibles'}</p>
-                        <h3>Temps passé</h3>
-                        <p>${p.time_spent || 'Données non disponibles'}</p>
+                    <div class="info-column">
+                        <div class="results-section">
+                            <h3 class="section-title">Résultats</h3>
+                            <p class="results-content">${p.results || 'Données non disponibles'}</p>
+                        </div>
+                        <div class="time-section">
+                            <h3 class="section-title">Temps passé</h3>
+                            <p class="time-content">${p.time_spent || 'Données non disponibles'}</p>
+                        </div>
                     </div>
                 </div>
             </div>
