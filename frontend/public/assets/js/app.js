@@ -489,9 +489,6 @@
     function renderDetail(projectSlug) {
         if (!detail) return;
         
-        // Détecter si on est sur mobile
-        const isMobile = window.innerWidth <= 768;
-        
         // Mapping des projets statiques avec contenus détaillés
         const projectsData = {
             "1-optimisation-du-temps-de-fabrication-descalier-en-acier": {
@@ -661,9 +658,8 @@
 
         // Générer le HTML AVANT d'appliquer les classes
         detail.innerHTML = `
-            ${isMobile ? `<button class="mobile-close">×</button>` : ''}
-            <div class="project-detail-content ${isMobile ? 'mobile-modal-content' : ''}">
-                ${!isMobile ? `<button class="btn-back"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour</button>` : ''}
+            <div class="project-detail-content">
+                <button class="btn-back"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour</button>
                 
                 <div class="project-header">
                     <h2 class="project-title">${p.title}</h2>
@@ -705,67 +701,30 @@
             </div>
         `;
         
-        // Sur mobile : afficher en modal overlay
-        // Sur desktop : remplacer la grille
+        // Affichage du détail (même comportement desktop et mobile)
         const projectsGrid = document.querySelector('.projects-grid');
         
-        if (isMobile) {
-            // Mode mobile : modal overlay
-            detail.classList.remove('hidden');
-            detail.classList.add('mobile-modal-active');
-            detail.setAttribute('aria-hidden', 'false');
-            
-            // Bloquer le scroll du body
-            document.body.style.overflow = 'hidden';
-            
-            // Forcer le reflow pour que le navigateur applique les styles
-            detail.offsetHeight;
-            
-            // Scroll le container modal vers le top
-            detail.scrollTop = 0;
-        } else {
-            // Mode desktop : masquer la grille
-            if (projectsGrid) {
-                projectsGrid.style.display = 'none';
-            }
-            
-            detail.classList.remove('hidden');
-            detail.classList.remove('mobile-modal-active');
-            detail.setAttribute('aria-hidden', 'false');
-            
-            // Scroll vers le détail en desktop seulement
-            setTimeout(() => {
-                detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+        // Masquer la grille
+        if (projectsGrid) {
+            projectsGrid.style.display = 'none';
         }
         
-        // Attacher l'event listener au bouton retour (desktop seulement)
-        if (!isMobile) {
-            const btnBack = detail.querySelector('.btn-back');
-            if (btnBack) {
-                btnBack.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hideDetail();
-                });
-            }
-        } else {
-            // Mobile: attacher les listeners pour fermer la modal
-            const mobileClose = detail.querySelector('.mobile-close');
-            
-            if (mobileClose) {
-                mobileClose.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hideDetail();
-                });
-            }
-            
-            // Fermer en cliquant sur le fond (overlay) - on utilise le détail lui-même
-            detail.addEventListener('click', (e) => {
-                // Fermer seulement si on clique directement sur le detail container
-                if (e.target === detail) {
-                    e.preventDefault();
-                    hideDetail();
-                }
+        // Afficher le détail
+        detail.classList.remove('hidden');
+        detail.classList.remove('mobile-modal-active');
+        detail.setAttribute('aria-hidden', 'false');
+        
+        // Scroll vers le détail
+        setTimeout(() => {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+        
+        // Attacher l'event listener au bouton retour
+        const btnBack = detail.querySelector('.btn-back');
+        if (btnBack) {
+            btnBack.addEventListener('click', (e) => {
+                e.preventDefault();
+                hideDetail();
             });
         }
         

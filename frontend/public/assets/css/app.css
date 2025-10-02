@@ -535,18 +535,17 @@ body::before {
 
 /* Détail de projet - Design épuré */
 #projet-detail {
-    display: none;
     max-width: 1400px;
     margin: 0 auto;
     padding: 3rem 2rem;
 }
 
 #projet-detail.hidden {
-    display: none;
+    display: none !important;
 }
 
 #projet-detail:not(.hidden) {
-    display: block;
+    display: block !important;
 }
 
 /* Modal mobile pour détails de projet */
