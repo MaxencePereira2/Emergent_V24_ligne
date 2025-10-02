@@ -442,19 +442,21 @@
     }
 
     function initProjectCards() {
-        // Attacher les event listeners aux boutons "Voir le détail"
+        // Attacher les event listeners à toute la carte
         const projectCards = document.querySelectorAll('.project-card');
         
         projectCards.forEach(card => {
-            const button = card.querySelector('.project-btn');
             const projectSlug = card.getAttribute('data-project-slug');
             
-            if (button && projectSlug) {
-                button.addEventListener('click', (e) => {
+            if (projectSlug) {
+                // Rendre toute la carte cliquable
+                card.style.cursor = 'pointer';
+                
+                card.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    // Naviguer vers le détail du projet
-                    window.location.hash = `/projets/${projectSlug}`;
+                    // Ouvrir le détail en modal
+                    renderDetail(projectSlug);
                 });
             }
         });
@@ -569,8 +571,13 @@
             return;
         }
         
+        // Afficher en modal overlay
         detail.classList.remove('hidden');
+        detail.classList.add('modal-active');
         detail.setAttribute('aria-hidden', 'false');
+        
+        // Bloquer le scroll du body
+        document.body.style.overflow = 'hidden';
         
         const imageGallery = p.images && p.images.length > 0 
             ? `<div class="gallery">${p.images.map(src => `<img src="${src}" alt="${p.title}" onerror="this.style.display='none'">`).join('')}</div>`
@@ -581,41 +588,63 @@
             : '';
 
         detail.innerHTML = `
-            <h2>${p.title}</h2>
-            <p class="muted">${p.summary || ''}</p>
-            ${imageGallery}
-            <div class="cols">
-                <div>
-                    ${keyPoints}
-                    ${p.tech ? `<h3>Technologies</h3><p>${p.tech}</p>` : ''}
-                </div>
-                <div>
-                    <h3>Résultats</h3>
-                    <p>${p.results || 'Données non disponibles'}</p>
-                    <h3>Temps passé</h3>
-                    <p>${p.time_spent || 'Données non disponibles'}</p>
+            <div class="project-modal-overlay"></div>
+            <div class="project-modal-content">
+                <button class="project-modal-close" aria-label="Fermer">×</button>
+                <div class="project-modal-body">
+                    <h2>${p.title}</h2>
+                    <p class="muted">${p.summary || ''}</p>
+                    ${imageGallery}
+                    <div class="cols">
+                        <div>
+                            ${keyPoints}
+                            ${p.tech ? `<h3>Technologies</h3><p>${p.tech}</p>` : ''}
+                        </div>
+                        <div>
+                            <h3>Résultats</h3>
+                            <p>${p.results || 'Données non disponibles'}</p>
+                            <h3>Temps passé</h3>
+                            <p>${p.time_spent || 'Données non disponibles'}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p><a class="btn" href="#projets">← Revenir aux projets</a></p>
         `;
+        
+        // Ajouter les event listeners pour fermer le modal
+        const closeBtn = detail.querySelector('.project-modal-close');
+        const overlay = detail.querySelector('.project-modal-overlay');
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', hideDetail);
+        }
+        
+        if (overlay) {
+            overlay.addEventListener('click', hideDetail);
+        }
+        
+        // Fermer avec la touche Escape
+        const escapeHandler = (e) => {
+            if (e.key === 'Escape') {
+                hideDetail();
+                document.removeEventListener('keydown', escapeHandler);
+            }
+        };
+        document.addEventListener('keydown', escapeHandler);
         
         // Add gallery listeners after rendering
         setTimeout(addGalleryListeners, 100);
-        
-        // Smooth scroll to detail section
-        setTimeout(() => {
-            window.scrollTo({
-                top: detail.offsetTop - 100,
-                behavior: 'smooth'
-            });
-        }, 100);
     }
 
     function hideDetail() {
         if (!detail) return;
         detail.classList.add('hidden');
+        detail.classList.remove('modal-active');
         detail.setAttribute('aria-hidden', 'true');
         detail.innerHTML = '';
+        
+        // Restaurer le scroll du body
+        document.body.style.overflow = '';
     }
 
     function route() {
@@ -772,9 +801,9 @@
                     // Calculer le pourcentage de visibilité (0 = loin, 1 = au centre)
                     const visibility = Math.max(0, 1 - (distanceFromCenter / (windowHeight * 0.8)));
                     
-                    // Appliquer la transformation de -10% à 0%
-                    const translateY = (1 - visibility) * 10; // Réduit de 30 à 10
-                    const opacity = 0.3 + (visibility * 0.7);
+                    // Appliquer la transformation réduite de moitié : de -5% à 0% (au lieu de -10% à 0%)
+                    const translateY = (1 - visibility) * 5; // Divisé par 2
+                    const opacity = 0.65 + (visibility * 0.35); // Opacité de 0.65 à 1 au lieu de 0.3 à 1
                     
                     section.style.transform = `translateY(${translateY}%)`;
                     section.style.opacity = opacity;
