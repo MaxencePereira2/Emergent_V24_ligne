@@ -471,97 +471,83 @@
                 title: "Optimisation du temps de fabrication d'escalier en acier",
                 summary: "Accompagnement d'un métallier pour optimiser sa production d'escaliers sur mesure.",
                 images: [
-                    "assets/projets/1-optimisation-du-temps-de-fabrication-descalier-en-acier/1a.png"
+                    "assets/projets/1-optimisation-du-temps-de-fabrication-descalier-en-acier/1a.png",
+                    "assets/projets/1-optimisation-du-temps-de-fabrication-descalier-en-acier/2a.png",
+                    "assets/projets/1-optimisation-du-temps-de-fabrication-descalier-en-acier/3a.png",
+                    "assets/projets/1-optimisation-du-temps-de-fabrication-descalier-en-acier/4a.png",
+                    "assets/projets/1-optimisation-du-temps-de-fabrication-descalier-en-acier/5a.png"
                 ],
-                key_points: [
-                    "Analyse des processus de fabrication existants",
-                    "Identification des goulots d'étranglement",
-                    "Mise en place de nouvelles méthodes de travail",
-                    "Formation des opérateurs aux nouveaux processus"
-                ],
-                results: "Temps de production réduit de 120% et coût total diminué de 61%",
-                time_spent: "3 semaines",
-                tech: "Optimisation des processus, CAO, analyse de flux"
+                results: "Temps de production réduit de 120%<br>Coût total diminué de 61%",
+                time_spent: "3 semaines"
             },
             "2-fabrication-dune-ligne-de-production": {
                 title: "Fabrication d'une ligne de production",
                 summary: "Presse statique 40T + chariot interface pour startup, approche low-tech robuste.",
                 images: [
-                    "assets/projets/2-fabrication-dune-ligne-de-production/1b.jpg"
+                    "assets/projets/2-fabrication-dune-ligne-de-production/1b.jpg",
+                    "assets/projets/2-fabrication-dune-ligne-de-production/2b.jpg",
+                    "assets/projets/2-fabrication-dune-ligne-de-production/3b.jpg",
+                    "assets/projets/2-fabrication-dune-ligne-de-production/4b.png",
+                    "assets/projets/2-fabrication-dune-ligne-de-production/5b.png",
+                    "assets/projets/2-fabrication-dune-ligne-de-production/6b.png"
                 ],
-                key_points: [
-                    "Conception d'une presse statique 40 tonnes",
-                    "Développement d'un chariot d'interface",
-                    "Approche low-tech pour fiabilité maximale",
-                    "Intégration complète de la ligne"
-                ],
-                results: "Ligne de production opérationnelle en 52 jours avec capacité de pressage de 40T",
-                time_spent: "52 jours",
-                tech: "Mécano-soudure, hydraulique, automatisme simple"
+                results: "Ligne opérationnelle en 52 jours<br>Capacité de pressage : 40T",
+                time_spent: "52 jours"
             },
             "3-dveloppement-dun-cadre-de-vtt-de-descente": {
                 title: "Développement d'un cadre de VTT de descente",
                 summary: "Cadre VTT 100% made in France en acier CroMo pour startup October Bike.",
                 images: [
-                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/1c.png"
+                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/1c.png",
+                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/2c.png",
+                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/3c.JPG",
+                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/4c.JPG",
+                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/5c.png",
+                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/6c.png",
+                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/7c.JPG"
                 ],
-                key_points: [
-                    "Conception d'un cadre en acier CroMo",
-                    "Production 100% française",
-                    "Optimisation du rapport poids/résistance",
-                    "Tests et validation terrain"
-                ],
-                results: "Cadre de VTT de descente produit intégralement en France en 66 jours",
-                time_spent: "66 jours",
-                tech: "CAO mécanique, soudure TIG, traitement thermique"
+                results: "100% produit en France<br>Livraison en 66 jours",
+                time_spent: "66 jours"
             },
             "4-conception-et-fabrication-dune-cintreuse-galets-manuelle": {
                 title: "Cintreuse à galets manuelle",
                 summary: "Outillage de cintrage à froid pour l'acier jusqu'à carré 16x16.",
                 images: [
-                    "assets/projets/4-conception-et-fabrication-dune-cintreuse-galets-manuelle/1d.jpeg"
+                    "assets/projets/4-conception-et-fabrication-dune-cintreuse-galets-manuelle/1d.jpeg",
+                    "assets/projets/4-conception-et-fabrication-dune-cintreuse-galets-manuelle/2d.jpeg",
+                    "assets/projets/4-conception-et-fabrication-dune-cintreuse-galets-manuelle/3d.jpeg"
                 ],
-                key_points: [
-                    "Conception d'une cintreuse manuelle robuste",
-                    "Capacité jusqu'à carré 16x16mm",
-                    "Cintrage à froid sans déformation",
-                    "Facilité d'utilisation et maintenance"
-                ],
-                results: "Outillage fonctionnel réalisé en 1 jour, capable de cintrer des profils carrés 16x16",
-                time_spent: "1 jour",
-                tech: "Mécano-soudure, calcul RDM, usinage"
+                results: "Outillage fonctionnel en 1 jour<br>Capacité : carré 16×16mm",
+                time_spent: "1 jour"
             },
             "5-preuve-de-concept-impression-3d-metal-par-conduction": {
                 title: "Impression 3D métal par conduction",
                 summary: "R&D et POC pour impression 3D métal FDM, avec dépôt de brevet.",
                 images: [
-                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/1e.JPG"
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/1e.JPG",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/2e.JPG",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/3e.jpg",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/4e.jpg",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/5e.jpg",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/coupe 2.JPG",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/coupe 4.JPG",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/coupe 6.JPG",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/coupe 7.JPG",
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/coupe 8.JPG"
                 ],
-                key_points: [
-                    "Développement d'un procédé innovant d'impression 3D métal",
-                    "Approche FDM (Fused Deposition Modeling) adaptée au métal",
-                    "Validation du concept par prototypage",
-                    "Protection intellectuelle par brevet"
-                ],
-                results: "POC validé avec succès et brevet déposé pour protection de l'innovation",
-                time_spent: "4 mois",
-                tech: "Fabrication additive, thermique, régulation PID, C++"
+                results: "POC validé avec succès<br>Brevet déposé",
+                time_spent: "4 mois"
             },
             "6-supression-des-jeux-mcanique-dans-robot-parrallle-3-axe": {
                 title: "Robot parallèle sans jeux mécaniques",
                 summary: "R&D et brevet pour suppression totale des jeux dans robots parallèles 3 axes.",
                 images: [
-                    "assets/projets/6-supression-des-jeux-mcanique-dans-robot-parrallle-3-axe/2f.JPG"
+                    "assets/projets/6-supression-des-jeux-mcanique-dans-robot-parrallle-3-axe/2f.JPG",
+                    "assets/projets/6-supression-des-jeux-mcanique-dans-robot-parrallle-3-axe/3f.JPG",
+                    "assets/projets/6-supression-des-jeux-mcanique-dans-robot-parrallle-3-axe/4f.JPG"
                 ],
-                key_points: [
-                    "Conception innovante pour éliminer les jeux mécaniques",
-                    "Application sur robot parallèle 3 axes",
-                    "Amélioration de la précision et de la répétabilité",
-                    "Augmentation significative de l'accélération"
-                ],
-                results: "0 jeu mécanique mesuré et accélération multipliée par 5",
-                time_spent: "6 mois",
-                tech: "Robotique, cinématique, conception mécanique avancée"
+                results: "0 jeu mécanique mesuré<br>Accélération ×5",
+                time_spent: "6 mois"
             }
         };
         
@@ -587,16 +573,9 @@
             ? `<div class="horizontal-gallery">
                 ${p.images.map((src, index) => `
                     <div class="gallery-item" data-index="${index}">
-                        <img src="${src}" alt="${p.title} - Image ${index + 1}" onerror="this.style.display='none'">
+                        <img src="${src}" alt="${p.title} - Photo ${index + 1}" onerror="this.parentElement.style.display='none'">
                     </div>
                 `).join('')}
-            </div>`
-            : '';
-
-        const keyPoints = p.key_points && p.key_points.length > 0
-            ? `<div class="key-points-section">
-                <h3 class="section-title">Points clés</h3>
-                <ul class="key-points-list">${p.key_points.map(point => `<li><span class="point-icon">✓</span>${point}</li>`).join('')}</ul>
             </div>`
             : '';
 
@@ -606,7 +585,7 @@
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Retour aux projets
+                    Retour
                 </button>
                 
                 <div class="project-header">
@@ -616,25 +595,14 @@
                 
                 ${imageGallery}
                 
-                <div class="project-info-grid">
-                    <div class="info-column">
-                        ${keyPoints}
-                        ${p.tech ? `
-                            <div class="tech-section">
-                                <h3 class="section-title">Technologies</h3>
-                                <p class="tech-content">${p.tech}</p>
-                            </div>
-                        ` : ''}
+                <div class="project-info-simple">
+                    <div class="info-box">
+                        <h3>Résultats</h3>
+                        <p>${p.results || 'N/A'}</p>
                     </div>
-                    <div class="info-column">
-                        <div class="results-section">
-                            <h3 class="section-title">Résultats</h3>
-                            <p class="results-content">${p.results || 'Données non disponibles'}</p>
-                        </div>
-                        <div class="time-section">
-                            <h3 class="section-title">Temps passé</h3>
-                            <p class="time-content">${p.time_spent || 'Données non disponibles'}</p>
-                        </div>
+                    <div class="info-box">
+                        <h3>Durée</h3>
+                        <p>${p.time_spent || 'N/A'}</p>
                     </div>
                 </div>
             </div>
