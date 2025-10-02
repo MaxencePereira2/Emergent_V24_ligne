@@ -884,7 +884,8 @@ body::before {
         height: 100px;
     }
     
-    .project-info-simple {
+    .project-info-simple,
+    .project-info-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
