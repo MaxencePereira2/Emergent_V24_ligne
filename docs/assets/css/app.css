@@ -1948,10 +1948,6 @@ body::before {
         gap: 2rem;
     }
     
-    .carousel .nav {
-        display: none;
-    }
-    
     .recall-form {
         flex-direction: column;
         align-items: stretch;
