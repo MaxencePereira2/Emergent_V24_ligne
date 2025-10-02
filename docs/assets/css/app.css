@@ -533,24 +533,6 @@ body::before {
 }
 
 /* Modal mobile pour détails de projet */
-.mobile-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 9998;
-    pointer-events: all;
-}
-
-.mobile-modal-content {
-    position: relative;
-    z-index: 9999;
-    background: white;
-    min-height: 100vh;
-}
-
 #projet-detail.mobile-modal-active {
     position: fixed;
     top: 0;
@@ -564,6 +546,28 @@ body::before {
     max-width: none;
 }
 
+.mobile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9998;
+}
+
+.mobile-modal-wrapper {
+    position: relative;
+    z-index: 9999;
+    background: white;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.mobile-modal-content {
+    padding: 4rem 1.5rem 2rem;
+}
+
 .mobile-close {
     position: fixed !important;
     top: 1rem !important;
@@ -573,14 +577,21 @@ body::before {
     border-radius: 50% !important;
     background: var(--copper) !important;
     color: white !important;
-    font-size: 2rem !important;
+    font-size: 2.5rem !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 0 !important;
+    border: none !important;
+    cursor: pointer !important;
     z-index: 10000 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    line-height: 1;
+    line-height: 1 !important;
+    transition: all 0.2s ease;
+}
+
+.mobile-close:hover {
+    transform: rotate(90deg);
 }
 
 .project-detail-content {
