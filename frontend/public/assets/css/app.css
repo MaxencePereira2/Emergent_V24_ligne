@@ -238,17 +238,23 @@ body::before {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    z-index: 3;
+    z-index: 10;
     animation: fadeInUp 1.2s ease-out;
 }
 
 .hero-logo {
     text-align: center;
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 20;
 }
 
 .hero-logo img {
     filter: brightness(1.5) contrast(1.2);
+    position: relative;
+    z-index: 20;
+    display: inline-block;
+    opacity: 1 !important;
 }
 
 .hero h1 {
