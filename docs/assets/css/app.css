@@ -539,32 +539,17 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9998;
+    z-index: 10000;
     overflow-y: auto;
     padding: 0;
     margin: 0;
     max-width: none;
+    background: rgba(0, 0, 0, 0.9);
 }
 
-.mobile-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1;
-}
-
-.mobile-modal-wrapper {
-    position: relative;
-    z-index: 2;
+#projet-detail.mobile-modal-active .project-detail-content {
     background: white;
     min-height: 100vh;
-    overflow-y: auto;
-}
-
-.mobile-modal-content {
     padding: 4rem 1.5rem 2rem;
 }
 
@@ -584,10 +569,11 @@ body::before {
     padding: 0 !important;
     border: none !important;
     cursor: pointer !important;
-    z-index: 10000 !important;
+    z-index: 10001 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     line-height: 1 !important;
     transition: all 0.2s ease;
+}
 }
 
 .mobile-close:hover {
