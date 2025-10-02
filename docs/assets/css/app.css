@@ -1108,6 +1108,7 @@ body::before {
     font-size: 1rem;
     line-height: 1.5;
     color: var(--text);
+    flex-grow: 1;
 }
 
 /* Bouton toggle - style gracz */
@@ -1126,6 +1127,7 @@ body::before {
     font-weight: 500;
     color: var(--text);
     transition: all 0.2s ease;
+    margin-top: auto;
 }
 
 .card-toggle:hover {
