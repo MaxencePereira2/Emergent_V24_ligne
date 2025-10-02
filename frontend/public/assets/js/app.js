@@ -8,7 +8,7 @@
 
     const EMAIL = 'contact@alesium.fr';
     
-    // Header mobile: cacher au scroll vers le bas, afficher au scroll vers le haut
+    // Header mobile: cacher au scroll, visible seulement tout en haut
     let lastScrollTop = 0;
     const nav = document.querySelector('.nav');
     
@@ -17,11 +17,11 @@
         if (window.innerWidth <= 768) {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scroll vers le bas
+            if (scrollTop > 50) {
+                // On a scrollé : cacher le header
                 nav.classList.add('hidden-on-scroll');
             } else {
-                // Scroll vers le haut
+                // Tout en haut : afficher le header
                 nav.classList.remove('hidden-on-scroll');
             }
             
