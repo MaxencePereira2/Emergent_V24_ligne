@@ -825,36 +825,4 @@
             img.style.transition = 'opacity 0.3s ease';
         });
     });
-
-    // Create mock projects if JSON fails to load
-    function createMockProjects() {
-        const mockProjects = [
-            {
-                slug: "optimisation-escalier-acier",
-                title: "Optimisation du temps de fabrication d'escalier en acier",
-                preview: "assets/projets/optimisation-escalier-acier/preview.jpg",
-                images: ["assets/projets/optimisation-escalier-acier/image1.jpg", "assets/projets/optimisation-escalier-acier/image2.jpg"],
-                summary: "Réduction du temps de fabrication d'escaliers métalliques par optimisation des procédés.",
-                key_points: ["Analyse des goulots d'étranglement", "Nouvelle méthode d'assemblage", "Outillage spécialisé"],
-                results: "Temps de fabrication réduit de 40%",
-                time_spent: "3 semaines",
-                tech: "Soudure MIG/MAG, usinage CNC"
-            },
-            {
-                slug: "ligne-production",
-                title: "Fabrication d'une ligne de production",
-                preview: "assets/projets/ligne-production/preview.jpg",
-                images: ["assets/projets/ligne-production/image1.jpg"],
-                summary: "Conception et réalisation complète d'une ligne de production automatisée.",
-                key_points: ["Automatisation des tâches répétitives", "Contrôle qualité intégré", "Interface opérateur intuitive"],
-                results: "Productivité augmentée de 60%",
-                time_spent: "8 semaines",
-                tech: "Automatisme, pneumatique, vision industrielle"
-            }
-        ];
-        
-        renderCarousel(mockProjects);
-        route(mockProjects);
-        window.addEventListener('hashchange', () => route(mockProjects));
-    }
 })();
