@@ -568,11 +568,11 @@
         detail.setAttribute('aria-hidden', 'false');
         detail.style.display = 'block';
         
-        // Créer la galerie horizontale avec toutes les images
+        // Créer la galerie de miniatures cliquables
         const imageGallery = p.images && p.images.length > 0 
             ? `<div class="horizontal-gallery">
                 ${p.images.map((src, index) => `
-                    <div class="gallery-item" data-index="${index}">
+                    <div class="gallery-item" data-index="${index}" data-lightbox-trigger>
                         <img src="${src}" alt="${p.title} - Photo ${index + 1}" onerror="this.parentElement.style.display='none'">
                     </div>
                 `).join('')}
@@ -617,8 +617,14 @@
             });
         }
         
-        // Add gallery listeners after rendering
-        setTimeout(addGalleryListeners, 100);
+        // Attacher les event listeners pour ouvrir la lightbox sur clic des miniatures
+        const galleryItems = detail.querySelectorAll('[data-lightbox-trigger]');
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const index = parseInt(item.getAttribute('data-index'));
+                openLightbox(p.images, index, p.title);
+            });
+        });
         
         // Smooth scroll to detail section
         setTimeout(() => {
@@ -627,6 +633,96 @@
                 behavior: 'smooth'
             });
         }, 100);
+    }
+    
+    // Lightbox pour afficher les images en grand
+    function openLightbox(images, startIndex, title) {
+        let currentIndex = startIndex;
+        
+        // Créer le HTML de la lightbox
+        const lightboxHTML = `
+            <div class="lightbox-overlay">
+                <div class="lightbox-container">
+                    <button class="lightbox-close" aria-label="Fermer">×</button>
+                    <button class="lightbox-prev" aria-label="Image précédente">‹</button>
+                    <button class="lightbox-next" aria-label="Image suivante">›</button>
+                    <div class="lightbox-content">
+                        <img class="lightbox-image" src="${images[currentIndex]}" alt="${title}">
+                        <div class="lightbox-counter">${currentIndex + 1} / ${images.length}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Ajouter au DOM
+        document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+        document.body.style.overflow = 'hidden';
+        
+        const overlay = document.querySelector('.lightbox-overlay');
+        const lightboxImage = overlay.querySelector('.lightbox-image');
+        const counter = overlay.querySelector('.lightbox-counter');
+        const closeBtn = overlay.querySelector('.lightbox-close');
+        const prevBtn = overlay.querySelector('.lightbox-prev');
+        const nextBtn = overlay.querySelector('.lightbox-next');
+        
+        // Fonction pour mettre à jour l'image
+        function updateImage() {
+            lightboxImage.src = images[currentIndex];
+            counter.textContent = `${currentIndex + 1} / ${images.length}`;
+            
+            // Désactiver les boutons si nécessaire
+            prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+            prevBtn.style.cursor = currentIndex === 0 ? 'not-allowed' : 'pointer';
+            nextBtn.style.opacity = currentIndex === images.length - 1 ? '0.3' : '1';
+            nextBtn.style.cursor = currentIndex === images.length - 1 ? 'not-allowed' : 'pointer';
+        }
+        
+        // Navigation
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateImage();
+            }
+        });
+        
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+                updateImage();
+            }
+        });
+        
+        // Fermer
+        function closeLightbox() {
+            overlay.remove();
+            document.body.style.overflow = '';
+        }
+        
+        closeBtn.addEventListener('click', closeLightbox);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeLightbox();
+            }
+        });
+        
+        // Clavier
+        function handleKeyboard(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                document.removeEventListener('keydown', handleKeyboard);
+            } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                currentIndex--;
+                updateImage();
+            } else if (e.key === 'ArrowRight' && currentIndex < images.length - 1) {
+                currentIndex++;
+                updateImage();
+            }
+        }
+        document.addEventListener('keydown', handleKeyboard);
+        
+        updateImage();
     }
 
     function hideDetail() {
