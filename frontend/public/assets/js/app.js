@@ -659,7 +659,7 @@
         // Générer le HTML AVANT d'appliquer les classes
         detail.innerHTML = `
             <div class="project-detail-content">
-                <button class="btn-back"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour</button>
+                <button class="btn-back"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Revenir à tous les projets</button>
                 
                 <div class="project-header">
                     <h2 class="project-title">${p.title}</h2>
@@ -834,8 +834,6 @@
     function hideDetail() {
         if (!detail) return;
         
-        const isMobile = window.innerWidth <= 768;
-        
         // Cacher le détail
         detail.classList.add('hidden');
         detail.classList.remove('mobile-modal-active');
@@ -854,12 +852,10 @@
         // Restaurer le scroll du body
         document.body.style.overflow = '';
         
-        // Réafficher la grille (sauf sur mobile où elle est déjà visible)
-        if (!isMobile) {
-            const projectsGrid = document.querySelector('.projects-grid');
-            if (projectsGrid) {
-                projectsGrid.style.display = 'grid';
-            }
+        // Réafficher la grille
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid) {
+            projectsGrid.style.display = 'grid';
         }
     }
 
