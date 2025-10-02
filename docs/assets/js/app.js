@@ -731,6 +731,16 @@
             });
         }
         
+        // Sur mobile : fermer en cliquant sur l'overlay
+        if (isMobile) {
+            const mobileOverlay = detail.querySelector('.mobile-modal-overlay');
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', () => {
+                    hideDetail();
+                });
+            }
+        }
+        
         // Attacher les event listeners pour ouvrir la lightbox sur clic des miniatures
         const galleryItems = detail.querySelectorAll('[data-lightbox-trigger]');
         galleryItems.forEach(item => {
