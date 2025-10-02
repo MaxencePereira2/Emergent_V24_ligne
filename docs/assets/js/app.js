@@ -834,8 +834,6 @@
     function hideDetail() {
         if (!detail) return;
         
-        const isMobile = window.innerWidth <= 768;
-        
         // Cacher le détail
         detail.classList.add('hidden');
         detail.classList.remove('mobile-modal-active');
@@ -854,12 +852,10 @@
         // Restaurer le scroll du body
         document.body.style.overflow = '';
         
-        // Réafficher la grille (sauf sur mobile où elle est déjà visible)
-        if (!isMobile) {
-            const projectsGrid = document.querySelector('.projects-grid');
-            if (projectsGrid) {
-                projectsGrid.style.display = 'grid';
-            }
+        // Réafficher la grille
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid) {
+            projectsGrid.style.display = 'grid';
         }
     }
 
