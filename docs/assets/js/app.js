@@ -636,15 +636,6 @@
             detail.classList.remove('hidden');
             detail.classList.add('mobile-modal-active');
             detail.setAttribute('aria-hidden', 'false');
-            detail.style.display = 'block';
-            detail.style.position = 'fixed';
-            detail.style.top = '0';
-            detail.style.left = '0';
-            detail.style.width = '100%';
-            detail.style.height = '100%';
-            detail.style.zIndex = '10000';
-            detail.style.overflow = 'auto';
-            detail.style.background = 'white';
             
             // Bloquer le scroll du body
             document.body.style.overflow = 'hidden';
@@ -655,16 +646,8 @@
             }
             
             detail.classList.remove('hidden');
+            detail.classList.remove('mobile-modal-active');
             detail.setAttribute('aria-hidden', 'false');
-            detail.style.display = 'block';
-            detail.style.position = '';
-            detail.style.top = '';
-            detail.style.left = '';
-            detail.style.width = '';
-            detail.style.height = '';
-            detail.style.zIndex = '';
-            detail.style.overflow = '';
-            detail.style.background = '';
         }
         
         // Créer la galerie de miniatures cliquables
