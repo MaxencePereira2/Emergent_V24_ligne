@@ -701,8 +701,11 @@
         }
         
         closeBtn.addEventListener('click', closeLightbox);
+        
+        // Fermer en cliquant n'importe où en dehors de l'image
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
+            // Fermer si on clique sur l'overlay ou le container (pas sur l'image)
+            if (e.target === overlay || e.target.classList.contains('lightbox-container') || e.target.classList.contains('lightbox-content')) {
                 closeLightbox();
             }
         });
