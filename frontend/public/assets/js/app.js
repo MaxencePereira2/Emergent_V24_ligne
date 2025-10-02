@@ -430,11 +430,7 @@
         initLegalModal();
     }
 
-    // Projects and carousel functionality
-    const DATA_URL = 'content/projets.json';
-    const carouselHost = document.querySelector('#projets .track');
-    const prevBtn = document.querySelector('#projets .prev');
-    const nextBtn = document.querySelector('#projets .next');
+    // Projects functionality
     const detail = document.getElementById('projet-detail');
 
     function slugify(text) {
@@ -445,142 +441,134 @@
             .replace(/^-|-$/g, '');
     }
 
-    function cardHTML(p) {
-        return `
-            <article class="card">
-                <a href="#/projets/${p.slug}">
-                    <img src="${p.preview}" alt="${p.title}" onerror="this.style.display='none'"/>
-                    <h3>${p.title}</h3>
-                </a>
-            </article>
-        `;
-    }
-
-    function renderCarousel(items) {
-        if (!carouselHost) return;
+    function initProjectCards() {
+        // Attacher les event listeners aux boutons "Voir le détail"
+        const projectCards = document.querySelectorAll('.project-card');
         
-        // Trier les projets dans l'ordre 1-2-3-4-5-6 basé sur le numéro au début du titre
-        const sortedItems = items.sort((a, b) => {
-            const numA = parseInt(a.title.match(/^(\d+)/)?.[1] || '999');
-            const numB = parseInt(b.title.match(/^(\d+)/)?.[1] || '999');
-            return numA - numB;
-        });
-        
-        // Dupliquer les items pour un défilement infini
-        const duplicatedItems = [...sortedItems, ...sortedItems];
-        carouselHost.innerHTML = duplicatedItems.map(cardHTML).join('');
-        
-        // Variables pour le glissement manuel
-        let isDragging = false;
-        let startX = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationID = 0;
-        let startTime = 0;
-        
-        // Fonction pour activer/désactiver l'auto-scroll
-        function toggleAutoScroll(enable) {
-            if (enable) {
-                carouselHost.classList.add('auto-scroll');
-            } else {
-                carouselHost.classList.remove('auto-scroll');
-            }
-        }
-        
-        // Démarrer l'auto-scroll après 2 secondes
-        setTimeout(() => {
-            if (!isDragging) {
-                toggleAutoScroll(true);
-            }
-        }, 2000);
-        
-        // Gestion des événements tactiles et souris
-        carouselHost.addEventListener('mousedown', startDrag);
-        carouselHost.addEventListener('touchstart', startDrag, { passive: true });
-        
-        document.addEventListener('mouseup', endDrag);
-        document.addEventListener('touchend', endDrag);
-        
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('touchmove', drag, { passive: true });
-        
-        function startDrag(e) {
-            if (e.target.closest('.card a')) return; // Ne pas interférer avec les liens
+        projectCards.forEach(card => {
+            const button = card.querySelector('.project-btn');
+            const projectSlug = card.getAttribute('data-project-slug');
             
-            isDragging = true;
-            startTime = Date.now();
-            toggleAutoScroll(false);
-            carouselHost.classList.add('dragging');
-            
-            startX = getPositionX(e);
-            prevTranslate = currentTranslate;
-            
-            animationID = requestAnimationFrame(animation);
-        }
-        
-        function drag(e) {
-            if (!isDragging) return;
-            
-            const currentPosition = getPositionX(e);
-            currentTranslate = prevTranslate + (currentPosition - startX) * 0.8; // Facteur de réduction pour un scroll plus fluide
-        }
-        
-        function endDrag() {
-            if (!isDragging) return;
-            
-            isDragging = false;
-            carouselHost.classList.remove('dragging');
-            
-            cancelAnimationFrame(animationID);
-            
-            // Inertie de scroll
-            const duration = Date.now() - startTime;
-            const distance = currentTranslate - prevTranslate;
-            const velocity = distance / duration;
-            
-            if (Math.abs(velocity) > 0.1) {
-                currentTranslate += velocity * 200; // Inertie
-            }
-            
-            // Remettre l'auto-scroll après 3 secondes d'inactivité
-            setTimeout(() => {
-                if (!isDragging) {
-                    toggleAutoScroll(true);
-                    // Reset position for smooth auto-scroll
-                    currentTranslate = 0;
-                    prevTranslate = 0;
-                    carouselHost.style.transform = 'translateX(0)';
-                }
-            }, 3000);
-        }
-        
-        function getPositionX(e) {
-            return e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-        }
-        
-        function animation() {
-            if (isDragging) {
-                carouselHost.style.transform = `translateX(${currentTranslate}px)`;
-                requestAnimationFrame(animation);
-            }
-        }
-        
-        // Pause auto-scroll au survol
-        carouselHost.addEventListener('mouseenter', () => {
-            if (!isDragging) {
-                carouselHost.style.animationPlayState = 'paused';
-            }
-        });
-        
-        carouselHost.addEventListener('mouseleave', () => {
-            if (!isDragging) {
-                carouselHost.style.animationPlayState = 'running';
+            if (button && projectSlug) {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // Naviguer vers le détail du projet
+                    window.location.hash = `/projets/${projectSlug}`;
+                });
             }
         });
     }
 
-    function renderDetail(p) {
+    function renderDetail(projectSlug) {
         if (!detail) return;
+        
+        // Mapping des projets statiques
+        const projectsData = {
+            "1-optimisation-du-temps-de-fabrication-descalier-en-acier": {
+                title: "Optimisation du temps de fabrication d'escalier en acier",
+                summary: "Accompagnement d'un métallier pour optimiser sa production d'escaliers sur mesure.",
+                images: [
+                    "assets/projets/1-optimisation-du-temps-de-fabrication-descalier-en-acier/1a.png"
+                ],
+                key_points: [
+                    "Analyse des processus de fabrication existants",
+                    "Identification des goulots d'étranglement",
+                    "Mise en place de nouvelles méthodes de travail",
+                    "Formation des opérateurs aux nouveaux processus"
+                ],
+                results: "Temps de production réduit de 120% et coût total diminué de 61%",
+                time_spent: "3 semaines",
+                tech: "Optimisation des processus, CAO, analyse de flux"
+            },
+            "2-fabrication-dune-ligne-de-production": {
+                title: "Fabrication d'une ligne de production",
+                summary: "Presse statique 40T + chariot interface pour startup, approche low-tech robuste.",
+                images: [
+                    "assets/projets/2-fabrication-dune-ligne-de-production/1b.jpg"
+                ],
+                key_points: [
+                    "Conception d'une presse statique 40 tonnes",
+                    "Développement d'un chariot d'interface",
+                    "Approche low-tech pour fiabilité maximale",
+                    "Intégration complète de la ligne"
+                ],
+                results: "Ligne de production opérationnelle en 52 jours avec capacité de pressage de 40T",
+                time_spent: "52 jours",
+                tech: "Mécano-soudure, hydraulique, automatisme simple"
+            },
+            "3-dveloppement-dun-cadre-de-vtt-de-descente": {
+                title: "Développement d'un cadre de VTT de descente",
+                summary: "Cadre VTT 100% made in France en acier CroMo pour startup October Bike.",
+                images: [
+                    "assets/projets/3-dveloppement-dun-cadre-de-vtt-de-descente/1c.png"
+                ],
+                key_points: [
+                    "Conception d'un cadre en acier CroMo",
+                    "Production 100% française",
+                    "Optimisation du rapport poids/résistance",
+                    "Tests et validation terrain"
+                ],
+                results: "Cadre de VTT de descente produit intégralement en France en 66 jours",
+                time_spent: "66 jours",
+                tech: "CAO mécanique, soudure TIG, traitement thermique"
+            },
+            "4-conception-et-fabrication-dune-cintreuse-galets-manuelle": {
+                title: "Cintreuse à galets manuelle",
+                summary: "Outillage de cintrage à froid pour l'acier jusqu'à carré 16x16.",
+                images: [
+                    "assets/projets/4-conception-et-fabrication-dune-cintreuse-galets-manuelle/1d.jpeg"
+                ],
+                key_points: [
+                    "Conception d'une cintreuse manuelle robuste",
+                    "Capacité jusqu'à carré 16x16mm",
+                    "Cintrage à froid sans déformation",
+                    "Facilité d'utilisation et maintenance"
+                ],
+                results: "Outillage fonctionnel réalisé en 1 jour, capable de cintrer des profils carrés 16x16",
+                time_spent: "1 jour",
+                tech: "Mécano-soudure, calcul RDM, usinage"
+            },
+            "5-preuve-de-concept-impression-3d-metal-par-conduction": {
+                title: "Impression 3D métal par conduction",
+                summary: "R&D et POC pour impression 3D métal FDM, avec dépôt de brevet.",
+                images: [
+                    "assets/projets/5-preuve-de-concept-impression-3d-metal-par-conduction/1e.JPG"
+                ],
+                key_points: [
+                    "Développement d'un procédé innovant d'impression 3D métal",
+                    "Approche FDM (Fused Deposition Modeling) adaptée au métal",
+                    "Validation du concept par prototypage",
+                    "Protection intellectuelle par brevet"
+                ],
+                results: "POC validé avec succès et brevet déposé pour protection de l'innovation",
+                time_spent: "4 mois",
+                tech: "Fabrication additive, thermique, régulation PID, C++"
+            },
+            "6-supression-des-jeux-mcanique-dans-robot-parrallle-3-axe": {
+                title: "Robot parallèle sans jeux mécaniques",
+                summary: "R&D et brevet pour suppression totale des jeux dans robots parallèles 3 axes.",
+                images: [
+                    "assets/projets/6-supression-des-jeux-mcanique-dans-robot-parrallle-3-axe/2f.JPG"
+                ],
+                key_points: [
+                    "Conception innovante pour éliminer les jeux mécaniques",
+                    "Application sur robot parallèle 3 axes",
+                    "Amélioration de la précision et de la répétabilité",
+                    "Augmentation significative de l'accélération"
+                ],
+                results: "0 jeu mécanique mesuré et accélération multipliée par 5",
+                time_spent: "6 mois",
+                tech: "Robotique, cinématique, conception mécanique avancée"
+            }
+        };
+        
+        const p = projectsData[projectSlug];
+        if (!p) {
+            hideDetail();
+            return;
+        }
+        
         detail.classList.remove('hidden');
         detail.setAttribute('aria-hidden', 'false');
         
@@ -630,38 +618,31 @@
         detail.innerHTML = '';
     }
 
-    function route(items) {
+    function route() {
         const hash = location.hash || '';
         const projectMatch = hash.match(/^#\/projets\/(.+)$/);
         
         if (projectMatch) {
             const slug = projectMatch[1];
-            const project = items.find(x => x.slug === slug);
-            if (project) {
-                renderDetail(project);
-            } else {
-                hideDetail();
-            }
+            renderDetail(slug);
         } else {
             hideDetail();
         }
     }
 
-    // Load projects data
-    fetch(DATA_URL)
-        .then(r => r.json())
-        .then(items => {
-            renderCarousel(items);
-            route(items);
-            
-            // Handle hash changes for SPA routing
-            window.addEventListener('hashchange', () => route(items));
-        })
-        .catch(e => {
-            console.warn('projets.json introuvable', e);
-            // Fallback: create mock data from available assets
-            createMockProjects();
+    // Initialize project cards on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initProjectCards();
+            route();
         });
+    } else {
+        initProjectCards();
+        route();
+    }
+    
+    // Handle hash changes for SPA routing
+    window.addEventListener('hashchange', route);
 
     // Legal sections handling
     const ml = document.getElementById('mentions-legales');
@@ -844,36 +825,4 @@
             img.style.transition = 'opacity 0.3s ease';
         });
     });
-
-    // Create mock projects if JSON fails to load
-    function createMockProjects() {
-        const mockProjects = [
-            {
-                slug: "optimisation-escalier-acier",
-                title: "Optimisation du temps de fabrication d'escalier en acier",
-                preview: "assets/projets/optimisation-escalier-acier/preview.jpg",
-                images: ["assets/projets/optimisation-escalier-acier/image1.jpg", "assets/projets/optimisation-escalier-acier/image2.jpg"],
-                summary: "Réduction du temps de fabrication d'escaliers métalliques par optimisation des procédés.",
-                key_points: ["Analyse des goulots d'étranglement", "Nouvelle méthode d'assemblage", "Outillage spécialisé"],
-                results: "Temps de fabrication réduit de 40%",
-                time_spent: "3 semaines",
-                tech: "Soudure MIG/MAG, usinage CNC"
-            },
-            {
-                slug: "ligne-production",
-                title: "Fabrication d'une ligne de production",
-                preview: "assets/projets/ligne-production/preview.jpg",
-                images: ["assets/projets/ligne-production/image1.jpg"],
-                summary: "Conception et réalisation complète d'une ligne de production automatisée.",
-                key_points: ["Automatisation des tâches répétitives", "Contrôle qualité intégré", "Interface opérateur intuitive"],
-                results: "Productivité augmentée de 60%",
-                time_spent: "8 semaines",
-                tech: "Automatisme, pneumatique, vision industrielle"
-            }
-        ];
-        
-        renderCarousel(mockProjects);
-        route(mockProjects);
-        window.addEventListener('hashchange', () => route(mockProjects));
-    }
 })();
