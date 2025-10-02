@@ -845,16 +845,32 @@
     function hideDetail() {
         if (!detail) return;
         
+        const isMobile = window.innerWidth <= 768;
+        
         // Cacher le détail
         detail.classList.add('hidden');
+        detail.classList.remove('mobile-modal-active');
         detail.setAttribute('aria-hidden', 'true');
         detail.style.display = 'none';
+        detail.style.position = '';
+        detail.style.top = '';
+        detail.style.left = '';
+        detail.style.width = '';
+        detail.style.height = '';
+        detail.style.zIndex = '';
+        detail.style.overflow = '';
+        detail.style.background = '';
         detail.innerHTML = '';
         
-        // Réafficher la grille
-        const projectsGrid = document.querySelector('.projects-grid');
-        if (projectsGrid) {
-            projectsGrid.style.display = 'grid';
+        // Restaurer le scroll du body
+        document.body.style.overflow = '';
+        
+        // Réafficher la grille (sauf sur mobile où elle est déjà visible)
+        if (!isMobile) {
+            const projectsGrid = document.querySelector('.projects-grid');
+            if (projectsGrid) {
+                projectsGrid.style.display = 'grid';
+            }
         }
     }
 
