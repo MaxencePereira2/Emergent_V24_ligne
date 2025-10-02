@@ -676,12 +676,10 @@
             : '';
 
         detail.innerHTML = `
-            <div class="project-detail-content">
-                <button class="btn-back">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Retour
+            ${isMobile ? '<div class="mobile-modal-overlay"></div>' : ''}
+            <div class="project-detail-content ${isMobile ? 'mobile-modal-content' : ''}">
+                <button class="btn-back ${isMobile ? 'mobile-close' : ''}">
+                    ${isMobile ? '×' : '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour'}
                 </button>
                 
                 <div class="project-header">
